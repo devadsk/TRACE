@@ -1,0 +1,532 @@
+[
+  {
+    "family": "operator_interaction",
+    "raw": "2026-03-01T11:01:12.000,FLT004,F",
+    "reason": "expected 5 fields, got 3"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "CORRUPT_BLOCK_,channel=A",
+    "reason": "expected 5 fields, got 2"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "",
+    "reason": "expected 5 fields, got 0"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "CORRUPT_BLOCK_Y,wpt=KJFK",
+    "reason": "expected 5 fields, got 2"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "CORRUPT_BLOCK_spd_kt=340",
+    "reason": "expected 5 fields, got 1"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "2026-03-02T21:22:41.000FLT039,FMS-2,FMS_RESET_CMD,scope=local",
+    "reason": "expected 5 fields, got 4"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "2026-03-02T22:55:43.000FLT041,FMS-1,WAYPOINT_INSERT,wpt=WP83",
+    "reason": "expected 5 fields, got 4"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "CORRUPT_BLOCK_,channel=A",
+    "reason": "expected 5 fields, got 2"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "2026-03-04T02:02:47.000FLT068,FMS-1,MCDU_ROUTE_ENTRY,wpt=KSEA",
+    "reason": "expected 5 fields, got 4"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "2026-03-04T05:45:33.000FLT071,FMS-1,ACK_CAUTION,",
+    "reason": "expected 5 fields, got 4"
+  },
+  {
+    "family": "operator_interaction",
+    "raw": "2026-03-04T15:53:00.000FLT080,FMS-1,MODE_SELECT,mode=APPR",
+    "reason": "expected 5 fields, got 4"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-01T09:08:05.115\", \"flight\": \"FLT002\", \"",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-01T08:44:37.013\", \"flight\": \"FLT002\", \"nod",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-01T23:42:20.067\" \"flight\": \"FLT017\", \"node\": \"FMS-3\", \"mode\": \"HDG SEL\", \"event\": \"MODE_ENGAGED\"}",
+    "reason": "Expecting ',' delimiter: line 1 column 34 (char 33)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-02T01:15:28.110\", \"flight\": \"FLT018\",",
+    "reason": "Expecting property name enclosed in double quotes: line 1 column 54 (char 53)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-02T04:44:40.105\", \"flight\": \"FLT021\", \"",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-02T04:41:36.120\", \"flight\": \"FLT022\", \"nod",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-02T12:44:39.061\", \"flight\": \"FLT031\",",
+    "reason": "Expecting property name enclosed in double quotes: line 1 column 54 (char 53)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-02T15:18:08.015\" \"flight\": \"FLT032\", \"node\": \"FMS-2\", \"mode\": \"LNAV\", \"event\": \"MODE_ENGAGED\"}",
+    "reason": "Expecting ',' delimiter: line 1 column 34 (char 33)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "CORRUPT_BLOCK__ENGAGED\"}",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-02T21:03:01.045\", \"flight\": \"FLT039\", \"",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-03T02:19:54.062\", \"flight\": \"FLT044\", \"",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "CORRUPT_BLOCK__ENGAGED\"}",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "CORRUPT_BLOCK__ENGAGED\"}",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-03T05:35:35.038\" \"flight\": \"FLT048\", \"node\": \"FMS-1\", \"mode\": \"VNAV PATH\", \"event\": \"MODE_ENGAGED\"}",
+    "reason": "Expecting ',' delimiter: line 1 column 34 (char 33)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-03T11:17:37.084\", \"flight\": \"FLT053\", \"nod",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "CORRUPT_BLOCK__ENGAGED\"}",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "CORRUPT_BLOCK__ENGAGED\"}",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "CORRUPT_BLOCK__ENGAGED\"}",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-04T06:38:20.038\" \"flight\": \"FLT072\", \"node\": \"FMS-1\", \"mode\": \"VNAV SPEED\", \"event\": \"MODE_ENGAGED\"}",
+    "reason": "Expecting ',' delimiter: line 1 column 34 (char 33)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-04T11:37:55.041\", \"flight\": \"FLT076\", \"",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "guidance_planning",
+    "raw": "{\"ts\": \"2026-03-04T14:18:52.045\", \"flight\": \"FLT079\", \"nod",
+    "reason": "Unterminated string starting at: line 1 column 55 (char 54)"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-01T10:56:00.394 flight=FLT0",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "CORRUPT_BLOCK_prev=CLIMB",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "CORRUPT_BLOCK_prev=CLIMB",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-01T20:05:00.143 flight=FLT",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-02T08:50:00.314 flight=FLT0",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-02T11:11:00.356 flight=FLT",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-02T14:43:00.108 flight=FLT",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-03T05:54:00.108 flight=FLT",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "CORRUPT_BLOCK_ev=DESCENT",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-04T06:33:00.237 flight=FLT",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "CORRUPT_BLOCK_v=APPROACH",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "ts=2026-03-04T12:03:00.349 flight=FLT0",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "state_transition",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T08:54:08.177] FLT002 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T08:54:08.161] FLT002 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T14:09:14.024] FLT006 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T14:09:14.168] FLT006 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T14:09:14.189] FLT006 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T14:09:14.257] FLT006 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T15:54:20.114] FLT009 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T15:54:20.083] FLT009 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T17:43:11.304] FLT011 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T17:43:11.316] FLT011 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-01T20:52:44.081] FLT014 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T01:16:01.025] FLT018 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T01:16:01.260] FLT018 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T14:16:00.225] FLT032 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T14:16:00.160] FLT032 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T19:55:57.231] FLT038 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T19:55:57.170] FLT038 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T19:55:57.215] FLT038 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T22:05:03.107] FLT039 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T22:05:03.146] FLT039 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-02T22:05:03.263] FLT039 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T01:34:33.019] FLT043 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T01:34:33.310] FLT043 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T01:24:40.038] FLT044 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING###",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T01:21:52.065] FLT044 FMS-3 EICAS=\"FLT CTRL",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T01:21:52.191] FLT044 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T01:21:52.044] FLT044 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T04:06:21.238] FLT046 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T04:06:21.339] FLT046 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T14:45:07.072] FLT056 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T14:45:07.025] FLT056 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T14:50:15.295] FLT057 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T14:50:15.134] FLT057 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T14:50:15.115] FLT057 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T22:37:19.081] FLT064 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T22:37:19.290] FLT064 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-03T22:37:19.014] FLT064 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T04:58:53.230] FLT071 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T04:58:53.248] FLT071 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T04:58:53.087] FLT071 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T05:43:09.228] FLT071 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T06:59:42.074] FLT072 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T06:59:42.076] FLT072 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T06:59:42.083] FLT072 FMS-1 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T10:43:03.083] FLT076 FMS-2 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "fault_event",
+    "raw": "[2026-03-04T10:43:03.031] FLT076 FMS-3 EICAS=\"FLT CTRL DEGRADED\" CODE=27-93-01 ATA=Flight Controls SEV=WARNING",
+    "reason": "regex mismatch"
+  },
+  {
+    "family": "recovery_event",
+    "raw": "",
+    "reason": "blank line"
+  },
+  {
+    "family": "recovery_event",
+    "raw": "2026-03-03T13:40:34.201|FLT055|FMS-2|22-11-09|CLEARED|3000###",
+    "reason": "invalid literal for int() with base 10: '3000###'"
+  },
+  {
+    "family": "recovery_event",
+    "raw": "",
+    "reason": "blank line"
+  }
+]

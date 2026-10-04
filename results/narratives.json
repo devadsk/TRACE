@@ -1,0 +1,674 @@
+[
+  {
+    "incident_id": "INC0001",
+    "narrative": "During CRUISE phase, under LNAV guidance, flight FLT001 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-01T07:59:44.125, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 186.0ms. 1 bus chatter duplicate alert line(s) were recorded. Preceding MCDU interaction 'FMS_RESET_CMD' occurred 22.1s prior to alert onset. Recovery was confirmed 15.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R003983 #R003984 #R003985 #R003986 #R004208 #R004209 #R004210.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0002",
+    "narrative": "During CRUISE phase, under VNAV SPEED guidance, flight FLT002 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T09:10:43.010, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 295.0ms. Recovery was confirmed 28.1s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R003992 #R003991 #R003990 #R004212 #R004213.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0003",
+    "narrative": "During CRUISE phase, under VNAV SPEED guidance, flight FLT002 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-01T09:12:28.024, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 83.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 4.2s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R003987 #R003989 #R003988 #R004211.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0004",
+    "narrative": "During TAKEOFF phase, under VNAV PATH guidance, flight FLT003 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T09:48:18.252, reported by node FMS-1. Recovery was confirmed 19.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R003993 #R004216.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0005",
+    "narrative": "During TAKEOFF phase, under VNAV PATH guidance, flight FLT003 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-01T09:49:38.111, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 138.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 3.0s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R003996 #R003994 #R003995 #R003997 #R004218 #R004217.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0006",
+    "narrative": "During CRUISE phase, under ALT HOLD guidance, flight FLT003 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-01T10:13:35.064, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 161.0ms. Recovery was confirmed 3.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R003999 #R003998 #R004219 #R004220.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0007",
+    "narrative": "During CLIMB phase, under GA guidance, flight FLT004 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T11:38:59.180, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 70.0ms. Recovery was confirmed 36.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004001 #R004000 #R004221 #R004222.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0008",
+    "narrative": "During TAKEOFF phase, under GA guidance, flight FLT005 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-01T12:07:46.138, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 68.0ms. Preceding MCDU interaction 'MCDU_SPD_CHANGE' occurred 17.1s prior to alert onset. Recovery was confirmed 3.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004002 #R004003 #R004004 #R004225 #R004223 #R004224.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0009",
+    "narrative": "During DESCENT phase, under VNAV PATH guidance, flight FLT005 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-01T13:03:06.122, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 225.0ms. Recovery was confirmed 6.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004005 #R004006 #R004007 #R004226 #R004227 #R004228.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0010",
+    "narrative": "During CLIMB phase, under APPR guidance, flight FLT006 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-01T13:13:09.036, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 350.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 3.2s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004010 #R004011 #R004012 #R004234 #R004235.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0011",
+    "narrative": "During CRUISE phase, under GA guidance, flight FLT006 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T13:35:07.089, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 35.0ms. Recovery was confirmed 19.1s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004008 #R004009 #R004229 #R004230.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0012",
+    "narrative": "During DESCENT phase, under APPR guidance, flight FLT007 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-01T14:34:29.043, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 252.0ms. Preceding MCDU interaction 'WAYPOINT_INSERT' occurred 4.0s prior to alert onset. Recovery was confirmed 21.0s later, corroborated across 1 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004013 #R004015 #R004014 #R004236.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0013",
+    "narrative": "During TAKEOFF phase, under VNAV PATH guidance, flight FLT008 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-01T14:46:35.032, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 151.0ms. Recovery was confirmed 4.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004016 #R004017 #R004238 #R004237.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0014",
+    "narrative": "During DESCENT phase, under LNAV guidance, flight FLT008 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T15:21:18.031, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 137.0ms. Recovery was confirmed 36.1s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004018 #R004019 #R004239.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0015",
+    "narrative": "During APPROACH phase, under VNAV PATH guidance, flight FLT009 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T16:51:21.145, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 193.0ms. Recovery was confirmed 19.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004021 #R004022 #R004020 #R004241 #R004240 #R004242.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0016",
+    "narrative": "During APPROACH phase, under ALT HOLD guidance, flight FLT011 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-01T18:46:14.067, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 157.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 18.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004024 #R004023 #R004025 #R004026 #R004246 #R004245 #R004247.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0017",
+    "narrative": "During CLIMB phase, under APPR guidance, flight FLT013 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-01T19:50:54.013, reported by node FMS-2. Recovery was confirmed 4.2s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004027 #R004250.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0018",
+    "narrative": "During TAKEOFF phase, under MANUAL guidance, flight FLT014 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-01T20:33:08.297, reported by node FMS-2. Recovery was confirmed 1.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004028 #R004252.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0019",
+    "narrative": "During CLIMB phase, under VNAV PATH guidance, flight FLT015 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-01T21:17:21.054, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 257.0ms. Preceding MCDU interaction 'FMS_RESET_CMD' occurred 0.1s prior to alert onset. Recovery was confirmed 15.1s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004029 #R004030 #R004031 #R004254 #R004255 #R004253.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0020",
+    "narrative": "During TAKEOFF phase, under GA guidance, flight FLT016 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-01T22:15:46.165, reported by node FMS-3. Recovery was confirmed 8.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004033 #R004257.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0021",
+    "narrative": "During CLIMB phase, under VNAV PATH guidance, flight FLT016 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T22:30:54.170, reported by node FMS-2. Recovery was confirmed 6.0s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004032 #R004256.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0022",
+    "narrative": "During TAKEOFF phase, under VNAV SPEED guidance, flight FLT017 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-01T23:48:00.015, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 174.0ms. Recovery was confirmed 6.2s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004034 #R004035 #R004036 #R004259 #R004258.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0023",
+    "narrative": "During TAKEOFF phase, under VNAV SPEED guidance, flight FLT017 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-01T23:48:04.027, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 66.0ms. Recovery was confirmed 25.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004038 #R004037 #R004260 #R004261.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0024",
+    "narrative": "During APPROACH phase, under APPR guidance, flight FLT017 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-02T00:35:02.025, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 319.0ms. Recovery was confirmed 29.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004039 #R004041 #R004040 #R004264 #R004263 #R004262.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0025",
+    "narrative": "During APPROACH phase, under ALT HOLD guidance, flight FLT018 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-02T01:38:14.039, reported by node FMS-1. Recovery was confirmed 28.2s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004042 #R004265.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0026",
+    "narrative": "During TAKEOFF phase, under APPR guidance, flight FLT019 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-02T02:09:38.034, reported by node FMS-1. Recovery was confirmed 21.2s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004050 #R004274.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0027",
+    "narrative": "During CRUISE phase, under APPR guidance, flight FLT019 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-02T02:28:27.125, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 205.0ms. Recovery was confirmed 5.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004044 #R004045 #R004043 #R004269 #R004268 #R004270.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0028",
+    "narrative": "During DESCENT phase, under APPR guidance, flight FLT019 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-02T02:48:34.094, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 200.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 2.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004047 #R004046 #R004048 #R004049 #R004272 #R004271 #R004273.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0029",
+    "narrative": "During CRUISE phase, under LNAV guidance, flight FLT021 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-02T04:12:02.030, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 145.0ms. Recovery was confirmed 9.1s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004051 #R004052 #R004275 #R004276.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0030",
+    "narrative": "During CRUISE phase, under ALT HOLD guidance, flight FLT022 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-02T05:35:05.172, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 229.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 1.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004055 #R004056 #R004053 #R004054 #R004277 #R004279 #R004278.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0031",
+    "narrative": "During CLIMB phase, under MANUAL guidance, flight FLT023 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-02T05:46:55.268, reported by node FMS-3. Recovery was confirmed 13.8s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004057 #R004280.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0032",
+    "narrative": "During TAKEOFF phase, under MANUAL guidance, flight FLT026 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-02T08:40:33.336, reported by node FMS-1. Preceding MCDU interaction 'MODE_SELECT' occurred 8.3s prior to alert onset. Recovery was confirmed 8.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004058 #R004281.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0033",
+    "narrative": "During CLIMB phase, under HDG SEL guidance, flight FLT027 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-02T09:32:10.050, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 408.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 6.1s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004059 #R004062 #R004060 #R004061 #R004283 #R004284 #R004282.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0034",
+    "narrative": "During DESCENT phase, under VNAV SPEED guidance, flight FLT028 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-02T11:30:16.079, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 32.0ms. Recovery was confirmed 10.0s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004063 #R004064 #R004285.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0035",
+    "narrative": "During TAKEOFF phase, under ALT HOLD guidance, flight FLT029 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-02T11:32:26.031, reported by node FMS-2. No matching recovery record was found within the 120s window \u2014 flagged as UNRESOLVED (critical evidence gap). Corroboration confidence: LOW (single-source). Auditable evidence: #R004065.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0036",
+    "narrative": "During CLIMB phase, under HDG SEL guidance, flight FLT031 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-02T13:06:13.176, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 174.0ms. Recovery was confirmed 7.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004071 #R004069 #R004070 #R004290 #R004289 #R004288.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0037",
+    "narrative": "During DESCENT phase, under LNAV guidance, flight FLT031 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-02T13:49:15.248, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 181.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 12.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004068 #R004066 #R004067 #R004287 #R004286.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0038",
+    "narrative": "During CRUISE phase, under VNAV SPEED guidance, flight FLT032 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY###) at 2026-03-02T14:46:58.135, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 214.0ms. Recovery was confirmed 3.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004072 #R004073 #R004292 #R004291.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0039",
+    "narrative": "During TAKEOFF phase, under APPR guidance, flight FLT033 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-02T15:29:36.256, reported by node FMS-2. Recovery was confirmed 9.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004074 #R004295.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0040",
+    "narrative": "During TAKEOFF phase, under GA guidance, flight FLT034 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-02T16:24:16.247, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 100.0ms. Recovery was confirmed 27.8s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004075 #R004076 #R004297 #R004296.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0041",
+    "narrative": "During CLIMB phase, under HDG SEL guidance, flight FLT035 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-02T17:16:44.151, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 97.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 11.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004077 #R004079 #R004078 #R004298 #R004299.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0042",
+    "narrative": "During CRUISE phase, under ALT HOLD guidance, flight FLT036 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-02T18:18:33.340, reported by node FMS-3. Recovery was confirmed 33.8s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004083 #R004303.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0043",
+    "narrative": "During APPROACH phase, under ALT HOLD guidance, flight FLT036 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-02T18:56:26.031, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 133.0ms. Recovery was confirmed 3.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004081 #R004080 #R004082 #R004300 #R004301 #R004302.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0044",
+    "narrative": "During CRUISE phase, under MANUAL guidance, flight FLT037 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-02T19:00:42.129, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 136.0ms. Recovery was confirmed 5.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004087 #R004088 #R004306 #R004307.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0045",
+    "narrative": "During DESCENT phase, under APPR guidance, flight FLT037 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-02T19:08:36.016, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 245.0ms. Recovery was confirmed 8.1s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004084 #R004086 #R004085 #R004305 #R004304.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0046",
+    "narrative": "During CLIMB phase, under VNAV SPEED guidance, flight FLT039 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-02T21:22:14.137, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 189.0ms. Recovery was confirmed 12.9s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004090 #R004089 #R004313.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0047",
+    "narrative": "During CLIMB phase, under ALT HOLD guidance, flight FLT040 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-02T22:16:50.033, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 327.0ms. 1 bus chatter duplicate alert line(s) were recorded. Preceding MCDU interaction 'MCDU_ALT_CHANGE' occurred 2.0s prior to alert onset. Recovery was confirmed 17.1s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004093 #R004094 #R004091 #R004092 #R004314 #R004316 #R004315.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0048",
+    "narrative": "During APPROACH phase, under APPR guidance, flight FLT044 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T02:18:26.059, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 161.0ms. Recovery was confirmed 2.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004095 #R004096 #R004321 #R004320.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0049",
+    "narrative": "During CLIMB phase, under HDG SEL guidance, flight FLT045 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-03T02:47:22.203, reported by node FMS-2. Preceding MCDU interaction 'ACK_CAUTION' occurred 12.2s prior to alert onset. No matching recovery record was found within the 120s window \u2014 flagged as UNRESOLVED (critical evidence gap). Corroboration confidence: LOW (single-source). Auditable evidence: #R004099.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0050",
+    "narrative": "During CRUISE phase, under HDG SEL guidance, flight FLT045 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-03T03:04:15.201, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 56.0ms. Recovery was confirmed 8.8s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004097 #R004098 #R004324.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0051",
+    "narrative": "During APPROACH phase, under VNAV PATH guidance, flight FLT047 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T05:27:00.073, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 252.0ms. Recovery was confirmed 3.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004101 #R004102 #R004100 #R004328 #R004326 #R004327.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0052",
+    "narrative": "During APPROACH phase, under HDG SEL guidance, flight FLT047 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-03T05:30:04.030, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 122.0ms. Recovery was confirmed 8.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004104 #R004103 #R004329 #R004330.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0053",
+    "narrative": "During TAKEOFF phase, under VNAV PATH guidance, flight FLT048 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T05:36:16.013, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 263.0ms. Recovery was confirmed 3.2s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004106 #R004105 #R004107 #R004333 #R004332 #R004331.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0054",
+    "narrative": "During CLIMB phase, under VNAV PATH guidance, flight FLT048 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-03T05:51:01.179, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 238.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 18.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004110 #R004108 #R004109 #R004334 #R004335.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0055",
+    "narrative": "During DESCENT phase, under LNAV guidance, flight FLT050 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-03T08:29:00.204, reported by node FMS-2. Cross-node detection skew was measured at 127.0ms. 1 bus chatter duplicate alert line(s) were recorded. Preceding MCDU interaction 'ACK_CAUTION' occurred 20.2s prior to alert onset. Recovery was confirmed 24.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004111 #R004112 #R004336.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0056",
+    "narrative": "During TAKEOFF phase, under LNAV guidance, flight FLT051 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T08:31:37.026, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 199.0ms. Recovery was confirmed 4.2s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004117 #R004116 #R004339.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0057",
+    "narrative": "During CLIMB phase, under APPR guidance, flight FLT051 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-03T08:50:33.201, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 83.0ms. Recovery was confirmed 10.8s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004113 #R004114 #R004115 #R004338 #R004337.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0058",
+    "narrative": "During DESCENT phase, under VNAV PATH guidance, flight FLT051 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T09:17:10.176, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 38.0ms. Recovery was confirmed 5.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004118 #R004119 #R004340 #R004341.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0059",
+    "narrative": "During CLIMB phase, under LNAV guidance, flight FLT052 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-03T09:47:02.010, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 328.0ms. Recovery was confirmed 10.2s later, corroborated across 1 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004122 #R004121 #R004120 #R004342.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0060",
+    "narrative": "During DESCENT phase, under VNAV PATH guidance, flight FLT053 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T11:00:08.206, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 58.0ms. Recovery was confirmed 3.8s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004123 #R004125 #R004124 #R004345 #R004344 #R004343.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0061",
+    "narrative": "During TAKEOFF phase, under VNAV PATH guidance, flight FLT054 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-03T11:49:33.092, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 252.0ms. Recovery was confirmed 6.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004127 #R004128 #R004126 #R004347 #R004348 #R004346.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0062",
+    "narrative": "During DESCENT phase, under LNAV guidance, flight FLT055 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T13:40:31.181, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 96.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 3.1s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004132 #R004133 #R004131 #R004352.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0063",
+    "narrative": "During DESCENT phase, under LNAV guidance, flight FLT055 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-03T13:42:56.107, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 13.0ms. Recovery was confirmed 7.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004130 #R004129 #R004349 #R004350.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0064",
+    "narrative": "During CLIMB phase, under VNAV SPEED guidance, flight FLT056 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-03T14:04:08.153, reported by node FMS-3. Preceding MCDU interaction 'AP_ENGAGE' occurred 29.1s prior to alert onset. Recovery was confirmed 7.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004136 #R004356.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0065",
+    "narrative": "During CLIMB phase, under VNAV SPEED guidance, flight FLT056 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-03T14:04:17.188, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 155.0ms. Recovery was confirmed 11.1s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004134 #R004135 #R004355.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0066",
+    "narrative": "During APPROACH phase, under APPR guidance, flight FLT057 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-03T15:58:29.242, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 92.0ms. 1 bus chatter duplicate alert line(s) were recorded. No matching recovery record was found within the 120s window \u2014 flagged as UNRESOLVED (critical evidence gap). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004137 #R004138 #R004139.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0067",
+    "narrative": "During CLIMB phase, under HDG SEL guidance, flight FLT058 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-03T16:15:02.055, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 139.0ms. No matching recovery record was found within the 120s window \u2014 flagged as UNRESOLVED (critical evidence gap). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004142 #R004141.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0068",
+    "narrative": "During APPROACH phase, under VNAV PATH guidance, flight FLT058 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-03T16:57:07.275, reported by node FMS-3. Recovery was confirmed 14.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004140 #R004360.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0069",
+    "narrative": "During APPROACH phase, under VNAV PATH guidance, flight FLT058 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-03T17:00:40.151, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 59.0ms. Recovery was confirmed 21.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004145 #R004143 #R004144 #R004362 #R004363 #R004361.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0070",
+    "narrative": "During APPROACH phase, under LNAV guidance, flight FLT061 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-03T19:56:58.072, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 90.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 10.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004146 #R004147 #R004148 #R004364 #R004365.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0071",
+    "narrative": "During CLIMB phase, under GA guidance, flight FLT062 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-03T20:12:51.156, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 164.0ms. Recovery was confirmed 7.0s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004151 #R004149 #R004150 #R004367 #R004366.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0072",
+    "narrative": "During TAKEOFF phase, under MANUAL guidance, flight FLT063 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-03T21:32:17.167, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 168.0ms. Recovery was confirmed 7.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004155 #R004154 #R004371 #R004370.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0073",
+    "narrative": "During DESCENT phase, under GA guidance, flight FLT063 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-03T22:29:07.120, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 38.0ms. Recovery was confirmed 4.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004153 #R004152 #R004368 #R004369.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0074",
+    "narrative": "During TAKEOFF phase, under GA guidance, flight FLT064 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-03T22:44:51.049, reported by node FMS-3. Recovery was confirmed 9.0s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004156 #R004372.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0075",
+    "narrative": "During APPROACH phase, under ALT HOLD guidance, flight FLT064 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-03T23:34:32.277, reported by node FMS-2. Recovery was confirmed 17.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004157 #R004374.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0076",
+    "narrative": "During APPROACH phase, under APPR guidance, flight FLT066 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-04T01:45:04.142, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 132.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 0.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004158 #R004159 #R004160 #R004161 #R004377 #R004375 #R004376.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0077",
+    "narrative": "During DESCENT phase, under VNAV PATH guidance, flight FLT067 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-04T02:01:17.067, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 216.0ms. Recovery was confirmed 8.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004163 #R004162 #R004378 #R004379.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0078",
+    "narrative": "During APPROACH phase, under LNAV guidance, flight FLT067 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-04T02:23:12.154, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 162.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 13.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004164 #R004166 #R004165 #R004167 #R004381 #R004380 #R004382.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0079",
+    "narrative": "During TAKEOFF phase, under MANUAL guidance, flight FLT068 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-04T01:57:49.091, reported by nodes FMS-1 and FMS-3. Cross-node detection skew was measured at 211.0ms. Recovery was confirmed 45.1s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004169 #R004168 #R004384 #R004383.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0080",
+    "narrative": "During CLIMB phase, under ALT HOLD guidance, flight FLT069 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-04T03:14:50.075, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 84.0ms. Recovery was confirmed 5.0s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004174 #R004173 #R004175 #R004388 #R004389.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0081",
+    "narrative": "During DESCENT phase, under GA guidance, flight FLT069 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-04T03:50:40.142, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 37.0ms. Recovery was confirmed 21.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004172 #R004170 #R004171 #R004385 #R004386 #R004387.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0082",
+    "narrative": "During DESCENT phase, under HDG SEL guidance, flight FLT070 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-04T04:55:34.127, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 124.0ms. Recovery was confirmed 17.0s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004178 #R004179 #R004392 #R004391.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0083",
+    "narrative": "During APPROACH phase, under HDG SEL guidance, flight FLT070 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-04T05:13:47.090, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 122.0ms. Recovery was confirmed 4.0s later, corroborated across 1 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004176 #R004177 #R004390.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0084",
+    "narrative": "During APPROACH phase, under VNAV PATH guidance, flight FLT072 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-04T06:58:26.177, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 171.0ms. Recovery was confirmed 22.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004180 #R004181 #R004401 #R004400.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0085",
+    "narrative": "During DESCENT phase, under GA guidance, flight FLT073 experienced fault 22-11-09 (\"FMS WAYPOINT REJECT\", ADVISORY) at 2026-03-04T08:14:21.070, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 249.0ms. Recovery was confirmed 1.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004182 #R004183 #R004184 #R004402 #R004404 #R004403.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0086",
+    "narrative": "During DESCENT phase, under GA guidance, flight FLT073 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-04T08:19:42.060, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 272.0ms. Recovery was confirmed 13.0s later, corroborated across 2 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004186 #R004187 #R004185 #R004406 #R004405.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0087",
+    "narrative": "During TAKEOFF phase, under MANUAL guidance, flight FLT074 experienced fault 34-55-01 (\"GPS POSITION DEGRADE\", CAUTION) at 2026-03-04T08:39:49.024, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 277.0ms. Recovery was confirmed 10.1s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004189 #R004188 #R004407 #R004408.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0088",
+    "narrative": "During CRUISE phase, under VNAV PATH guidance, flight FLT074 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-04T08:58:49.218, reported by node FMS-3. Recovery was confirmed 4.8s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004190 #R004409.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0089",
+    "narrative": "During CRUISE phase, under VNAV PATH guidance, flight FLT074 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-04T09:01:00.324, reported by node FMS-1. Cross-node detection skew was measured at 102.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 9.8s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004191 #R004192 #R004410.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0090",
+    "narrative": "During DESCENT phase, under HDG SEL guidance, flight FLT075 experienced fault 22-81-04 (\"AUTOPILOT DISC\", WARNING) at 2026-03-04T10:24:30.228, reported by node FMS-3. Recovery was confirmed 3.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004193 #R004411.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0091",
+    "narrative": "During CLIMB phase, under VNAV PATH guidance, flight FLT077 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-04T12:29:19.237, reported by node FMS-1. Cross-node detection skew was measured at 55.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 9.9s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004194 #R004195 #R004414.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0092",
+    "narrative": "During CRUISE phase, under HDG SEL guidance, flight FLT078 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-04T14:09:16.345, reported by node FMS-1. Recovery was confirmed 13.8s later, corroborated across 1 node(s). Corroboration confidence: LOW (single-source). Auditable evidence: #R004196 #R004415.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0093",
+    "narrative": "During TAKEOFF phase, under MANUAL guidance, flight FLT079 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-04T14:07:16.146, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 172.0ms. 1 bus chatter duplicate alert line(s) were recorded. Recovery was confirmed 10.9s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004201 #R004202 #R004199 #R004200 #R004420 #R004419 #R004418.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0094",
+    "narrative": "During CRUISE phase, under LNAV guidance, flight FLT079 experienced fault 42-30-07 (\"FMS CHANNEL FAIL\", WARNING) at 2026-03-04T14:34:44.075, reported by nodes FMS-1 and FMS-2. Cross-node detection skew was measured at 258.0ms. Recovery was confirmed 19.9s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004197 #R004198 #R004417 #R004416.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0095",
+    "narrative": "During APPROACH phase, under ALT HOLD guidance, flight FLT079 experienced fault 31-52-03 (\"FMS DISAGREE\", CAUTION) at 2026-03-04T14:57:07.258, reported by nodes FMS-2 and FMS-3. Cross-node detection skew was measured at 61.0ms. Recovery was confirmed 9.8s later, corroborated across 2 node(s). Corroboration confidence: MEDIUM (2-node agreement). Auditable evidence: #R004203 #R004204 #R004421 #R004422.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  },
+  {
+    "incident_id": "INC0096",
+    "narrative": "During TAKEOFF phase, under VNAV SPEED guidance, flight FLT080 experienced fault 34-11-02 (\"NAV DATA FAULT\", CAUTION) at 2026-03-04T15:03:48.113, reported by all three nodes (FMS-1, FMS-2, FMS-3). Cross-node detection skew was measured at 181.0ms. Recovery was confirmed 18.0s later, corroborated across 3 node(s). Corroboration confidence: HIGH (full 3-node agreement). Auditable evidence: #R004207 #R004206 #R004205 #R004424 #R004423 #R004425.",
+    "verified": true,
+    "bad_citations": [],
+    "missing_citations": []
+  }
+]

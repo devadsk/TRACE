@@ -1,0 +1,4532 @@
+[
+  {
+    "incident_id": "INC0001",
+    "flight": "FLT001",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T07:59:44.125",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 186.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 15.901,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R003983",
+      "R003984",
+      "R003985",
+      "R003986",
+      "R004208",
+      "R004209",
+      "R004210"
+    ],
+    "fault_event_ids": [
+      "R003983",
+      "R003984",
+      "R003985",
+      "R003986"
+    ],
+    "recovery_event_ids": [
+      "R004208",
+      "R004209",
+      "R004210"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": "FMS_RESET_CMD",
+      "prior_action_detail": {
+        "scope": "local",
+        "raw": "scope=local"
+      },
+      "prior_action_delta_s": 22.12,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0002",
+    "flight": "FLT002",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T09:10:43.010",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 295.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 28.1,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R003992",
+      "R003991",
+      "R003990",
+      "R004212",
+      "R004213"
+    ],
+    "fault_event_ids": [
+      "R003992",
+      "R003991",
+      "R003990"
+    ],
+    "recovery_event_ids": [
+      "R004212",
+      "R004213"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0003",
+    "flight": "FLT002",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T09:12:28.024",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 83.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 4.208,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R003987",
+      "R003989",
+      "R003988",
+      "R004211"
+    ],
+    "fault_event_ids": [
+      "R003987",
+      "R003989",
+      "R003988"
+    ],
+    "recovery_event_ids": [
+      "R004211"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R000016"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0004",
+    "flight": "FLT003",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T09:48:18.252",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 19.946,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R003993",
+      "R004216"
+    ],
+    "fault_event_ids": [
+      "R003993"
+    ],
+    "recovery_event_ids": [
+      "R004216"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0005",
+    "flight": "FLT003",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T09:49:38.111",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 138.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 2.96,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R003996",
+      "R003994",
+      "R003995",
+      "R003997",
+      "R004218",
+      "R004217"
+    ],
+    "fault_event_ids": [
+      "R003996",
+      "R003994",
+      "R003995",
+      "R003997"
+    ],
+    "recovery_event_ids": [
+      "R004218",
+      "R004217"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0006",
+    "flight": "FLT003",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T10:13:35.064",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 161.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 3.024,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R003999",
+      "R003998",
+      "R004219",
+      "R004220"
+    ],
+    "fault_event_ids": [
+      "R003999",
+      "R003998"
+    ],
+    "recovery_event_ids": [
+      "R004219",
+      "R004220"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0007",
+    "flight": "FLT004",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T11:38:59.180",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 70.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 36.912,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004001",
+      "R004000",
+      "R004221",
+      "R004222"
+    ],
+    "fault_event_ids": [
+      "R004001",
+      "R004000"
+    ],
+    "recovery_event_ids": [
+      "R004221",
+      "R004222"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0008",
+    "flight": "FLT005",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T12:07:46.138",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 68.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 3.897,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004002",
+      "R004003",
+      "R004004",
+      "R004225",
+      "R004223",
+      "R004224"
+    ],
+    "fault_event_ids": [
+      "R004002",
+      "R004003",
+      "R004004"
+    ],
+    "recovery_event_ids": [
+      "R004225",
+      "R004223",
+      "R004224"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "GA",
+      "prior_pilot_action": "MCDU_SPD_CHANGE",
+      "prior_action_detail": {
+        "spd_kt": "310",
+        "raw": "spd_kt=310"
+      },
+      "prior_action_delta_s": 17.14,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0009",
+    "flight": "FLT005",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T13:03:06.122",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 225.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 6.937,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004005",
+      "R004006",
+      "R004007",
+      "R004226",
+      "R004227",
+      "R004228"
+    ],
+    "fault_event_ids": [
+      "R004005",
+      "R004006",
+      "R004007"
+    ],
+    "recovery_event_ids": [
+      "R004226",
+      "R004227",
+      "R004228"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0010",
+    "flight": "FLT006",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T13:13:09.036",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 350.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 3.2,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004010",
+      "R004011",
+      "R004012",
+      "R004234",
+      "R004235"
+    ],
+    "fault_event_ids": [
+      "R004010",
+      "R004011",
+      "R004012"
+    ],
+    "recovery_event_ids": [
+      "R004234",
+      "R004235"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0011",
+    "flight": "FLT006",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T13:35:07.089",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 35.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 19.063,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004008",
+      "R004009",
+      "R004229",
+      "R004230"
+    ],
+    "fault_event_ids": [
+      "R004008",
+      "R004009"
+    ],
+    "recovery_event_ids": [
+      "R004229",
+      "R004230"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0012",
+    "flight": "FLT007",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-01T14:34:29.043",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 252.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 21.043,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004013",
+      "R004015",
+      "R004014",
+      "R004236"
+    ],
+    "fault_event_ids": [
+      "R004013",
+      "R004015",
+      "R004014"
+    ],
+    "recovery_event_ids": [
+      "R004236"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": "WAYPOINT_INSERT",
+      "prior_action_detail": {
+        "wpt": "WP22",
+        "raw": "wpt=WP22"
+      },
+      "prior_action_delta_s": 4.04,
+      "context_event_ids": [
+        "R000069"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0013",
+    "flight": "FLT008",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T14:46:35.032",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 151.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 4.01,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004016",
+      "R004017",
+      "R004238",
+      "R004237"
+    ],
+    "fault_event_ids": [
+      "R004016",
+      "R004017"
+    ],
+    "recovery_event_ids": [
+      "R004238",
+      "R004237"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0014",
+    "flight": "FLT008",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T15:21:18.031",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 137.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 36.108,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004018",
+      "R004019",
+      "R004239"
+    ],
+    "fault_event_ids": [
+      "R004018",
+      "R004019"
+    ],
+    "recovery_event_ids": [
+      "R004239"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0015",
+    "flight": "FLT009",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T16:51:21.145",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 193.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 18.99,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004021",
+      "R004022",
+      "R004020",
+      "R004241",
+      "R004240",
+      "R004242"
+    ],
+    "fault_event_ids": [
+      "R004021",
+      "R004022",
+      "R004020"
+    ],
+    "recovery_event_ids": [
+      "R004241",
+      "R004240",
+      "R004242"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0016",
+    "flight": "FLT011",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T18:46:14.067",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 157.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 17.967,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004024",
+      "R004023",
+      "R004025",
+      "R004026",
+      "R004246",
+      "R004245",
+      "R004247"
+    ],
+    "fault_event_ids": [
+      "R004024",
+      "R004023",
+      "R004025",
+      "R004026"
+    ],
+    "recovery_event_ids": [
+      "R004246",
+      "R004245",
+      "R004247"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0017",
+    "flight": "FLT013",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T19:50:54.013",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 4.165,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004027",
+      "R004250"
+    ],
+    "fault_event_ids": [
+      "R004027"
+    ],
+    "recovery_event_ids": [
+      "R004250"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0018",
+    "flight": "FLT014",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T20:33:08.297",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 1.94,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004028",
+      "R004252"
+    ],
+    "fault_event_ids": [
+      "R004028"
+    ],
+    "recovery_event_ids": [
+      "R004252"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0019",
+    "flight": "FLT015",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-01T21:17:21.054",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 257.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 15.097,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004029",
+      "R004030",
+      "R004031",
+      "R004254",
+      "R004255",
+      "R004253"
+    ],
+    "fault_event_ids": [
+      "R004029",
+      "R004030",
+      "R004031"
+    ],
+    "recovery_event_ids": [
+      "R004254",
+      "R004255",
+      "R004253"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": "FMS_RESET_CMD",
+      "prior_action_detail": {
+        "scope": "local",
+        "raw": "scope=local"
+      },
+      "prior_action_delta_s": 0.05,
+      "context_event_ids": [
+        "R000155"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0020",
+    "flight": "FLT016",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T22:15:46.165",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 8.865,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004033",
+      "R004257"
+    ],
+    "fault_event_ids": [
+      "R004033"
+    ],
+    "recovery_event_ids": [
+      "R004257"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0021",
+    "flight": "FLT016",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T22:30:54.170",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 5.997,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004032",
+      "R004256"
+    ],
+    "fault_event_ids": [
+      "R004032"
+    ],
+    "recovery_event_ids": [
+      "R004256"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R001063",
+        "R001064",
+        "R001065"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0022",
+    "flight": "FLT017",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-01T23:48:00.015",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 174.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 6.188,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004034",
+      "R004035",
+      "R004036",
+      "R004259",
+      "R004258"
+    ],
+    "fault_event_ids": [
+      "R004034",
+      "R004035",
+      "R004036"
+    ],
+    "recovery_event_ids": [
+      "R004259",
+      "R004258"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0023",
+    "flight": "FLT017",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-01T23:48:04.027",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 66.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 25.036,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004038",
+      "R004037",
+      "R004260",
+      "R004261"
+    ],
+    "fault_event_ids": [
+      "R004038",
+      "R004037"
+    ],
+    "recovery_event_ids": [
+      "R004260",
+      "R004261"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0024",
+    "flight": "FLT017",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T00:35:02.025",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 319.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 29.034,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004039",
+      "R004041",
+      "R004040",
+      "R004264",
+      "R004263",
+      "R004262"
+    ],
+    "fault_event_ids": [
+      "R004039",
+      "R004041",
+      "R004040"
+    ],
+    "recovery_event_ids": [
+      "R004264",
+      "R004263",
+      "R004262"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0025",
+    "flight": "FLT018",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T01:38:14.039",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 28.155,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004042",
+      "R004265"
+    ],
+    "fault_event_ids": [
+      "R004042"
+    ],
+    "recovery_event_ids": [
+      "R004265"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R002787",
+        "R002788"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0026",
+    "flight": "FLT019",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T02:09:38.034",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 21.17,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004050",
+      "R004274"
+    ],
+    "fault_event_ids": [
+      "R004050"
+    ],
+    "recovery_event_ids": [
+      "R004274"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R000198"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0027",
+    "flight": "FLT019",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T02:28:27.125",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 205.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 5.908,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004044",
+      "R004045",
+      "R004043",
+      "R004269",
+      "R004268",
+      "R004270"
+    ],
+    "fault_event_ids": [
+      "R004044",
+      "R004045",
+      "R004043"
+    ],
+    "recovery_event_ids": [
+      "R004269",
+      "R004268",
+      "R004270"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0028",
+    "flight": "FLT019",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T02:48:34.094",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 200.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 2.935,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004047",
+      "R004046",
+      "R004048",
+      "R004049",
+      "R004272",
+      "R004271",
+      "R004273"
+    ],
+    "fault_event_ids": [
+      "R004047",
+      "R004046",
+      "R004048",
+      "R004049"
+    ],
+    "recovery_event_ids": [
+      "R004272",
+      "R004271",
+      "R004273"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0029",
+    "flight": "FLT021",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-02T04:12:02.030",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 145.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 9.134,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004051",
+      "R004052",
+      "R004275",
+      "R004276"
+    ],
+    "fault_event_ids": [
+      "R004051",
+      "R004052"
+    ],
+    "recovery_event_ids": [
+      "R004275",
+      "R004276"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R002842",
+        "R002841",
+        "R002843"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0030",
+    "flight": "FLT022",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T05:35:05.172",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 229.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 1.916,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004055",
+      "R004056",
+      "R004053",
+      "R004054",
+      "R004277",
+      "R004279",
+      "R004278"
+    ],
+    "fault_event_ids": [
+      "R004055",
+      "R004056",
+      "R004053",
+      "R004054"
+    ],
+    "recovery_event_ids": [
+      "R004277",
+      "R004279",
+      "R004278"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0031",
+    "flight": "FLT023",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T05:46:55.268",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 13.761,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004057",
+      "R004280"
+    ],
+    "fault_event_ids": [
+      "R004057"
+    ],
+    "recovery_event_ids": [
+      "R004280"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0032",
+    "flight": "FLT026",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-02T08:40:33.336",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 8.925,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004058",
+      "R004281"
+    ],
+    "fault_event_ids": [
+      "R004058"
+    ],
+    "recovery_event_ids": [
+      "R004281"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": "MODE_SELECT",
+      "prior_action_detail": {
+        "mode": "ALT",
+        "extra": [
+          "HOLD"
+        ],
+        "raw": "mode=ALT HOLD"
+      },
+      "prior_action_delta_s": 8.34,
+      "context_event_ids": [
+        "R000259"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0033",
+    "flight": "FLT027",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T09:32:10.050",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 408.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 6.115,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004059",
+      "R004062",
+      "R004060",
+      "R004061",
+      "R004283",
+      "R004284",
+      "R004282"
+    ],
+    "fault_event_ids": [
+      "R004059",
+      "R004062",
+      "R004060",
+      "R004061"
+    ],
+    "recovery_event_ids": [
+      "R004283",
+      "R004284",
+      "R004282"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0034",
+    "flight": "FLT028",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T11:30:16.079",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 32.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 10.031,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004063",
+      "R004064",
+      "R004285"
+    ],
+    "fault_event_ids": [
+      "R004063",
+      "R004064"
+    ],
+    "recovery_event_ids": [
+      "R004285"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0035",
+    "flight": "FLT029",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-02T11:32:26.031",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": false,
+    "recovery_duration_s": null,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004065"
+    ],
+    "fault_event_ids": [
+      "R004065"
+    ],
+    "recovery_event_ids": [],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R001331",
+        "R001330",
+        "R001329"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0036",
+    "flight": "FLT031",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T13:06:13.176",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 174.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 7.886,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004071",
+      "R004069",
+      "R004070",
+      "R004290",
+      "R004289",
+      "R004288"
+    ],
+    "fault_event_ids": [
+      "R004071",
+      "R004069",
+      "R004070"
+    ],
+    "recovery_event_ids": [
+      "R004290",
+      "R004289",
+      "R004288"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R001379",
+        "R001378",
+        "R001377"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0037",
+    "flight": "FLT031",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-02T13:49:15.248",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 181.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 12.0,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004068",
+      "R004066",
+      "R004067",
+      "R004287",
+      "R004286"
+    ],
+    "fault_event_ids": [
+      "R004068",
+      "R004066",
+      "R004067"
+    ],
+    "recovery_event_ids": [
+      "R004287",
+      "R004286"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0038",
+    "flight": "FLT032",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY###",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T14:46:58.135",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 214.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 3.902,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004072",
+      "R004073",
+      "R004292",
+      "R004291"
+    ],
+    "fault_event_ids": [
+      "R004072",
+      "R004073"
+    ],
+    "recovery_event_ids": [
+      "R004292",
+      "R004291"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0039",
+    "flight": "FLT033",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-02T15:29:36.256",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 9.937,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004074",
+      "R004295"
+    ],
+    "fault_event_ids": [
+      "R004074"
+    ],
+    "recovery_event_ids": [
+      "R004295"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0040",
+    "flight": "FLT034",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T16:24:16.247",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 100.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 27.785,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004075",
+      "R004076",
+      "R004297",
+      "R004296"
+    ],
+    "fault_event_ids": [
+      "R004075",
+      "R004076"
+    ],
+    "recovery_event_ids": [
+      "R004297",
+      "R004296"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0041",
+    "flight": "FLT035",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T17:16:44.151",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 97.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 11.921,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004077",
+      "R004079",
+      "R004078",
+      "R004298",
+      "R004299"
+    ],
+    "fault_event_ids": [
+      "R004077",
+      "R004079",
+      "R004078"
+    ],
+    "recovery_event_ids": [
+      "R004298",
+      "R004299"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0042",
+    "flight": "FLT036",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T18:18:33.340",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 33.811,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004083",
+      "R004303"
+    ],
+    "fault_event_ids": [
+      "R004083"
+    ],
+    "recovery_event_ids": [
+      "R004303"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0043",
+    "flight": "FLT036",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T18:56:26.031",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 133.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 2.992,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004081",
+      "R004080",
+      "R004082",
+      "R004300",
+      "R004301",
+      "R004302"
+    ],
+    "fault_event_ids": [
+      "R004081",
+      "R004080",
+      "R004082"
+    ],
+    "recovery_event_ids": [
+      "R004300",
+      "R004301",
+      "R004302"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0044",
+    "flight": "FLT037",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-02T19:00:42.129",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 136.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 5.02,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004087",
+      "R004088",
+      "R004306",
+      "R004307"
+    ],
+    "fault_event_ids": [
+      "R004087",
+      "R004088"
+    ],
+    "recovery_event_ids": [
+      "R004306",
+      "R004307"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0045",
+    "flight": "FLT037",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-02T19:08:36.016",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 245.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 8.08,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004084",
+      "R004086",
+      "R004085",
+      "R004305",
+      "R004304"
+    ],
+    "fault_event_ids": [
+      "R004084",
+      "R004086",
+      "R004085"
+    ],
+    "recovery_event_ids": [
+      "R004305",
+      "R004304"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0046",
+    "flight": "FLT039",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-02T21:22:14.137",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 189.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 12.941,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004090",
+      "R004089",
+      "R004313"
+    ],
+    "fault_event_ids": [
+      "R004090",
+      "R004089"
+    ],
+    "recovery_event_ids": [
+      "R004313"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R003191",
+        "R003189",
+        "R003190"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0047",
+    "flight": "FLT040",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-02T22:16:50.033",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 327.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 17.106,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004093",
+      "R004094",
+      "R004091",
+      "R004092",
+      "R004314",
+      "R004316",
+      "R004315"
+    ],
+    "fault_event_ids": [
+      "R004093",
+      "R004094",
+      "R004091",
+      "R004092"
+    ],
+    "recovery_event_ids": [
+      "R004314",
+      "R004316",
+      "R004315"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": "MCDU_ALT_CHANGE",
+      "prior_action_detail": {
+        "alt_ft": "31000",
+        "raw": "alt_ft=31000"
+      },
+      "prior_action_delta_s": 2.03,
+      "context_event_ids": [
+        "R000401",
+        "R001582",
+        "R001581"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0048",
+    "flight": "FLT044",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T02:18:26.059",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 161.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 2.002,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004095",
+      "R004096",
+      "R004321",
+      "R004320"
+    ],
+    "fault_event_ids": [
+      "R004095",
+      "R004096"
+    ],
+    "recovery_event_ids": [
+      "R004321",
+      "R004320"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0049",
+    "flight": "FLT045",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T02:47:22.203",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": false,
+    "recovery_duration_s": null,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004099"
+    ],
+    "fault_event_ids": [
+      "R004099"
+    ],
+    "recovery_event_ids": [],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": "ACK_CAUTION",
+      "prior_action_detail": {
+        "raw": ""
+      },
+      "prior_action_delta_s": 12.2,
+      "context_event_ids": [
+        "R000449"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0050",
+    "flight": "FLT045",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T03:04:15.201",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 56.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 8.827,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004097",
+      "R004098",
+      "R004324"
+    ],
+    "fault_event_ids": [
+      "R004097",
+      "R004098"
+    ],
+    "recovery_event_ids": [
+      "R004324"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0051",
+    "flight": "FLT047",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T05:27:00.073",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 252.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 2.956,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004101",
+      "R004102",
+      "R004100",
+      "R004328",
+      "R004326",
+      "R004327"
+    ],
+    "fault_event_ids": [
+      "R004101",
+      "R004102",
+      "R004100"
+    ],
+    "recovery_event_ids": [
+      "R004328",
+      "R004326",
+      "R004327"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0052",
+    "flight": "FLT047",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T05:30:04.030",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 122.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 7.992,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004104",
+      "R004103",
+      "R004329",
+      "R004330"
+    ],
+    "fault_event_ids": [
+      "R004104",
+      "R004103"
+    ],
+    "recovery_event_ids": [
+      "R004329",
+      "R004330"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0053",
+    "flight": "FLT048",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T05:36:16.013",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 263.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 3.172,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004106",
+      "R004105",
+      "R004107",
+      "R004333",
+      "R004332",
+      "R004331"
+    ],
+    "fault_event_ids": [
+      "R004106",
+      "R004105",
+      "R004107"
+    ],
+    "recovery_event_ids": [
+      "R004333",
+      "R004332",
+      "R004331"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0054",
+    "flight": "FLT048",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T05:51:01.179",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 238.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 18.902,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004110",
+      "R004108",
+      "R004109",
+      "R004334",
+      "R004335"
+    ],
+    "fault_event_ids": [
+      "R004110",
+      "R004108",
+      "R004109"
+    ],
+    "recovery_event_ids": [
+      "R004334",
+      "R004335"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0055",
+    "flight": "FLT050",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T08:29:00.204",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 127.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 24.944,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004111",
+      "R004112",
+      "R004336"
+    ],
+    "fault_event_ids": [
+      "R004111",
+      "R004112"
+    ],
+    "recovery_event_ids": [
+      "R004336"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": "ACK_CAUTION",
+      "prior_action_detail": {
+        "raw": ""
+      },
+      "prior_action_delta_s": 20.2,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0056",
+    "flight": "FLT051",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T08:31:37.026",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 199.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 4.229,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004117",
+      "R004116",
+      "R004339"
+    ],
+    "fault_event_ids": [
+      "R004117",
+      "R004116"
+    ],
+    "recovery_event_ids": [
+      "R004339"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R001834",
+        "R001836",
+        "R001835"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0057",
+    "flight": "FLT051",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-03T08:50:33.201",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 83.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 10.811,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004113",
+      "R004114",
+      "R004115",
+      "R004338",
+      "R004337"
+    ],
+    "fault_event_ids": [
+      "R004113",
+      "R004114",
+      "R004115"
+    ],
+    "recovery_event_ids": [
+      "R004338",
+      "R004337"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0058",
+    "flight": "FLT051",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T09:17:10.176",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 38.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 5.89,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004118",
+      "R004119",
+      "R004340",
+      "R004341"
+    ],
+    "fault_event_ids": [
+      "R004118",
+      "R004119"
+    ],
+    "recovery_event_ids": [
+      "R004340",
+      "R004341"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0059",
+    "flight": "FLT052",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-03T09:47:02.010",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 328.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 10.188,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004122",
+      "R004121",
+      "R004120",
+      "R004342"
+    ],
+    "fault_event_ids": [
+      "R004122",
+      "R004121",
+      "R004120"
+    ],
+    "recovery_event_ids": [
+      "R004342"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0060",
+    "flight": "FLT053",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T11:00:08.206",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 58.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 3.805,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004123",
+      "R004125",
+      "R004124",
+      "R004345",
+      "R004344",
+      "R004343"
+    ],
+    "fault_event_ids": [
+      "R004123",
+      "R004125",
+      "R004124"
+    ],
+    "recovery_event_ids": [
+      "R004345",
+      "R004344",
+      "R004343"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0061",
+    "flight": "FLT054",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-03T11:49:33.092",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 252.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 5.985,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004127",
+      "R004128",
+      "R004126",
+      "R004347",
+      "R004348",
+      "R004346"
+    ],
+    "fault_event_ids": [
+      "R004127",
+      "R004128",
+      "R004126"
+    ],
+    "recovery_event_ids": [
+      "R004347",
+      "R004348",
+      "R004346"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0062",
+    "flight": "FLT055",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T13:40:31.181",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 96.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 3.106,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004132",
+      "R004133",
+      "R004131",
+      "R004352"
+    ],
+    "fault_event_ids": [
+      "R004132",
+      "R004133",
+      "R004131"
+    ],
+    "recovery_event_ids": [
+      "R004352"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0063",
+    "flight": "FLT055",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-03T13:42:56.107",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 13.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 7.911,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004130",
+      "R004129",
+      "R004349",
+      "R004350"
+    ],
+    "fault_event_ids": [
+      "R004130",
+      "R004129"
+    ],
+    "recovery_event_ids": [
+      "R004349",
+      "R004350"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R001943",
+        "R001941",
+        "R001942"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0064",
+    "flight": "FLT056",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T14:04:08.153",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 7.941,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004136",
+      "R004356"
+    ],
+    "fault_event_ids": [
+      "R004136"
+    ],
+    "recovery_event_ids": [
+      "R004356"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": "AP_ENGAGE",
+      "prior_action_detail": {
+        "channel": "A",
+        "raw": "channel=A"
+      },
+      "prior_action_delta_s": 29.15,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0065",
+    "flight": "FLT056",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T14:04:17.188",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 155.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 11.075,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004134",
+      "R004135",
+      "R004355"
+    ],
+    "fault_event_ids": [
+      "R004134",
+      "R004135"
+    ],
+    "recovery_event_ids": [
+      "R004355"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0066",
+    "flight": "FLT057",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T15:58:29.242",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [],
+    "clock_drift_ms": 92.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": false,
+    "recovery_duration_s": null,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004137",
+      "R004138",
+      "R004139"
+    ],
+    "fault_event_ids": [
+      "R004137",
+      "R004138",
+      "R004139"
+    ],
+    "recovery_event_ids": [],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0067",
+    "flight": "FLT058",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T16:15:02.055",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [],
+    "clock_drift_ms": 139.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": false,
+    "recovery_duration_s": null,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004142",
+      "R004141"
+    ],
+    "fault_event_ids": [
+      "R004142",
+      "R004141"
+    ],
+    "recovery_event_ids": [],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0068",
+    "flight": "FLT058",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T16:57:07.275",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 14.945,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004140",
+      "R004360"
+    ],
+    "fault_event_ids": [
+      "R004140"
+    ],
+    "recovery_event_ids": [
+      "R004360"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0069",
+    "flight": "FLT058",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T17:00:40.151",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 59.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 21.921,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004145",
+      "R004143",
+      "R004144",
+      "R004362",
+      "R004363",
+      "R004361"
+    ],
+    "fault_event_ids": [
+      "R004145",
+      "R004143",
+      "R004144"
+    ],
+    "recovery_event_ids": [
+      "R004362",
+      "R004363",
+      "R004361"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0070",
+    "flight": "FLT061",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T19:56:58.072",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 90.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 9.996,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004146",
+      "R004147",
+      "R004148",
+      "R004364",
+      "R004365"
+    ],
+    "fault_event_ids": [
+      "R004146",
+      "R004147",
+      "R004148"
+    ],
+    "recovery_event_ids": [
+      "R004364",
+      "R004365"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0071",
+    "flight": "FLT062",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-03T20:12:51.156",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 164.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 6.955,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004151",
+      "R004149",
+      "R004150",
+      "R004367",
+      "R004366"
+    ],
+    "fault_event_ids": [
+      "R004151",
+      "R004149",
+      "R004150"
+    ],
+    "recovery_event_ids": [
+      "R004367",
+      "R004366"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R002075",
+        "R002074"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0072",
+    "flight": "FLT063",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-03T21:32:17.167",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 168.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 7.899,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004155",
+      "R004154",
+      "R004371",
+      "R004370"
+    ],
+    "fault_event_ids": [
+      "R004155",
+      "R004154"
+    ],
+    "recovery_event_ids": [
+      "R004371",
+      "R004370"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R002093",
+        "R002092",
+        "R002091"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0073",
+    "flight": "FLT063",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-03T22:29:07.120",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 38.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 4.023,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004153",
+      "R004152",
+      "R004368",
+      "R004369"
+    ],
+    "fault_event_ids": [
+      "R004153",
+      "R004152"
+    ],
+    "recovery_event_ids": [
+      "R004368",
+      "R004369"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R002082",
+        "R002083",
+        "R002084",
+        "R000619"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0074",
+    "flight": "FLT064",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-03T22:44:51.049",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 9.046,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004156",
+      "R004372"
+    ],
+    "fault_event_ids": [
+      "R004156"
+    ],
+    "recovery_event_ids": [
+      "R004372"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0075",
+    "flight": "FLT064",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-03T23:34:32.277",
+    "nodes_reporting_fault": [
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 17.861,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004157",
+      "R004374"
+    ],
+    "fault_event_ids": [
+      "R004157"
+    ],
+    "recovery_event_ids": [
+      "R004374"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0076",
+    "flight": "FLT066",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-04T01:45:04.142",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 132.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 0.885,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004158",
+      "R004159",
+      "R004160",
+      "R004161",
+      "R004377",
+      "R004375",
+      "R004376"
+    ],
+    "fault_event_ids": [
+      "R004158",
+      "R004159",
+      "R004160",
+      "R004161"
+    ],
+    "recovery_event_ids": [
+      "R004377",
+      "R004375",
+      "R004376"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "APPR",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0077",
+    "flight": "FLT067",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-04T02:01:17.067",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 216.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 7.983,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004163",
+      "R004162",
+      "R004378",
+      "R004379"
+    ],
+    "fault_event_ids": [
+      "R004163",
+      "R004162"
+    ],
+    "recovery_event_ids": [
+      "R004378",
+      "R004379"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0078",
+    "flight": "FLT067",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-04T02:23:12.154",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 162.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 13.868,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004164",
+      "R004166",
+      "R004165",
+      "R004167",
+      "R004381",
+      "R004380",
+      "R004382"
+    ],
+    "fault_event_ids": [
+      "R004164",
+      "R004166",
+      "R004165",
+      "R004167"
+    ],
+    "recovery_event_ids": [
+      "R004381",
+      "R004380",
+      "R004382"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0079",
+    "flight": "FLT068",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T01:57:49.091",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 211.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 45.061,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004169",
+      "R004168",
+      "R004384",
+      "R004383"
+    ],
+    "fault_event_ids": [
+      "R004169",
+      "R004168"
+    ],
+    "recovery_event_ids": [
+      "R004384",
+      "R004383"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0080",
+    "flight": "FLT069",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-04T03:14:50.075",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 84.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 5.01,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004174",
+      "R004173",
+      "R004175",
+      "R004388",
+      "R004389"
+    ],
+    "fault_event_ids": [
+      "R004174",
+      "R004173",
+      "R004175"
+    ],
+    "recovery_event_ids": [
+      "R004388",
+      "R004389"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0081",
+    "flight": "FLT069",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T03:50:40.142",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 37.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 21.939,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004172",
+      "R004170",
+      "R004171",
+      "R004385",
+      "R004386",
+      "R004387"
+    ],
+    "fault_event_ids": [
+      "R004172",
+      "R004170",
+      "R004171"
+    ],
+    "recovery_event_ids": [
+      "R004385",
+      "R004386",
+      "R004387"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0082",
+    "flight": "FLT070",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-04T04:55:34.127",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 124.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 17.04,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004178",
+      "R004179",
+      "R004392",
+      "R004391"
+    ],
+    "fault_event_ids": [
+      "R004178",
+      "R004179"
+    ],
+    "recovery_event_ids": [
+      "R004392",
+      "R004391"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0083",
+    "flight": "FLT070",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-04T05:13:47.090",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2"
+    ],
+    "clock_drift_ms": 122.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 4.0,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004176",
+      "R004177",
+      "R004390"
+    ],
+    "fault_event_ids": [
+      "R004176",
+      "R004177"
+    ],
+    "recovery_event_ids": [
+      "R004390"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0084",
+    "flight": "FLT072",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T06:58:26.177",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 171.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 22.926,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004180",
+      "R004181",
+      "R004401",
+      "R004400"
+    ],
+    "fault_event_ids": [
+      "R004180",
+      "R004181"
+    ],
+    "recovery_event_ids": [
+      "R004401",
+      "R004400"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0085",
+    "flight": "FLT073",
+    "fault_code": "22-11-09",
+    "eicas": "FMS WAYPOINT REJECT",
+    "severity": "ADVISORY",
+    "ata": "Autoflight",
+    "onset": "2026-03-04T08:14:21.070",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 249.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 0.96,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004182",
+      "R004183",
+      "R004184",
+      "R004402",
+      "R004404",
+      "R004403"
+    ],
+    "fault_event_ids": [
+      "R004182",
+      "R004183",
+      "R004184"
+    ],
+    "recovery_event_ids": [
+      "R004402",
+      "R004404",
+      "R004403"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": [
+        "R000691"
+      ]
+    }
+  },
+  {
+    "incident_id": "INC0086",
+    "flight": "FLT073",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-04T08:19:42.060",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 272.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 12.974,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004186",
+      "R004187",
+      "R004185",
+      "R004406",
+      "R004405"
+    ],
+    "fault_event_ids": [
+      "R004186",
+      "R004187",
+      "R004185"
+    ],
+    "recovery_event_ids": [
+      "R004406",
+      "R004405"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "GA",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0087",
+    "flight": "FLT074",
+    "fault_code": "34-55-01",
+    "eicas": "GPS POSITION DEGRADE",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T08:39:49.024",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 277.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 10.054,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004189",
+      "R004188",
+      "R004407",
+      "R004408"
+    ],
+    "fault_event_ids": [
+      "R004189",
+      "R004188"
+    ],
+    "recovery_event_ids": [
+      "R004407",
+      "R004408"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0088",
+    "flight": "FLT074",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-04T08:58:49.218",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 4.795,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004190",
+      "R004409"
+    ],
+    "fault_event_ids": [
+      "R004190"
+    ],
+    "recovery_event_ids": [
+      "R004409"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0089",
+    "flight": "FLT074",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T09:01:00.324",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 102.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 9.785,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004191",
+      "R004192",
+      "R004410"
+    ],
+    "fault_event_ids": [
+      "R004191",
+      "R004192"
+    ],
+    "recovery_event_ids": [
+      "R004410"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0090",
+    "flight": "FLT075",
+    "fault_code": "22-81-04",
+    "eicas": "AUTOPILOT DISC",
+    "severity": "WARNING",
+    "ata": "Autoflight",
+    "onset": "2026-03-04T10:24:30.228",
+    "nodes_reporting_fault": [
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-3"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 3.946,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004193",
+      "R004411"
+    ],
+    "fault_event_ids": [
+      "R004193"
+    ],
+    "recovery_event_ids": [
+      "R004411"
+    ],
+    "context": {
+      "phase": "DESCENT",
+      "prev_phase": "CRUISE",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0091",
+    "flight": "FLT077",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-04T12:29:19.237",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 55.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 9.86,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004194",
+      "R004195",
+      "R004414"
+    ],
+    "fault_event_ids": [
+      "R004194",
+      "R004195"
+    ],
+    "recovery_event_ids": [
+      "R004414"
+    ],
+    "context": {
+      "phase": "CLIMB",
+      "prev_phase": "TAKEOFF",
+      "guidance_mode": "VNAV PATH",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0092",
+    "flight": "FLT078",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T14:09:16.345",
+    "nodes_reporting_fault": [
+      "FMS-1"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1"
+    ],
+    "clock_drift_ms": 0.0,
+    "confidence": "LOW (single-source)",
+    "confidence_score": 1,
+    "resolved": true,
+    "recovery_duration_s": 13.809,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004196",
+      "R004415"
+    ],
+    "fault_event_ids": [
+      "R004196"
+    ],
+    "recovery_event_ids": [
+      "R004415"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "HDG SEL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0093",
+    "flight": "FLT079",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-04T14:07:16.146",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 172.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 10.865,
+    "duplicate_count": 1,
+    "evidence_ids": [
+      "R004201",
+      "R004202",
+      "R004199",
+      "R004200",
+      "R004420",
+      "R004419",
+      "R004418"
+    ],
+    "fault_event_ids": [
+      "R004201",
+      "R004202",
+      "R004199",
+      "R004200"
+    ],
+    "recovery_event_ids": [
+      "R004420",
+      "R004419",
+      "R004418"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "MANUAL",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0094",
+    "flight": "FLT079",
+    "fault_code": "42-30-07",
+    "eicas": "FMS CHANNEL FAIL",
+    "severity": "WARNING",
+    "ata": "Avionics/IMA",
+    "onset": "2026-03-04T14:34:44.075",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2"
+    ],
+    "clock_drift_ms": 258.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 19.944,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004197",
+      "R004198",
+      "R004417",
+      "R004416"
+    ],
+    "fault_event_ids": [
+      "R004197",
+      "R004198"
+    ],
+    "recovery_event_ids": [
+      "R004417",
+      "R004416"
+    ],
+    "context": {
+      "phase": "CRUISE",
+      "prev_phase": "CLIMB",
+      "guidance_mode": "LNAV",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0095",
+    "flight": "FLT079",
+    "fault_code": "31-52-03",
+    "eicas": "FMS DISAGREE",
+    "severity": "CAUTION",
+    "ata": "Indicating/Rec",
+    "onset": "2026-03-04T14:57:07.258",
+    "nodes_reporting_fault": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 61.0,
+    "confidence": "MEDIUM (2-node agreement)",
+    "confidence_score": 2,
+    "resolved": true,
+    "recovery_duration_s": 9.813,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004203",
+      "R004204",
+      "R004421",
+      "R004422"
+    ],
+    "fault_event_ids": [
+      "R004203",
+      "R004204"
+    ],
+    "recovery_event_ids": [
+      "R004421",
+      "R004422"
+    ],
+    "context": {
+      "phase": "APPROACH",
+      "prev_phase": "DESCENT",
+      "guidance_mode": "ALT HOLD",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  },
+  {
+    "incident_id": "INC0096",
+    "flight": "FLT080",
+    "fault_code": "34-11-02",
+    "eicas": "NAV DATA FAULT",
+    "severity": "CAUTION",
+    "ata": "Navigation",
+    "onset": "2026-03-04T15:03:48.113",
+    "nodes_reporting_fault": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "nodes_reporting_recovery": [
+      "FMS-1",
+      "FMS-2",
+      "FMS-3"
+    ],
+    "clock_drift_ms": 181.0,
+    "confidence": "HIGH (full 3-node agreement)",
+    "confidence_score": 3,
+    "resolved": true,
+    "recovery_duration_s": 17.958,
+    "duplicate_count": 0,
+    "evidence_ids": [
+      "R004207",
+      "R004206",
+      "R004205",
+      "R004424",
+      "R004423",
+      "R004425"
+    ],
+    "fault_event_ids": [
+      "R004207",
+      "R004206",
+      "R004205"
+    ],
+    "recovery_event_ids": [
+      "R004424",
+      "R004423",
+      "R004425"
+    ],
+    "context": {
+      "phase": "TAKEOFF",
+      "prev_phase": "PREFLIGHT",
+      "guidance_mode": "VNAV SPEED",
+      "prior_pilot_action": null,
+      "prior_action_detail": null,
+      "prior_action_delta_s": null,
+      "context_event_ids": []
+    }
+  }
+]

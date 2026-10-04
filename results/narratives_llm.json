@@ -1,0 +1,578 @@
+[
+  {
+    "incident_id": "INC0001",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0002",
+    "narrative": "On 2026-03-01 at 09:10:43.010",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0003",
+    "narrative": "During flight FLT002, a fault with code 22-11-09 was detected at 2026\u201103\u201101T09:12:28.024, reported by both FMS\u20112 and FMS\u20113, and was resolved after a recovery duration of 4.208 seconds, with a confidence level of MEDIUM (2\u2011node agreement) #R004211 #R003989 #R003987 #R003988.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0004",
+    "narrative": "On 2026-03-01 at 09:48:18.252, flight FLT003 experienced fault code 34-55-01 reported by node FMS-1, and the fault was resolved after a recovery duration of approximately 19.95 seconds; the confidence level for this incident is low due to single-source reporting, and evidence supporting this includes logs #R003993 and #R004216.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0005",
+    "narrative": "On 2026-03-01 at 09:49:38.",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0006",
+    "narrative": "On 2026-03-01 at 10:13:35.064, flight FLT003 experienced fault code 22\u201181\u201104 reported by both FMS\u20111 and FMS\u20112, with medium confidence based on 2\u2011node agreement; the fault was resolved after a recovery duration of 3.024 seconds. #R003998 #R003999 #R004219 #R004",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0007",
+    "narrative": "On 2026\u201103\u201101 at 11:38:59.180, flight FLT004 experienced fault code 34\u201155\u201101 reported by nodes FMS\u20111 and FMS\u20112, with a medium confidence",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0008",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0009",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0010",
+    "narrative": "During flight FLT006, a fault with code 22-11-09 was detected at 2026-03-01T13:13:09.036 by both FMS-1 and FMS-2, and the incident was confirmed by evidence from #R004010, #R004234, #R004235, #R004012, and #R004011",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0011",
+    "narrative": "On 2026-03-01 at 13:35:07.089, flight FLT006 experienced fault code 34-55-01 reported by nodes FMS-1 and FMS-3, and the fault was resolved after 19.062999963760376 seconds of recovery, with a confidence level of MEDIUM (2-node agreement) #R004229 #R004230 #R004009 #R004008",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0012",
+    "narrative": "On 2026-03-01 at 14:34:29 UTC, flight FLT007 experienced fault code 42-30-07 reported by all three FMS nodes (FMS-1, FMS-2, FMS-3) #R004013 #R004014 #R004015. The fault was fully resolved after 21.042999982833862 seconds of recovery, as confirmed by evidence #R004236. Confidence was HIGH with full 3\u2011node agreement.",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0013",
+    "narrative": "On 2026-03-01 at 14:46:35.032, flight FLT008 experienced fault code 22-11-09 reported by both FMS-1 and FMS-2, with medium confidence based on two\u2011node agreement. The fault was resolved after a recovery duration of 4.009999990463257 seconds, as evidenced by logs #R004238, #R",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0014",
+    "narrative": "On 2026-03-01 at 15:21:18.031 UTC, flight FLT008 experienced fault code 34-55-01 reported by nodes FMS-1 and FMS-3, with evidence logs #R004239, #R004019, and #R004018 confirming the fault; the incident was assigned a medium confidence level based on the agreement of two nodes and was resolved after a recovery duration of 36.108 seconds.",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0015",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0016",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0017",
+    "narrative": "On 2026-03-01 at 19:50:54.013, flight FLT013 experienced fault code 22-81-04 reported by node FMS-2; the fault was resolved after a recovery duration of 4.164999961853027 seconds, with a low confidence level due to single-source data. Evidence supporting this includes #R004027 and #R004250.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0018",
+    "narrative": "On 2026\u201103\u201101 at 20:33:08.297, flight FLT014 experienced fault code 22\u201111\u201109 reported by node FMS\u20112; the fault was resolved after 1.94\u202fseconds, with a low confidence level due to a single source, as indicated by evidence #R004028 and #R004252.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0019",
+    "narrative": "On 2026-03-01 at 21:17:21.054,",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0020",
+    "narrative": "On 2026-03-01 at 22:15:46.165, flight FLT016 experienced fault code 34-11-02 reported by node FMS-3, and the incident was resolved after a recovery duration of 8.865 seconds. Confidence in the fault identification is low due to single-source reporting, as indicated by the evidence logs #R004033 and #R004257.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0021",
+    "narrative": "On 2026-03-01 at 22:30:54.170, flight FLT016 experienced fault code 34-55-01 reported by node FMS-2, and the fault was resolved after approximately 5.997 seconds, with a low confidence level due to single-source reporting. Evidence supporting the fault and recovery is documented in records #R004032 and #R004256.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0022",
+    "narrative": "On 2026-03-01 at 23:48:00.015, flight FLT017 experienced fault code 22-81-04 reported by all three FMS nodes (FMS-1, FMS-2, FMS-3). The fault was fully resolved after 6.187999963760376 seconds, with high confidence due to full 3\u2011node agreement. Evidence: #R004035 #",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0023",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0024",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0025",
+    "narrative": "On 2026-03-02 at 01:38:14 UTC, flight FLT018 experienced fault code 34\u201155\u201101 reported by node FMS\u20111; the fault was detected and resolved after 28.155 seconds, with confidence rated as LOW due to single\u2011source reporting, as indicated by evidence logs #R004042 and #R004265.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0026",
+    "narrative": "On 2026-03-02 at 02:09:38.034 UTC, flight FLT019 experienced a fault with code 34-55-01 reported by the FMS-1 node, which was detected and logged in evidence #R004050 and #R004274. The fault was resolved after a recovery duration of 21.170000076293945 seconds, with a confidence level of LOW (single-source) #R004050 #R004274.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0027",
+    "narrative": "On 2026\u201103\u201102 at 02:28:27.125, flight FLT019 experienced fault code 22\u201111\u201109, reported by all three FMS nodes (FMS\u2011",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0028",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0029",
+    "narrative": "On 2026-03-02 at 04:12:02.030, flight FLT021 experienced fault code 31-52-03 reported by nodes FMS-1 and FMS-3, as indicated by evidence logs #R004051, #R004052, #R004275, and #R004276.",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0030",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0031",
+    "narrative": "On 2026-03-02 at 05:46:55.268 UTC, flight FLT023 experienced a fault with code 34-11-02 reported by node FMS-3, which was resolved after a recovery duration of 13.761 seconds. The confidence level for this incident is low, as it is based on single\u2011source evidence, and the incident was successfully resolved, as indicated by evidence IDs #R004057 and #R004280.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0032",
+    "narrative": "On 2026-03-02 at 08:40:33.336 UTC, flight FLT026 experienced fault code 42-30-07 reported by the FMS-1 node, with low confidence due to a single source of evidence #R004058 #R004281. The fault was resolved after a recovery duration of 8.924999952316284 seconds.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0033",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0034",
+    "narrative": "On 2026-03-02 at 11:30:16.079, flight FLT028 experienced fault code 34-11-02 reported by nodes FMS-1 and FMS-3, with medium confidence based on the two\u2011node agreement; the fault was resolved after a recovery duration of approximately 10.031 seconds, as documented in evidence #R004063, #R004064, and #R004285.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0035",
+    "narrative": "On 2026-03-02 at 11:32:26.031 UTC, flight FLT029 experienced fault code 42-30-07 reported by node FMS-2. The incident was detected by a single source, giving a low confidence level, and it has not yet been resolved. Evidence supporting this event is documented in record #R004065.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0036",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0037",
+    "narrative": "During flight FLT031, a fault with code 31\u201152\u201103 was reported at 2026\u201103\u201102T13:49:15.248 by both FMS\u20111 and FMS\u20112, and the fault was resolved after 12 seconds of recovery time #R004068 #R004066 #R004067 #R004287 #R004286. The confidence in the fault detection is medium, based on agreement between two nodes, and the incident was marked as resolved.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0038",
+    "narrative": "On 2026-03-02 at 14:46:58 UTC, flight FLT032 experienced fault code 22-11-09 reported by FMS-1 and FMS-3; the fault was resolved after approximately 3.902 seconds, with a medium confidence level based on agreement between the two nodes. Evidence from logs #R004072, #R004073, #R004291, and #R004292 supports this sequence.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0039",
+    "narrative": "On 2026-03-02 at 15:29:36.256, flight FLT033 experienced a fault with code 31-52-03 reported by the FMS-2 node, which was resolved after a recovery duration of 9.937 seconds; the confidence level for this incident is LOW (single-source) #R004074 #R004295.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0040",
+    "narrative": "On 2026-03-02 at 16:24:16.247, flight FLT034 experienced fault code 34-55-01 reported by nodes FMS-1 and FMS-3, and the fault was resolved after a recovery duration of 27.785 seconds, with a medium confidence level based on two\u2011node agreement; evidence supporting this includes logs #R004075, #R004296, #R004076, and #R004297",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0041",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0042",
+    "narrative": "On 2026-03-02 at 18:18:33.340, flight FLT036 experienced fault code 34-55-01 reported by node FMS-3, which was resolved after 33.811 seconds; the incident has a low confidence level due to single-source evidence, as documented in logs #R004083 and #R004303.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0043",
+    "narrative": "On 2026-03-02 at 18:56:26.031, flight FLT036 experienced fault code 22\u201111\u201109 reported by all three FMS nodes (FMS\u20111, FMS\u20112, FMS\u20113). The fault was resolved after 2.992 seconds, with high confidence due to full 3\u2011node agreement. Evidence: #R004300 #R004082 #R004081 #R004301 #R004302 #R004080",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0044",
+    "narrative": "On 2026\u201103\u201102 at 19:00:42.129, flight FLT037 experienced fault code 22\u201181\u201104 reported by both FMS\u20111 and FMS\u20112, with a medium confidence level based on the two\u2011node agreement #R004087 #R004088 #R004306 #R004307. The fault was resolved after a recovery duration of 5.019999980926514 seconds, confirming that the issue was successfully addressed.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0045",
+    "narrative": "The fault code 31\u201152\u201103 was detected on flight FLT037 at 2026\u201103\u201102T19:08:36.016, with all three FMS units (FMS\u20111, FMS\u20112, FMS\u20113) reporting the fault, as indicated by evidence #R004304, #R004",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0046",
+    "narrative": "On 2026-03-02 at 21:22:14.137, flight FLT039 experienced fault code 42\u201130\u201107 reported by both FMS\u20111 and FMS\u20112, with a medium confidence level based on 2\u2011node agreement; the fault was resolved after 12.94 seconds, as indicated by evidence #R004090, #R004089, and #R004313.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0047",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0048",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0049",
+    "narrative": "On 2026-03-03 at 02:47:22.203, flight FLT045 experienced a fault with code 34-55-01 reported by the FMS-2 node; the incident was identified with low confidence due to a single source and has not yet been resolved, with no recovery duration recorded #R004099.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0050",
+    "narrative": "On 2026-03-03 at 03:04:15.201 UTC, flight FLT045 experienced fault code 34-11-02 reported by both FMS-1 and FMS-2, and the fault was resolved after 8.827 seconds with medium confidence based on the two\u2011node agreement, as documented in logs #R004097, #R004098, and #R004324.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0051",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0052",
+    "narrative": "On 2026-03-03 at 05:30:04.030, flight FLT047 experienced fault code 22\u201181\u201104 reported by both FMS\u20111 and FMS\u20112, and the fault was resolved after 7.992 seconds with medium confidence based on agreement from two nodes. Evidence from logs #R004104, #R004330, #R004103, and #R004329 supports this conclusion.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0053",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0054",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0055",
+    "narrative": "On 2026-03-03 at 08:29:00.204, flight FLT050 experienced fault code 34-55-01 reported by node FMS-2, and the fault was resolved after a recovery duration of 24.944 seconds, with a confidence level of LOW due to single-source evidence #R004111 #R004112 #R004336.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0056",
+    "narrative": "On 2026-03-03 at 08:31:37.026, flight FLT051 experienced fault code 22-11-09 reported by both FMS-1 and FMS-2; the incident was resolved after 4.229 seconds, with a medium confidence level based on agreement from two nodes. Evidence: #R004116 #R004339 #R004117",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0057",
+    "narrative": "On 2026-03-03 at 08:50:33.201, flight FLT051 experienced fault code 31-52-03 reported by all three FMS nodes (FMS-1, FMS-2, FMS-3) #R004113 #R004114 #R004115. The fault was fully resolved after 10.811 seconds, with a confidence level of HIGH due to full 3\u2011node agreement #R004338 #R004337.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0058",
+    "narrative": "On 2026-03-03 at 09:17:10.176 UTC, flight FLT051 experienced fault code 22-11-09 reported by nodes FMS-1 and FMS-3, as indicated by evidence #R004340, #R004119, #R004341, and #R004118. The incident had a medium confidence level based on 2\u2011node agreement, was resolved after a recovery duration of 5.889999866485596 seconds.",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0059",
+    "narrative": "On 2026-03-03 at 09:47:02.010, flight FLT052 experienced fault code 42\u201130\u201107 reported by nodes FMS\u20111, FMS\u20112, and FMS\u20113, with high confidence due to full 3\u2011node agreement. The fault was resolved after a recovery duration of",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0060",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0061",
+    "narrative": "On 2026-03-03 at 11:49:33",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0062",
+    "narrative": "On 2026-03-03 at 13:40:31.181, flight FLT055 experienced fault code 22-11-09 reported by nodes FMS-2 and FMS-3, and the fault was resolved after 3.106 seconds; the confidence level was MEDIUM due to agreement between two nodes, and evidence supporting the incident includes #R004352 #R004133 #R004131 #R004132.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0063",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0064",
+    "narrative": "On 2026-03-03 at 14:04:08.153 UTC, flight FLT056 experienced fault code 22-81-04 reported by node FMS-3, and the fault was resolved after a recovery duration of 7.940999984741211 seconds, with a confidence level of LOW (single-source) #R004136 #R004356.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0065",
+    "narrative": "On 2026-03-03 at 14:04:17.188, flight FLT056 experienced fault code 34-11-02 reported by nodes FMS-1 and FMS-3, and the fault was resolved after 11.075 seconds with medium confidence based on two\u2011node agreement; evidence from logs #R004134, #R004355, and #R004135 supports this incident.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0066",
+    "narrative": "On 2026-03-03 at 15:58:29.242, flight FLT057 experienced fault code 22-81-04 reported by nodes FMS-2 and FMS-3, and the fault remains unresolved with no recovery duration recorded; the confidence level is MEDIUM due to agreement between two nodes, as documented in evidence #R004137, #R004138, and #R004139.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0067",
+    "narrative": "On 2026-03-03 at 16:15:02.055, flight FLT058 experienced fault code 22-81-04 reported by both FMS-1 and FMS-2, with a medium confidence level based on two\u2011node agreement #R004142 #R004141. The fault remains unresolved as of the last update, with no recovery duration recorded.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0068",
+    "narrative": "On 2026-03-03 at 16:57:07.275, flight FLT058 experienced a fault with code 34-11-02 reported by node FMS-3, which was resolved after a recovery duration of 14.944999933242798 seconds, with a confidence level of LOW due to single-source evidence, as indicated by evidence IDs #R004140 and #R004360.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0069",
+    "narrative": "On 2026-03-03 at 17:00:40.151 UTC, flight FLT058",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0070",
+    "narrative": "On 2026-03-03 at 19:56:58.072, flight FLT061 experienced fault code 34-11",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0071",
+    "narrative": "On 2026-03-03 at 20:12:51.156, flight FLT062 experienced fault code 34-11-02 reported by nodes FMS",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0072",
+    "narrative": "On 2026-03-03 at",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0073",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0074",
+    "narrative": "On 2026-03-03 at 22:44:51.049, flight FLT064 experienced fault code 31-52-03 reported by node FMS-3, and the fault was resolved after 9.046 seconds; the confidence level for this incident is LOW (single-source) and it was confirmed resolved, as indicated by evidence IDs #R004156 and #R004372.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0075",
+    "narrative": "On 2026-03-03 at 23:34:32.277 UTC, flight FLT064 experienced fault code 42-30-07 reported by node FMS-2, with low confidence due to single-source evidence #R004374 and #R004157. The fault was resolved after a recovery duration of 17.861 seconds.",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0076",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0077",
+    "narrative": "On 2026-03-04 at 01:57:49.",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0078",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0079",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0080",
+    "narrative": "At 2026-03-04T03:14:50.075, flight FLT069 experienced fault code 22-81-04 reported by all three FMS nodes (FMS",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0081",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0082",
+    "narrative": "On 2026-03-04 at 04:55:34 UTC, flight FLT070 experienced fault code 42-30-07 reported by nodes FMS-2 and FMS-3, with medium confidence based on two\u2011node agreement; the fault was resolved after a recovery duration of 17.04 seconds. #R004179 #R004392 #R004391 #R004178",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0083",
+    "narrative": "On flight FLT070, at 2026-03-04T05:13:47.090, a fault with code 22-11-09 was reported by both FMS-1 and FMS-2, as confirmed by evidence #R004176, #R004177, and #R004390. The incident was resolved after a recovery duration of 4.0 seconds, with a confidence level of MEDIUM (2-node agreement).",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0084",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0085",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0086",
+    "narrative": "On 2026-03-04 at 08:19:42.060, flight FL",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0087",
+    "narrative": "On 2026-03-04 at 08:39:49.024, flight FLT074 experienced fault code 34-55-01 reported by nodes FMS-2 and FMS-3, and the fault was resolved after a recovery duration of 10.054 seconds, with a medium confidence level based on two\u2011node agreement. Evidence from logs #R004408, #R004407, #R004189, and #R004188 supports this conclusion.",
+    "verified": true,
+    "attempts": 2
+  },
+  {
+    "incident_id": "INC0088",
+    "narrative": "On 2026-03-04 at 08:58:49.218, flight FLT074 experienced fault code 31-52-03 reported by node FMS-3, which was resolved after a recovery duration of 4.795 seconds; the confidence level for this incident is LOW (single-source) and it was confirmed as resolved, as indicated by evidence #R004190 and #R004409.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0089",
+    "narrative": "On 2026-03-04 at 09:01:00.324, flight FLT074 experienced fault code 34-11-02 reported by node FMS-1, a single\u2011source event",
+    "verified": false,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0090",
+    "narrative": "On 2026-03-04 at 10:24:30.228, flight FLT075 experienced fault code 22-81-04 reported by node FMS-3, and the fault was resolved after a recovery duration of 3.946 seconds #R004193 #R004411. The confidence in this incident is low due to single\u2011source reporting, and the incident was marked as resolved.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0091",
+    "narrative": "On 2026-03-04 at 12:29:19.237, flight FLT077 experienced fault code 31-52-03 reported by node FMS-1, and the fault was resolved after a recovery duration of 9.859999895095825 seconds, indicating a successful recovery #R004194 #R004195 #R004414. The confidence level for this incident is low, as it is based on a single source of evidence, and the incident was marked as resolved.",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0092",
+    "narrative": "During flight FLT079, a fault with code 42-30-07 was detected at 2026-03-04T14:07:16.146, reported by nodes FMS-1, FMS-2, and FMS-3. The fault was fully resolved after 10.865 seconds, with high confidence due to full 3\u2011node agreement. Evidence: #R004202 #R004200 #R004420 #R004199 #R004419 #R004418 #R004201",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0093",
+    "narrative": "On 2026-03-04 at 14:09:16.345, flight FLT078 experienced fault code 34-11-02 reported by node FMS-1 #R004196 #R004415. The fault was resolved after 13.809 seconds, with a low confidence level due to single-source reporting",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0094",
+    "narrative": "On 2026-03-04 at 14:34:44.075, flight FLT079 experienced fault code 42-30-07 reported by nodes FMS-1 and FMS-2. The fault was resolved after a recovery duration of 19.944 seconds, with a confidence level of MEDIUM (2-node agreement). Evidence includes #R004416, #R004417, #R004198, #R004197.",
+    "verified": true,
+    "attempts": 3
+  },
+  {
+    "incident_id": "INC0095",
+    "narrative": "On 2026-03-04 at 14:57:07.258, flight FLT079 experienced fault code 31-52-03 reported by nodes FMS-2 and FMS-3, and the fault was resolved after a recovery duration of 9.813 seconds #R004203 #R004204 #R004421 #R004422. The confidence level for this incident was medium, based on agreement between",
+    "verified": true,
+    "attempts": 1
+  },
+  {
+    "incident_id": "INC0096",
+    "narrative": "",
+    "verified": false,
+    "attempts": 3
+  }
+]

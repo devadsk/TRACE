@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Timeline Reconstruction & Auditable Correlation Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0d14;
+      --bg-secondary: #101522;
+      --bg-panel: rgba(18, 24, 38, 0.75);
+      --bg-card: rgba(23, 31, 50, 0.85);
+      --bg-hover: rgba(35, 48, 77, 0.8);
+      --border-color: rgba(60, 80, 120, 0.35);
+      --border-glow: rgba(0, 240, 255, 0.25);
+      --cyan: #00f0ff;
+      --cyan-dim: rgba(0, 240, 255, 0.15);
+      --emerald: #10b981;
+      --emerald-dim: rgba(16, 185, 129, 0.15);
+      --amber: #f59e0b;
+      --amber-dim: rgba(245, 158, 11, 0.15);
+      --rose: #ef4444;
+      --rose-dim: rgba(239, 68, 68, 0.15);
+      --purple: #a855f7;
+      --purple-dim: rgba(168, 85, 247, 0.15);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.04) 0%, transparent 40%);
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--cyan), #3b82f6);
+      color: #000;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .telemetry-bar {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .metric-pill {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .metric-pill .label {
+      font-size: 9px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-pill .val {
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--cyan);
+    }
+
+    .action-btn {
+      background: var(--cyan-dim);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-sans);
+    }
+    .action-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 12px var(--border-glow);
+    }
+
+    /* Natural Language Query Bar */
+    .query-section {
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .query-box-container {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .query-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .query-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 8px var(--border-glow);
+    }
+
+    .chips-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chips-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .chip-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      border-radius: 14px;
+      padding: 3px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: var(--cyan-dim);
+    }
+
+    /* Filters Bar */
+    .filter-bar {
+      padding: 10px 24px;
+      background: rgba(16, 21, 34, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    select.filter-select {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      outline: none;
+      cursor: pointer;
+    }
+    select.filter-select:focus {
+      border-color: var(--cyan);
+    }
+
+    /* Main Layout */
+    .main-container {
+      display: grid;
+      grid-template-columns: 320px 1fr 420px;
+      height: calc(100vh - 170px);
+      overflow: hidden;
+    }
+
+    /* Level 1: Flight Overview Column */
+    .col-overview {
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .level-tag {
+      background: rgba(255, 255, 255, 0.1);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--cyan);
+    }
+
+    .flight-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .flight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .flight-card:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-glow);
+    }
+    .flight-card.active {
+      border-color: var(--cyan);
+      background: rgba(0, 240, 255, 0.08);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+    }
+
+    .flight-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .flight-id {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .flight-stat {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .phase-strip {
+      display: flex;
+      gap: 3px;
+      margin-top: 6px;
+    }
+    .phase-badge {
+      font-size: 9px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    /* Level 2: Incidents List & Detail */
+    .col-incidents {
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .incident-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .incident-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .incident-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+    }
+    .incident-card.active {
+      border-color: var(--cyan);
+      background: rgba(20, 28, 48, 0.95);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+    }
+
+    .inc-row-1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .inc-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inc-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .inc-eicas {
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .sev-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+    .sev-WARNING { background: var(--rose-dim); color: var(--rose); border: 1px solid var(--rose); }
+    .sev-CAUTION { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber); }
+    .sev-ADVISORY { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
+
+    .inc-narrative {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 8px 10px;
+      border-radius: 6px;
+      border-left: 2px solid var(--cyan);
+    }
+
+    .citation-tag {
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .citation-tag:hover {
+      color: #fff;
+      text-shadow: 0 0 6px var(--cyan);
+    }
+
+    .inc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 8px;
+    }
+
+    .triplex-voting {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .vote-node {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+    }
+    .vote-node.active {
+      background: var(--emerald-dim);
+      color: var(--emerald);
+      border: 1px solid var(--emerald);
+      font-weight: 700;
+    }
+
+    /* Level 3 & Level 4: Context & Evidence Inspector */
+    .col-inspector {
+      background: var(--bg-panel);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .inspector-section {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Context Telemetry Strip */
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .context-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 10px;
+    }
+    .context-card .ctx-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .context-card .ctx-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    .telemetry-alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #fde68a;
+      margin-bottom: 10px;
+    }
+
+    /* Evidence List */
+    .evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .evidence-item {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .evidence-item:hover {
+      border-color: var(--cyan);
+      background: rgba(0, 240, 255, 0.05);
+    }
+    .evidence-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .evidence-meta {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    /* Raw Record Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.2);
+      border-radius: 10px;
+      width: 600px;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      padding: 18px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .close-btn:hover { color: #fff; }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="brand">
+      <div class="logo-badge">TRACE</div>
+      <div>
+        <div class="brand-title">Timeline Reconstruction & Auditable Correlation Engine</div>
+        <div class="brand-sub">Multi-Node Avionics Telemetry & Incident Verification</div>
+      </div>
+    </div>
+    <div class="telemetry-bar">
+      <div class="metric-pill">
+        <span class="label">Ingested</span>
+        <span class="val" id="metric-ingested">4,424</span>
+      </div>
+      <div class="metric-pill">
+        <span class="label">Audited Skips</span>
+        <span class="val" style="color: var(--amber)" id="metric-skipped">106</span>
+      </div>
+      <div class="metric-pill">
+        <span class="label">Incidents</span>
+        <span class="val" id="metric-incidents">96</span>
+      </div>
+      <div class="metric-pill">
+        <span class="label">Citation Audit</span>
+        <span class="val" style="color: var(--emerald)">100% (96/96)</span>
+      </div>
+      <div class="metric-pill">
+        <span class="label">Mean Skew</span>
+        <span class="val">163.3 ms</span>
+      </div>
+      <button class="action-btn" onclick="openSkippedModal()">Ingestion Audit</button>
+    </div>
+  </header>
+
+  <!-- Natural Language Query & Guided Questions -->
+  <section class="query-section">
+    <div class="query-box-container">
+      <input type="text" id="searchInput" class="query-input" placeholder="Natural search: e.g. 'unresolved evidence gaps', 'FLT001', 'ATA 34 GPS', or flight phase..." oninput="handleSearch(this.value)">
+      <button class="action-btn" onclick="executeCurrentQuery()">Query Logs</button>
+    </div>
+    <div class="chips-row">
+      <span class="chips-label">Showcase Queries:</span>
+      <button class="chip-btn" onclick="runCannedQuery('unresolved')">🚨 4 Unresolved Evidence Gaps</button>
+      <button class="chip-btn" onclick="runCannedQuery('high')">🛡️ Full 3-Node Consensus (HIGH)</button>
+      <button class="chip-btn" onclick="runCannedQuery('skew')">⏱️ High Clock Skew (>200ms)</button>
+      <button class="chip-btn" onclick="runCannedQuery('ata34')">📡 ATA 34 Navigation Faults</button>
+      <button class="chip-btn" onclick="resetAllFilters()">🔄 Reset View</button>
+    </div>
+  </section>
+
+  <!-- Filter Strip -->
+  <section class="filter-bar">
+    <div class="filter-group">
+      <span class="filter-label">Node Agreement:</span>
+      <select id="filterConfidence" class="filter-select" onchange="applyFilters()">
+        <option value="ALL">All Confidence Levels</option>
+        <option value="HIGH">HIGH (Full 3-Node Agreement)</option>
+        <option value="MEDIUM">MEDIUM (2-Node Agreement)</option>
+        <option value="LOW">LOW (Single-Source)</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Recovery Status:</span>
+      <select id="filterResolution" class="filter-select" onchange="applyFilters()">
+        <option value="ALL">All Incidents</option>
+        <option value="RESOLVED">Resolved (92)</option>
+        <option value="UNRESOLVED">Unresolved / Gap (4)</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Node Presence:</span>
+      <select id="filterNode" class="filter-select" onchange="applyFilters()">
+        <option value="ALL">All Nodes</option>
+        <option value="FMS-1">FMS-1</option>
+        <option value="FMS-2">FMS-2</option>
+        <option value="FMS-3">FMS-3</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Severity:</span>
+      <select id="filterSeverity" class="filter-select" onchange="applyFilters()">
+        <option value="ALL">All Severities</option>
+        <option value="WARNING">WARNING</option>
+        <option value="CAUTION">CAUTION</option>
+        <option value="ADVISORY">ADVISORY</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Four-Level Drill-Down Main Grid -->
+  <main class="main-container">
+    
+    <!-- LEVEL 1: Flight Overview -->
+    <aside class="col-overview">
+      <div class="col-header">
+        <span>Level 1: Flight Overview</span>
+        <span class="level-tag" id="flightCountTag">80 Flights</span>
+      </div>
+      <div class="flight-list" id="flightListContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </aside>
+
+    <!-- LEVEL 2: Incident & Fault Detail -->
+    <section class="col-incidents">
+      <div class="col-header">
+        <span>Level 2: Fault Corroboration & Narrative</span>
+        <span class="level-tag" id="incidentCountTag">96 Incidents</span>
+      </div>
+      <div class="incident-list" id="incidentListContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- LEVEL 3 & 4: Context & Decoded Evidence -->
+    <aside class="col-inspector">
+      <div class="col-header">
+        <span>Level 3 & 4: Inspector</span>
+        <span class="level-tag">Context + Evidence</span>
+      </div>
+
+      <!-- Level 3: Operational Context -->
+      <div class="inspector-section">
+        <div class="section-title">
+          <span>Level 3: Operational Context</span>
+          <span style="color: var(--cyan); font-family: var(--font-mono); font-size: 10px;" id="ctxIncidentId">INC0001</span>
+        </div>
+        
+        <div class="context-grid">
+          <div class="context-card">
+            <div class="ctx-label">Flight Phase</div>
+            <div class="ctx-val" id="ctxPhase" style="color: var(--cyan);">CRUISE</div>
+          </div>
+          <div class="context-card">
+            <div class="ctx-label">Guidance Mode</div>
+            <div class="ctx-val" id="ctxGuidance" style="color: var(--purple);">LNAV</div>
+          </div>
+          <div class="context-card">
+            <div class="ctx-label">Cross-Node Skew</div>
+            <div class="ctx-val" id="ctxSkew">186.0 ms</div>
+          </div>
+          <div class="context-card">
+            <div class="ctx-label">Recovery Window</div>
+            <div class="ctx-val" id="ctxRecovery">15.9s (3 nodes)</div>
+          </div>
+        </div>
+
+        <div class="telemetry-alert-box" id="ctxPilotAlert">
+          <strong>Preceding MCDU Action:</strong> 'FMS_RESET_CMD' executed 22.1s prior to fault onset.
+        </div>
+      </div>
+
+      <!-- Level 4: Raw Decoded Evidence Records -->
+      <div class="inspector-section" style="flex: 1;">
+        <div class="section-title">
+          <span>Level 4: Auditable Evidence Records</span>
+          <span style="color: var(--emerald);" id="ctxEvidenceCount">7 Records</span>
+        </div>
+        <div class="evidence-list" id="evidenceListContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Level 4 Modal: Single Raw Event Record -->
+  <div class="modal-overlay" id="recordModal" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="modalRecordTitle">Decoded Engineering Record: #R003983</span>
+        <button class="close-btn" onclick="closeRecordModal()">&times;</button>
+      </div>
+      <pre class="modal-body" id="modalRecordBody">Loading...</pre>
+    </div>
+  </div>
+
+  <!-- Ingestion Audit Modal (106 Skipped records) -->
+  <div class="modal-overlay" id="skippedModal" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content" style="width: 750px;">
+      <div class="modal-header">
+        <span>Ingestion Skip Audit (106 Records — Zero Silent Drops)</span>
+        <button class="close-btn" onclick="closeSkippedModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="skippedModalBody" style="max-height: 70vh;">
+        Loading skipped records...
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Bundle Inclusion (Supports direct file:// and http://) -->
+  <script src="results/data_bundle.js"></script>
+
+  <script>
+    let incidentsData = [];
+    let eventsData = {};
+    let skippedData = [];
+    let narrativesData = [];
+    let activeFlight = "ALL";
+    let selectedIncident = null;
+
+    // Initialize application
+    async function init() {
+      if (window.TRACE_BUNDLE) {
+        incidentsData = window.TRACE_BUNDLE.incidents || [];
+        eventsData = window.TRACE_BUNDLE.events || {};
+        skippedData = window.TRACE_BUNDLE.skipped || [];
+        narrativesData = window.TRACE_BUNDLE.narratives || [];
+      } else {
+        // Fallback to fetch for HTTP server mode
+        try {
+          const [incRes, evRes, skRes, narRes] = await Promise.all([
+            fetch('results/incidents.json').then(r => r.json()),
+            fetch('results/events.json').then(r => r.json()),
+            fetch('results/skipped.json').then(r => r.json()),
+            fetch('results/narratives.json').then(r => r.json())
+          ]);
+          incidentsData = incRes;
+          eventsData = evRes;
+          skippedData = skRes;
+          narrativesData = narRes;
+        } catch (err) {
+          console.error("Failed to load JSON results:", err);
+        }
+      }
+
+      document.getElementById('metric-incidents').textContent = incidentsData.length;
+      document.getElementById('metric-skipped').textContent = skippedData.length;
+
+      renderFlightList();
+      applyFilters();
+      if (incidentsData.length > 0) {
+        selectIncident(incidentsData[0].incident_id);
+      }
+    }
+
+    // Render Flight List (Level 1)
+    function renderFlightList() {
+      const container = document.getElementById('flightListContainer');
+      const flightsMap = new Map();
+
+      incidentsData.forEach(inc => {
+        if (!flightsMap.has(inc.flight)) {
+          flightsMap.set(inc.flight, { count: 0, severities: new Set(), resolved: true, phases: new Set() });
+        }
+        const f = flightsMap.get(inc.flight);
+        f.count++;
+        f.severities.add(inc.severity);
+        if (!inc.resolved) f.resolved = false;
+        if (inc.context && inc.context.phase) f.phases.add(inc.context.phase);
+      });
+
+      const allCard = document.createElement('div');
+      allCard.className = `flight-card ${activeFlight === 'ALL' ? 'active' : ''}`;
+      allCard.innerHTML = `
+        <div class="flight-top">
+          <span class="flight-id">ALL FLIGHTS</span>
+          <span class="flight-stat">${incidentsData.length} Incidents</span>
+        </div>
+        <div class="flight-stat" style="color: var(--text-dim)">Aggregated triplex fleet view</div>
+      `;
+      allCard.onclick = () => { activeFlight = 'ALL'; renderFlightList(); applyFilters(); };
+      container.innerHTML = '';
+      container.appendChild(allCard);
+
+      flightsMap.forEach((info, flt) => {
+        const card = document.createElement('div');
+        card.className = `flight-card ${activeFlight === flt ? 'active' : ''}`;
+        const hasWarning = info.severities.has("WARNING");
+        const hasCaution = info.severities.has("CAUTION");
+        const sevColor = hasWarning ? "var(--rose)" : hasCaution ? "var(--amber)" : "var(--cyan)";
+
+        card.innerHTML = `
+          <div class="flight-top">
+            <span class="flight-id">${flt}</span>
+            <span class="flight-stat" style="color: ${sevColor}; font-weight: 700;">${info.count} alert(s)</span>
+          </div>
+          <div class="flight-stat">Status: ${info.resolved ? '<span style="color: var(--emerald)">Resolved</span>' : '<span style="color: var(--rose); font-weight: 700">UNRESOLVED GAP</span>'}</div>
+          <div class="phase-strip">
+            ${Array.from(info.phases).slice(0, 3).map(p => `<span class="phase-badge">${p}</span>`).join('')}
+          </div>
+        `;
+        card.onclick = () => { activeFlight = flt; renderFlightList(); applyFilters(); };
+        container.appendChild(card);
+      });
+
+      document.getElementById('flightCountTag').textContent = `${flightsMap.size} Flights`;
+    }
+
+    // Filter & Search Engine
+    function applyFilters() {
+      const conf = document.getElementById('filterConfidence').value;
+      const res = document.getElementById('filterResolution').value;
+      const node = document.getElementById('filterNode').value;
+      const sev = document.getElementById('filterSeverity').value;
+      const search = (document.getElementById('searchInput').value || "").toLowerCase().trim();
+
+      const filtered = incidentsData.filter(inc => {
+        if (activeFlight !== 'ALL' && inc.flight !== activeFlight) return false;
+        if (conf !== 'ALL' && !inc.confidence.startsWith(conf)) return false;
+        if (res === 'RESOLVED' && !inc.resolved) return false;
+        if (res === 'UNRESOLVED' && inc.resolved) return false;
+        if (node !== 'ALL' && !inc.nodes_reporting_fault.includes(node)) return false;
+        if (sev !== 'ALL' && inc.severity !== sev) return false;
+
+        if (search) {
+          const hay = `${inc.incident_id} ${inc.flight} ${inc.fault_code} ${inc.eicas} ${inc.confidence} ${inc.context?.phase || ''} ${inc.context?.guidance_mode || ''}`.toLowerCase();
+          if (!hay.includes(search)) return false;
+        }
+        return true;
+      });
+
+      renderIncidentList(filtered);
+    }
+
+    // Render Incident List (Level 2)
+    function renderIncidentList(list) {
+      const container = document.getElementById('incidentListContainer');
+      document.getElementById('incidentCountTag').textContent = `${list.length} Incidents`;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-dim);">No incidents match the active filter criteria.</div>`;
+        return;
+      }
+
+      list.forEach(inc => {
+        const card = document.createElement('div');
+        card.className = `incident-card ${selectedIncident && selectedIncident.incident_id === inc.incident_id ? 'active' : ''}`;
+        
+        // Find narrative
+        const narObj = narrativesData.find(n => n.incident_id === inc.incident_id);
+        const narrativeText = narObj ? narObj.narrative : `Incident on flight ${inc.flight}, fault ${inc.fault_code}.`;
+
+        // Format narrative citations with clickable tags
+        const formattedNarrative = narrativeText.replace(/#(\w+)/g, (match, id) => {
+          return `<span class="citation-tag" onclick="event.stopPropagation(); inspectRecord('${id}')">${match}</span>`;
+        });
+
+        // Triplex voting pills
+        const fms1Active = inc.nodes_reporting_fault.includes("FMS-1") ? "active" : "";
+        const fms2Active = inc.nodes_reporting_fault.includes("FMS-2") ? "active" : "";
+        const fms3Active = inc.nodes_reporting_fault.includes("FMS-3") ? "active" : "";
+
+        card.innerHTML = `
+          <div class="inc-row-1">
+            <div class="inc-title-group">
+              <span class="inc-id">${inc.incident_id}</span>
+              <span class="inc-eicas">${inc.eicas}</span>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">[${inc.fault_code}]</span>
+            </div>
+            <span class="sev-badge sev-${inc.severity}">${inc.severity}</span>
+          </div>
+
+          <div class="inc-narrative">${formattedNarrative}</div>
+
+          <div class="inc-footer">
+            <div class="triplex-voting">
+              <span style="font-size: 10px; color: var(--text-dim); margin-right: 4px;">VOTING:</span>
+              <span class="vote-node ${fms1Active}">FMS-1</span>
+              <span class="vote-node ${fms2Active}">FMS-2</span>
+              <span class="vote-node ${fms3Active}">FMS-3</span>
+              <span style="font-family: var(--font-mono); margin-left: 6px; color: var(--cyan);">Δt: ${inc.clock_drift_ms.toFixed(1)}ms</span>
+            </div>
+            <div>
+              ${inc.resolved ? `<span style="color: var(--emerald)">✓ Recovered in ${inc.recovery_duration_s.toFixed(1)}s</span>` : `<span style="color: var(--rose); font-weight: 700;">⚠ UNRESOLVED GAP</span>`}
+            </div>
+          </div>
+        `;
+
+        card.onclick = () => selectIncident(inc.incident_id);
+        container.appendChild(card);
+      });
+    }
+
+    // Select Incident & Populate Inspector (Level 3 & 4)
+    function selectIncident(incId) {
+      const inc = incidentsData.find(i => i.incident_id === incId);
+      if (!inc) return;
+      selectedIncident = inc;
+
+      // Update active highlight
+      document.querySelectorAll('.incident-card').forEach(c => c.classList.remove('active'));
+      const cards = document.querySelectorAll('.incident-card');
+      // Highlight in view
+      applyFilters();
+
+      // Populate Level 3 Context
+      document.getElementById('ctxIncidentId').textContent = inc.incident_id;
+      document.getElementById('ctxPhase').textContent = inc.context ? inc.context.phase : "UNKNOWN";
+      document.getElementById('ctxGuidance').textContent = inc.context ? inc.context.guidance_mode : "UNKNOWN";
+      document.getElementById('ctxSkew').textContent = `${inc.clock_drift_ms.toFixed(1)} ms`;
+      document.getElementById('ctxRecovery').textContent = inc.resolved 
+        ? `${inc.recovery_duration_s.toFixed(1)}s (${inc.nodes_reporting_recovery.length} nodes)`
+        : "None (Evidence Gap)";
+
+      const pilotBox = document.getElementById('ctxPilotAlert');
+      if (inc.context && inc.context.prior_pilot_action) {
+        pilotBox.style.display = 'block';
+        pilotBox.innerHTML = `<strong>Preceding MCDU Action:</strong> '${inc.context.prior_pilot_action}' executed ${inc.context.prior_action_delta_s}s prior to fault onset.`;
+      } else {
+        pilotBox.style.display = 'none';
+      }
+
+      // Populate Level 4 Evidence List
+      const evidenceContainer = document.getElementById('evidenceListContainer');
+      evidenceContainer.innerHTML = '';
+      const allEvidenceIds = inc.evidence_ids || [];
+      document.getElementById('ctxEvidenceCount').textContent = `${allEvidenceIds.length} Records`;
+
+      allEvidenceIds.forEach(id => {
+        const ev = eventsData[id];
+        const item = document.createElement('div');
+        item.className = 'evidence-item';
+        if (ev) {
+          const isFault = ev.code === "FAULT";
+          const tagColor = isFault ? "var(--rose)" : "var(--emerald)";
+          item.innerHTML = `
+            <div class="evidence-header">
+              <span>#${ev.id} &bull; ${ev.node}</span>
+              <span style="color: ${tagColor};">${ev.code}</span>
+            </div>
+            <div class="evidence-meta">Family: ${ev.family} | ${ev.ts}</div>
+            <div style="color: var(--text-dim); margin-top: 4px; font-size: 10px;">${JSON.stringify(ev.detail)}</div>
+          `;
+        } else {
+          item.innerHTML = `<div class="evidence-header"><span>#${id}</span></div><div class="evidence-meta">Linked record</div>`;
+        }
+        item.onclick = () => inspectRecord(id);
+        evidenceContainer.appendChild(item);
+      });
+    }
+
+    // Modal: Level 4 Detailed Decoded Record
+    function inspectRecord(recordId) {
+      const modal = document.getElementById('recordModal');
+      const title = document.getElementById('modalRecordTitle');
+      const body = document.getElementById('modalRecordBody');
+      const ev = eventsData[recordId];
+
+      if (ev) {
+        title.textContent = `Decoded Engineering Record: #${ev.id} (${ev.family})`;
+        body.textContent = JSON.stringify(ev, null, 2);
+      } else {
+        title.textContent = `Record: #${recordId}`;
+        body.textContent = `Record ID #${recordId} not found in memory index.`;
+      }
+      modal.classList.add('open');
+    }
+
+    function closeRecordModal() {
+      document.getElementById('recordModal').classList.remove('open');
+    }
+
+    // Ingestion Audit Modal (106 Skipped records)
+    function openSkippedModal() {
+      const modal = document.getElementById('skippedModal');
+      const body = document.getElementById('skippedModalBody');
+      body.innerHTML = '';
+
+      const summaryDiv = document.createElement('div');
+      summaryDiv.style.marginBottom = '14px';
+      summaryDiv.style.color = 'var(--text-muted)';
+      summaryDiv.innerHTML = `Total Audited Skips: <strong style="color: var(--amber);">${skippedData.length}</strong> unparseable or corrupted lines isolated. Zero silent drops.`;
+      body.appendChild(summaryDiv);
+
+      const table = document.createElement('table');
+      table.style.width = '100%';
+      table.style.borderCollapse = 'collapse';
+      table.style.fontSize = '11px';
+      table.innerHTML = `
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--cyan);">
+            <th style="padding: 6px;">Family</th>
+            <th style="padding: 6px;">Reason</th>
+            <th style="padding: 6px;">Raw Content Snippet</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${skippedData.slice(0, 50).map(s => `
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 6px; color: var(--purple);">${s.family}</td>
+              <td style="padding: 6px; color: var(--rose);">${s.reason}</td>
+              <td style="padding: 6px; color: var(--text-dim); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.raw || '<em>[BLANK LINE]</em>'}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+      body.appendChild(table);
+      modal.classList.add('open');
+    }
+
+    function closeSkippedModal() {
+      document.getElementById('skippedModal').classList.remove('open');
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('open');
+      }
+    }
+
+    // Search and Canned Queries
+    function handleSearch(val) {
+      applyFilters();
+    }
+
+    function runCannedQuery(type) {
+      resetAllFilters();
+      if (type === 'unresolved') {
+        document.getElementById('filterResolution').value = 'UNRESOLVED';
+      } else if (type === 'high') {
+        document.getElementById('filterConfidence').value = 'HIGH';
+      } else if (type === 'skew') {
+        document.getElementById('searchInput').value = 'skew';
+      } else if (type === 'ata34') {
+        document.getElementById('searchInput').value = '34-';
+      }
+      applyFilters();
+    }
+
+    function resetAllFilters() {
+      activeFlight = 'ALL';
+      document.getElementById('filterConfidence').value = 'ALL';
+      document.getElementById('filterResolution').value = 'ALL';
+      document.getElementById('filterNode').value = 'ALL';
+      document.getElementById('filterSeverity').value = 'ALL';
+      document.getElementById('searchInput').value = '';
+      renderFlightList();
+      applyFilters();
+    }
+
+    function executeCurrentQuery() {
+      applyFilters();
+    }
+
+    // Launch
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
