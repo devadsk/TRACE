@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import sys
 import subprocess
@@ -359,6 +360,120 @@ def _derive_from_cluster(cluster: dict):
     return sev, summary
 
 
+def _compute_anomaly_score(cluster: dict, full_md: str, sev: str, duration_sec: int) -> tuple[int, str, dict]:
+    """
+    Computes Multi-Vector Domain-Weighted Anomaly & Relevance Score (0-100).
+    Dimensions:
+      1. Severity & Hazard Impact (0-40)
+      2. Temporal Burst Velocity (0-25)
+      3. Cross-Node Contagion & Topology (0-20)
+      4. Flight Phase Hazard Multiplier (0.85 - 1.35)
+    """
+    events = cluster.get("events", [])
+    md_low = full_md.lower()
+
+    # 1. Severity & Impact (0-40 pts)
+    sev_upper = sev.upper()
+    if sev_upper == "CRITICAL":
+        s_pts = 35.0
+    elif sev_upper == "HIGH":
+        s_pts = 26.0
+    elif sev_upper == "WARNING":
+        s_pts = 16.0
+    else:
+        s_pts = 6.0
+
+    # Key hazard signals in text/telemetry
+    hazard_keywords = [
+        ("total loss", 4.0), ("dual mode", 3.5), ("split brain", 4.0),
+        ("failover", 3.0), ("emergency", 4.0), ("degraded", 2.0),
+        ("bite fail", 3.0), ("sensor disagree", 3.5), ("disengage", 2.5),
+        ("abort", 3.5), ("disconnect", 2.0), ("fault", 1.5)
+    ]
+    boost = 0.0
+    for kw, val in hazard_keywords:
+        if kw in md_low:
+            boost += val
+    s_pts = min(40.0, s_pts + boost)
+
+    # 2. Temporal Burst Velocity (0-25 pts)
+    n_events = cluster.get("event_count", len(events))
+    d_sec = max(1, duration_sec)
+    rate = n_events / d_sec  # events / sec
+    v_pts = min(25.0, 4.5 * math.log2(1.0 + rate * 3.0) + min(8.0, n_events * 0.4))
+
+    # 3. Cross-Node Contagion & Topology (0-20 pts)
+    nodes = set(ev.get("node_id", "") for ev in events if ev.get("node_id"))
+    families = set(ev.get("log_family", "") for ev in events if ev.get("log_family"))
+    if len(nodes) >= 3:
+        node_pts = 14.0
+    elif len(nodes) == 2:
+        node_pts = 9.0
+    else:
+        node_pts = 4.0
+    family_pts = min(6.0, len(families) * 1.5)
+    c_pts = min(20.0, node_pts + family_pts)
+
+    # 4. Flight Phase Hazard Multiplier (0.85 - 1.35)
+    phase_found = "CRUISE"
+    for ev in events:
+        p = ev.get("raw_payload", {})
+        ph = p.get("Flight Phase") or p.get("flight_phase")
+        if ph:
+            phase_found = str(ph).upper()
+            break
+
+    if phase_found == "CRUISE":
+        if any(w in md_low for w in ["takeoff", "take-off", "landing", "approach", "touchdown"]):
+            phase_found = "TAKEOFF / APPROACH"
+        elif any(w in md_low for w in ["climb", "ascent"]):
+            phase_found = "CLIMB"
+        elif any(w in md_low for w in ["descent", "glide"]):
+            phase_found = "DESCENT"
+        elif any(w in md_low for w in ["taxi", "ground", "gate"]):
+            phase_found = "GROUND"
+
+    if any(k in phase_found for k in ["TAKEOFF", "LANDING", "APPROACH"]):
+        phase_mult = 1.30
+    elif any(k in phase_found for k in ["CLIMB", "DESCENT"]):
+        phase_mult = 1.15
+    elif any(k in phase_found for k in ["GROUND", "TAXI"]):
+        phase_mult = 0.85
+    else:
+        phase_mult = 1.00
+
+    # Composite Normalized Score (0-100)
+    raw_score = (s_pts + v_pts + c_pts) * phase_mult
+    score = min(100, max(5, int(round(raw_score))))
+
+    if score >= 80:
+        tier = "CRITICAL ANOMALY"
+        tier_color = "#ef4444"
+    elif score >= 60:
+        tier = "ELEVATED ANOMALY"
+        tier_color = "#f97316"
+    elif score >= 40:
+        tier = "MODERATE ANOMALY"
+        tier_color = "#eab308"
+    else:
+        tier = "ROUTINE EVENT"
+        tier_color = "#06b6d4"
+
+    breakdown = {
+        "severity_pts": round(s_pts, 1),
+        "velocity_pts": round(v_pts, 1),
+        "contagion_pts": round(c_pts, 1),
+        "phase_multiplier": phase_mult,
+        "flight_phase": phase_found,
+        "anomaly_tier": tier,
+        "tier_color": tier_color,
+        "nodes_impacted": len(nodes),
+        "families_impacted": len(families),
+    }
+
+    return score, tier, breakdown
+
+
 def stage_5_package_visualization() -> bool:
     """Bundle clusters + forensic reports into viz_data.json and viz_data.js."""
     cf = PATHS["correlated_clusters"]
@@ -425,6 +540,9 @@ def stage_5_package_visualization() -> bool:
 
         nodes = sorted(set(ev.get("node_id", "") for ev in cluster.get("events", [])))
 
+        # Compute Multi-Vector Anomaly & Relevance Score
+        score, tier, breakdown = _compute_anomaly_score(cluster, full_md, sev, duration_sec)
+
         incidents.append({
             "index":              idx,
             "cluster_id":         cid,
@@ -438,6 +556,9 @@ def stage_5_package_visualization() -> bool:
             "raw_occurrences":    cluster.get("total_occurrences_incl_duplicates",
                                               cluster.get("event_count", len(events_out))),
             "severity":           sev,
+            "anomaly_score":      score,
+            "anomaly_tier":       tier,
+            "score_breakdown":    breakdown,
             "executive_summary":  exec_s,
             "root_cause":         root_c,
             "cascade_sequence":   cascade,
@@ -449,6 +570,11 @@ def stage_5_package_visualization() -> bool:
 
         if idx % 25 == 0 or idx == len(clusters):
             print(f"  {DIM}Packaged {idx}/{len(clusters)} incidents{RESET}", flush=True)
+
+    # Compute global relevance rank (Rank #1 = highest anomaly score)
+    sorted_order = sorted(range(len(incidents)), key=lambda i: incidents[i]["anomaly_score"], reverse=True)
+    for rank, orig_idx in enumerate(sorted_order, 1):
+        incidents[orig_idx]["relevance_rank"] = rank
 
     # Single-pass JSON serialization (avoids serializing 6MB data structure twice)
     info("Serializing visualization dataset (single-pass) ...")

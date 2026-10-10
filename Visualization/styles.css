@@ -2116,3 +2116,145 @@ body.avionics-storyboard {
   justify-content: flex-end;
   gap: 12px;
 }
+
+/* ==============================================================================
+   ANOMALY & RELEVANCE SCORING SYSTEM STYLES
+   ============================================================================== */
+
+.anomaly-sort-deck {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  border-radius: var(--radius-sm, 6px);
+  padding: 4px 10px;
+  backdrop-filter: blur(8px);
+}
+
+.sort-glyph {
+  font-size: 0.95rem;
+  color: #38bdf8;
+  animation: pulse-glyph 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glyph {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 6px #38bdf8); }
+}
+
+.hud-dropdown-select {
+  background: transparent;
+  color: #f1f5f9;
+  border: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.hud-dropdown-select option {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.incident-anomaly-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(249, 115, 22, 0.15));
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.incident-anomaly-badge.critical {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.6);
+  background: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+}
+
+.incident-anomaly-badge.elevated {
+  color: #f97316;
+  border-color: rgba(249, 115, 22, 0.6);
+  background: rgba(249, 115, 22, 0.2);
+  box-shadow: 0 0 14px rgba(249, 115, 22, 0.3);
+}
+
+.incident-anomaly-badge.moderate {
+  color: #eab308;
+  border-color: rgba(234, 179, 8, 0.5);
+  background: rgba(234, 179, 8, 0.15);
+}
+
+.incident-anomaly-badge.routine {
+  color: #06b6d4;
+  border-color: rgba(6, 182, 212, 0.4);
+  background: rgba(6, 182, 212, 0.12);
+}
+
+/* Radar & Anomaly Breakdown Matrix in Level 2 */
+.anomaly-breakdown-card {
+  margin-top: 12px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm, 6px);
+  padding: 12px;
+}
+
+.anomaly-vector-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 0.72rem;
+}
+
+.vector-label {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.vector-val {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.vector-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.vector-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* Pulsing aura for high-anomaly canvas dots */
+.critical-anomaly-pulse .incident-beacon-halo {
+  animation: crit-halo-pulse 1.8s infinite ease-out !important;
+  stroke: #ef4444 !important;
+  stroke-width: 2.4px !important;
+}
+
+@keyframes crit-halo-pulse {
+  0% { r: 8px; opacity: 1; }
+  70% { r: 20px; opacity: 0; }
+  100% { r: 20px; opacity: 0; }
+}

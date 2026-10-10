@@ -28,6 +28,7 @@
     currentZoomLevel: 1, // 1: Flight Trajectory, 2: Narration, 3: Telemetry
     filterSeverity: 'all',
     searchQuery: '',
+    sortBy: 'default',    // 'default', 'anomaly-desc', 'critical-only'
     currentFlightTime: 0, // In seconds from 09:00:00
     replayPlaying: false,
     replaySpeed: 1,       // 1x, 5x, 20x
@@ -48,6 +49,7 @@
     // Search & Filters
     omniSearch: document.getElementById('omni-search'),
     btnClearSearch: document.getElementById('clear-search'),
+    sortSelect: document.getElementById('anomaly-sort-select'),
     filterChips: document.querySelectorAll('.filter-chip'),
 
     // Level 1: Flight Profile & Trajectory
@@ -76,6 +78,7 @@
     hudTipIndex: document.getElementById('hud-tip-index'),
     hudTipCluster: document.getElementById('hud-tip-cluster'),
     hudTipSev: document.getElementById('hud-tip-sev'),
+    hudTipAnomaly: document.getElementById('hud-tip-anomaly'),
     hudTipPhase: document.getElementById('hud-tip-phase'),
     hudTipNodes: document.getElementById('hud-tip-nodes'),
     hudTipTrigger: document.getElementById('hud-tip-trigger'),
@@ -91,6 +94,7 @@
     deckClusterTitle: document.getElementById('deck-cluster-title'),
     deckTimeBadge: document.getElementById('deck-time-badge'),
     deckSeverityBadge: document.getElementById('deck-severity-badge'),
+    deckAnomalyBadge: document.getElementById('deck-anomaly-badge'),
     deckSpecsMatrix: document.getElementById('deck-specs-matrix'),
     deckExecNarrative: document.getElementById('deck-exec-narrative'),
     deckTriggerTag: document.getElementById('deck-trigger-tag'),
@@ -319,9 +323,12 @@
 
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       const sevClass = inc.severity.toLowerCase();
-      g.setAttribute('class', `incident-dot-group ${sevClass}`);
+      const isCriticalAnomaly = (inc.anomaly_score || 0) >= 80;
+      g.setAttribute('class', `incident-dot-group ${sevClass}${isCriticalAnomaly ? ' critical-anomaly-pulse' : ''}`);
       g.setAttribute('data-index', inc.index);
       g.setAttribute('data-cluster-id', inc.cluster_id);
+      g.setAttribute('data-anomaly-score', inc.anomaly_score || 0);
+      g.setAttribute('data-relevance-rank', inc.relevance_rank || 999);
 
       const x = inc._x;
       const y = inc._y;
@@ -430,6 +437,14 @@
     dom.hudTipCluster.textContent = inc.cluster_id;
     dom.hudTipSev.textContent = inc.severity;
     dom.hudTipSev.className = `hud-tooltip-sev ${inc.severity.toLowerCase()}`;
+
+    if (dom.hudTipAnomaly) {
+      const score = inc.anomaly_score !== undefined ? inc.anomaly_score : '—';
+      const rank = inc.relevance_rank !== undefined ? inc.relevance_rank : '—';
+      const tier = inc.anomaly_tier || 'ANOMALY';
+      dom.hudTipAnomaly.textContent = `⚡ ${score}/100 • Rank #${rank} (${tier})`;
+    }
+
     dom.hudTipPhase.textContent = `${inc._phase.name} • ${inc.start_clock} UTC (${Math.round(inc._alt).toLocaleString()} FT)`;
     dom.hudTipNodes.textContent = inc.nodes.join(', ');
 
@@ -655,7 +670,21 @@
     dom.deckSeverityBadge.textContent = inc.severity;
     dom.deckSeverityBadge.className = `incident-crit-badge ${inc.severity.toLowerCase()}`;
 
-    // 1. Overview Specification Matrix
+    // Anomaly Badge
+    if (dom.deckAnomalyBadge) {
+      const score = inc.anomaly_score !== undefined ? inc.anomaly_score : '—';
+      const rank = inc.relevance_rank !== undefined ? inc.relevance_rank : '—';
+      const tier = inc.anomaly_tier || 'ANOMALY';
+      dom.deckAnomalyBadge.textContent = `⚡ ANOMALY: ${score} / 100 • RANK #${rank}`;
+      let tierClass = 'routine';
+      if (score >= 80) tierClass = 'critical';
+      else if (score >= 60) tierClass = 'elevated';
+      else if (score >= 40) tierClass = 'moderate';
+      dom.deckAnomalyBadge.className = `incident-anomaly-badge ${tierClass}`;
+    }
+
+    // 1. Overview Specification Matrix with Multi-Vector Breakdown
+    const bk = inc.score_breakdown || {};
     dom.deckSpecsMatrix.innerHTML = `
       <div class="spec-cell"><span class="spec-k">DATE</span><span class="spec-v">2032-06-18</span></div>
       <div class="spec-cell"><span class="spec-k">FLIGHT PHASE</span><span class="spec-v" style="color:var(--cyan)">${inc._phase.name} (${Math.round(inc._alt).toLocaleString()} FT)</span></div>
@@ -663,6 +692,31 @@
       <div class="spec-cell"><span class="spec-k">AFFECTED NODES</span><span class="spec-v">${inc.nodes.join(', ')}</span></div>
       <div class="spec-cell"><span class="spec-k">DISCRETE EVENTS</span><span class="spec-v">${inc.event_count}</span></div>
       <div class="spec-cell"><span class="spec-k">SEVERITY RATING</span><span class="spec-v" style="color:var(--${inc.severity === 'CRITICAL' ? 'critical' : (inc.severity === 'WARNING' ? 'warning' : 'routine')})">${inc.severity}</span></div>
+      
+      <div class="spec-cell" style="grid-column: 1 / -1; background: rgba(15,23,42,0.85); border-color: rgba(14,165,233,0.35); padding: 10px 14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span class="spec-k" style="font-weight:800; color:#38bdf8; font-size:0.75rem;">⚡ MULTI-VECTOR ANOMALY RISK INDEX</span>
+          <span style="font-family:var(--font-mono); font-weight:800; font-size:0.92rem; color:${bk.tier_color || '#38bdf8'}">${inc.anomaly_score || 0} / 100 • ${inc.anomaly_tier || 'ANOMALY'} (RELEVANCE RANK #${inc.relevance_rank || '—'})</span>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; font-size:0.7rem; font-family:var(--font-mono);">
+          <div>
+            <div style="color:#94a3b8; margin-bottom:2px;">SEVERITY: <strong>${bk.severity_pts || 0} / 40</strong></div>
+            <div class="vector-progress-track"><div class="vector-progress-fill" style="width:${Math.min(100, ((bk.severity_pts||0)/40)*100)}%; background:#ef4444;"></div></div>
+          </div>
+          <div>
+            <div style="color:#94a3b8; margin-bottom:2px;">VELOCITY: <strong>${bk.velocity_pts || 0} / 25</strong></div>
+            <div class="vector-progress-track"><div class="vector-progress-fill" style="width:${Math.min(100, ((bk.velocity_pts||0)/25)*100)}%; background:#f97316;"></div></div>
+          </div>
+          <div>
+            <div style="color:#94a3b8; margin-bottom:2px;">CONTAGION: <strong>${bk.contagion_pts || 0} / 20</strong></div>
+            <div class="vector-progress-track"><div class="vector-progress-fill" style="width:${Math.min(100, ((bk.contagion_pts||0)/20)*100)}%; background:#eab308;"></div></div>
+          </div>
+          <div>
+            <div style="color:#94a3b8; margin-bottom:2px;">PHASE HAZARD: <strong>${bk.phase_multiplier || 1.0}x</strong></div>
+            <div class="vector-progress-track"><div class="vector-progress-fill" style="width:${Math.min(100, (((bk.phase_multiplier||1.0)-0.8)/0.55)*100)}%; background:#06b6d4;"></div></div>
+          </div>
+        </div>
+      </div>
     `;
 
     // 2. Executive Forensic Narrative
@@ -966,12 +1020,46 @@
         matchesQuery = str.includes(query);
       }
 
-      const isVisible = matchesSev && matchesQuery;
+      // Anomaly critical-only filter check
+      let matchesSort = true;
+      if (state.sortBy === 'critical-only') {
+        matchesSort = (inc.anomaly_score || 0) >= 75;
+      }
+
+      const isVisible = matchesSev && matchesQuery && matchesSort;
       dotEl.classList.toggle('dimmed', !isVisible);
       dotEl.classList.toggle('highlighted', query.length > 0 && matchesQuery);
 
       if (isVisible) matchingCount++;
     });
+
+    // Keep state.filteredIncidents in sync with active sort order
+    state.filteredIncidents = state.incidents.filter(inc => {
+      let matchesSev = (state.filterSeverity === 'all');
+      if (!matchesSev) {
+        if (state.filterSeverity === 'INFORMATIONAL' || state.filterSeverity === 'ROUTINE') {
+          matchesSev = (inc.severity === 'INFORMATIONAL' || inc.severity === 'ROUTINE');
+        } else {
+          matchesSev = (inc.severity === state.filterSeverity);
+        }
+      }
+      let matchesQuery = true;
+      if (query.length > 0) {
+        const str = `${inc.cluster_id} ${inc.executive_summary} ${inc.root_cause} ${inc.nodes.join(' ')} ${inc.start_clock}`.toLowerCase();
+        matchesQuery = str.includes(query);
+      }
+      let matchesSort = true;
+      if (state.sortBy === 'critical-only') {
+        matchesSort = (inc.anomaly_score || 0) >= 75;
+      }
+      return matchesSev && matchesQuery && matchesSort;
+    });
+
+    if (state.sortBy === 'anomaly-desc' || state.sortBy === 'critical-only') {
+      state.filteredIncidents.sort((a, b) => (b.anomaly_score || 0) - (a.anomaly_score || 0));
+    } else {
+      state.filteredIncidents.sort((a, b) => a.index - b.index);
+    }
 
     dom.hudIncidentStat.textContent = `${matchingCount} of ${state.incidents.length} Incidents Active`;
   }
@@ -1356,33 +1444,31 @@
     // Action Buttons in Level 2
     dom.btnPrevIncident.addEventListener('click', () => {
       if (!state.selectedIncident) return;
-      const curIdx = state.selectedIncident.index;
-      if (curIdx > 1) {
-        const prev = state.incidents.find(i => i.index === curIdx - 1);
-        if (prev) {
-          state.selectedIncident = prev;
-          state.selectedEventIndex = 0;
-          updateFlightAircraftPosition(prev._missionSec);
-          const dots = dom.dotsGroup.querySelectorAll('.incident-dot-group');
-          dots.forEach(d => d.classList.toggle('selected-active', Number(d.dataset.index) === prev.index));
-          populateNarrationDeck();
-        }
+      const list = (state.filteredIncidents && state.filteredIncidents.length > 0) ? state.filteredIncidents : state.incidents;
+      const pos = list.findIndex(i => i.index === state.selectedIncident.index);
+      if (pos > 0) {
+        const prev = list[pos - 1];
+        state.selectedIncident = prev;
+        state.selectedEventIndex = 0;
+        updateFlightAircraftPosition(prev._missionSec);
+        const dots = dom.dotsGroup.querySelectorAll('.incident-dot-group');
+        dots.forEach(d => d.classList.toggle('selected-active', Number(d.dataset.index) === prev.index));
+        populateNarrationDeck();
       }
     });
 
     dom.btnNextIncident.addEventListener('click', () => {
       if (!state.selectedIncident) return;
-      const curIdx = state.selectedIncident.index;
-      if (curIdx < state.incidents.length) {
-        const next = state.incidents.find(i => i.index === curIdx + 1);
-        if (next) {
-          state.selectedIncident = next;
-          state.selectedEventIndex = 0;
-          updateFlightAircraftPosition(next._missionSec);
-          const dots = dom.dotsGroup.querySelectorAll('.incident-dot-group');
-          dots.forEach(d => d.classList.toggle('selected-active', Number(d.dataset.index) === next.index));
-          populateNarrationDeck();
-        }
+      const list = (state.filteredIncidents && state.filteredIncidents.length > 0) ? state.filteredIncidents : state.incidents;
+      const pos = list.findIndex(i => i.index === state.selectedIncident.index);
+      if (pos !== -1 && pos < list.length - 1) {
+        const next = list[pos + 1];
+        state.selectedIncident = next;
+        state.selectedEventIndex = 0;
+        updateFlightAircraftPosition(next._missionSec);
+        const dots = dom.dotsGroup.querySelectorAll('.incident-dot-group');
+        dots.forEach(d => d.classList.toggle('selected-active', Number(d.dataset.index) === next.index));
+        populateNarrationDeck();
       }
     });
 
@@ -1485,6 +1571,18 @@
       state.searchQuery = '';
       updateIncidentFilters();
     });
+
+    // Anomaly Priority & Flight Order Sorting
+    if (dom.sortSelect) {
+      dom.sortSelect.addEventListener('change', (e) => {
+        state.sortBy = e.target.value;
+        updateIncidentFilters();
+        if (state.filteredIncidents.length > 0) {
+          const optText = dom.sortSelect.options[dom.sortSelect.selectedIndex].text;
+          showToast(`✓ View Updated: ${optText}`);
+        }
+      });
+    }
 
     // Severity Filters
     dom.filterChips.forEach(chip => {

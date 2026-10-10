@@ -47,6 +47,15 @@
         <button id="clear-search" class="btn-clear-search">✕</button>
       </div>
 
+      <div class="anomaly-sort-deck">
+        <span class="sort-glyph">⚡</span>
+        <select id="anomaly-sort-select" class="hud-dropdown-select" title="Sort and prioritize incidents by Anomaly Index">
+          <option value="default">⏱ Flight Timeline (#001 ➔ #124)</option>
+          <option value="anomaly-desc">⚡ Anomaly Index (Highest ➔ Lowest)</option>
+          <option value="critical-only">🚨 Critical Anomalies (Score ≥ 75)</option>
+        </select>
+      </div>
+
       <div class="filter-pills">
         <button class="filter-chip active" data-filter="all">ALL (124)</button>
         <button class="filter-chip chip-crit" data-filter="CRITICAL">CRITICAL (72)</button>
@@ -289,6 +298,10 @@
               <span class="hud-tip-val" id="hud-tip-nodes">NODE_A, NODE_C</span>
             </div>
             <div class="hud-tip-row">
+              <span class="hud-tip-label">Anomaly:</span>
+              <span class="hud-tip-val highlight-cyan" id="hud-tip-anomaly">⚡ 84 / 100 • Rank #1</span>
+            </div>
+            <div class="hud-tip-row">
               <span class="hud-tip-label">Trigger:</span>
               <span class="hud-tip-val text-wrap" id="hud-tip-trigger">Navigation Database Refresh Cycle conflict</span>
             </div>
@@ -351,6 +364,7 @@
           <h2 class="incident-title-text" id="deck-cluster-title">cluster-28d5f74c</h2>
           <span class="incident-time-badge" id="deck-time-badge">09:00:00 — 09:01:28 UTC</span>
           <span class="incident-crit-badge" id="deck-severity-badge">CRITICAL</span>
+          <span class="incident-anomaly-badge" id="deck-anomaly-badge">⚡ ANOMALY: 84 / 100 • RANK #1</span>
         </div>
 
         <div class="deck-top-actions">
