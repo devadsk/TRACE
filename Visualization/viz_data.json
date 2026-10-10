@@ -13,7 +13,7 @@
     ],
     "event_count": 13,
     "raw_occurrences": 13,
-    "severity": "CRITICAL",
+    "severity": "WARNING",
     "executive_summary": "A simultaneous Navigation Database Refresh Cycle initiated on both the Master (NODE_A) and Spare (NODE_C) Flight Management System (FMS) nodes resulted in a critical loss of system redundancy. The concurrent update triggered a state transition from Dual mode to Single mode, forcing a reconfiguration of the FMS node hierarchy to maintain basic operational availability.",
     "root_cause": "The primary trigger was the simultaneous execution of a **Navigation Database Refresh Cycle** on both the Master and Spare FMS nodes `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 15 | UUID: 675e178f-7e11-4cb5-9198-c92aa465c74c]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 17 | UUID: 028cf4f9-5ee4-408a-8b38-da9fe99f125f]`. \n\nThe failure mechanism is identified as a synchronization conflict during the database update process. Because both nodes attempted to refresh the navigation data concurrently, the distributed system could not maintain the \"Dual\" operational state, leading to a breakdown in the cross-channel monitoring and subsequent mode degradation.",
     "cascade_sequence": "1.  **[09:00:31] Initiation:** Operator interaction triggered a Navigation Database Refresh Cycle on NODE_A (Master/Captain position) `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 15 | UUID: 675e178f-7e11-4cb5-9198-c92aa465c74c]` and simultaneously on NODE_C (Spare/First Officer position) `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 17 | UUID: 028cf4f9-5ee4-408a-8b38-da9fe99f125f]`.\n2.  **[09:00:32] Guidance Instability:** The refresh cycle caused an immediate change in the Vertical Guidance Sequence on both nodes `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 16 | UUID: fef99cfd-c490-47f2-b43b-c720a9058ae9]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 6c5b37c2-eb69-44e9-8af8-22e2f713a2d2]`.\n3.  **[09:00:33] Navigation Mode Shift:** Both nodes reported a change in L-navigation status to \"L navigation hdg\" (heading mode) `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 29 | UUID: ad3e2a81-107e-4c84-833f-6f4b78a309f6]` `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 30 | UUID: 9c74f569-f16a-4887-bddd-54a51cf5c24c]`.\n4.  **[09:01:21] Redundancy Loss:** The system officially transitioned from \"Dual\" mode to \"Single\" mode `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 31 | UUID: 864cc738-4a69-413b-ae93-75b2e7398c9b]`.\n5.  **[09:01:22] Comm Reconfiguration:** Data link communication was reconfigured, with the slave node transitioning to master status `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 32 | UUID: 6c4e19fb-3c5e-4d58-b9d8-40191be60f8a]`.\n6.  **[09:01:28] Final State Stabilization:** The FMS node position was reconfigured, with the Right FMS node assuming the Master role within the Single mode architecture `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 2839019f-41ec-4a9e-b922-d9ba318e8106]`.",
@@ -6866,7 +6866,7 @@
     "end_time": "2032-06-18T09:39:15",
     "start_clock": "09:39:15",
     "end_clock": "09:39:15",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -19870,7 +19870,7 @@
     "end_time": "2032-06-18T09:42:53",
     "start_clock": "09:42:53",
     "end_clock": "09:42:53",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -20585,7 +20585,7 @@
     ],
     "event_count": 25,
     "raw_occurrences": 32,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a rapid sequence of flight management system (FMS) operator interactions involving offset data and temporary flight plan insertions, which culminated in a distributed hardware/software fault. The event resulted in an RNP (Required Navigation Performance) legs transmitter I/O failure on the Master node and a subsequent integrity validation timeout on the standby/redundant node.",
     "root_cause": "The primary trigger was a high-frequency sequence of **Operator Interactions** involving the initialization of offset data `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: e0f03f7f-7b97-4b98-8d2d-a1a2444c20b2]` and the insertion of temporary flight plan data `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 99 | UUID: f4b1e8bc-7f93-4f3b-9f5d-06ba03fefe6e]`. \n\nThe failure mechanism appears to be a resource exhaustion or data bus contention issue caused by simultaneous or near-simultaneous command entries from both the Captain (NODE_A) and First Officer (NODE_C) positions `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 6a9c784f-5771-4709-a0f6-5ec48bfbf8c5]`. This rapid state transition from \"Offset Initialization\" to \"Temporary Insertion\" and \"Optimized Step Selection\" created a processing load that triggered an I/O fault in the RNP legs transmitter.",
     "cascade_sequence": "1. **Command Initiation:** NODE_A (Captain) initiates offset data initialization `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: e0f03f7f-7b97-4b98-8d2d-a1a2444c20b2]`.\n2. **Cross-Node Synchronization:** NODE_C (First Officer) simultaneously processes offset data initialization `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 6a9c784f-5771-4709-a0f6-5ec48bfbf8c5]`.\n3. **Data Modification:** Rapid succession of \"Enter Offset Distance\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 93 | UUID: 853e5b9f-aa2f-431b-825b-2d731b7a8c21]` and \"Insert Temporary\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 99 | UUID: f4b1e8bc-7f93-4f3b-9f5d-06ba03fefe6e]` commands are issued.\n4. **Primary Node Fault:** At 09:50:50, NODE_A experiences an \"Rnp legs transmitter io\" fault (Code 6, Sub Code 93) `[Source: NODE_A_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 168 | UUID: 135818ed-fed2-406f-93ea-ee8eb69d96c0]`.\n5. **Redundancy Failure:** At 09:50:52, the failure propagates to NODE_B, which reports an \"Rnp integrity validation receiver timeout\" (Code 6, Sub Code 97) `[Source: NODE_B_FAULT_HISTORY_LOG | Seq: 133 | UUID: UNKNOWN_B_LOG_REF]`.",
@@ -22263,7 +22263,7 @@
     "end_time": "2032-06-18T09:53:07",
     "start_clock": "09:53:07",
     "end_clock": "09:53:07",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -26610,7 +26610,7 @@
     ],
     "event_count": 20,
     "raw_occurrences": 26,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a rapid sequence of flight management system (FMS) reconfiguration commands initiated by operator interaction, leading to a distributed system fault. The sequence resulted in a communication failure regarding RNP (Required Navigation Performance) legs and a subsequent integrity validation timeout, necessitating FMS service restarts.",
     "root_cause": "The primary trigger was a series of high-frequency **Operator Interactions** involving the deletion and subsequent insertion of temporary flight plan data `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 165 | UUID: cedf9d59-ca6f-4953-990c-54f3230fd0fd]`. Specifically, the operator executed an `operator interaction delete discon` command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 167 | UUID: 627135a3-423c-48dd-bf15-9343b2b3d87b]` followed by an `operator interaction insert temporary` command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 171 | UUID: 1e8f6a69-4185-47f7-bdfa-69fe3f5b12ad]`. This rapid state transition between \"Active\" and \"Temporary Efb\" flight plan sources created a synchronization stressor across the distributed FMS nodes.",
     "cascade_sequence": "1. **[10:00:18 - 10:00:19] Initial Disconnection:** Operator interaction initiated a disconnection event on both NODE_A (Captain/Master) and NODE_C (First Officer/Spare) `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 165 | UUID: cedf9d59-ca6f-4953-990c-54f3230fd0fd]` and `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 167 | UUID: 627135a3-423c-48dd-bf15-9343b2b3d87b]`.\n2. **[10:00:20 - 10:00:22] Rapid Reconfiguration:** A sequence of \"Optimized Step Selected\" and \"Insert Temporary\" commands were propagated across the bus, shifting the flight plan source to \"Temporary Efb\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 171 | UUID: 1e8f6a69-4185-47f7-bdfa-69fe3f5b12ad]` and `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 173 | UUID: 0d225747-9072-4b14-ba9f-1ac1229cd9ac]`.\n3. **[10:00:25] I/O Failure:** The rapid data churn resulted in a `Rnp legs transmitter io` fault (Code 6) on NODE_A, indicating a failure in the transmitter input/output interface `[Source: NODE_A_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 176 | UUID: 9a9a4639-e0f4-4b61-a536-115d0e4e0255]`.\n4. **[10:00:27] Integrity Timeout:** The failure propagated to NODE_B, which reported an `Rnp integrity validation receiver timeout` (Code 6), suggesting the system could no longer validate the navigation integrity due to the interrupted I/O `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 138 | UUID: 6ea41a55-10bc-422d-b935-919172114deb]`.",
@@ -27238,13 +27238,13 @@
     "end_time": "2032-06-18T10:00:25",
     "start_clock": "10:00:25",
     "end_clock": "10:00:25",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "A critical software fault occurred within the Flight Management System (FMS) logic of NODE_A during active flight operations. The incident was characterized by a specific memory address violation following a sequence of high-frequency pilot interface interactions (FMS button pushes), resulting in an immediate system state capture.",
     "root_cause": "The primary trigger for this incident is a **Software Fault** occurring at a specific memory address `318767105` [Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 496a152b-0b70-4652-86ac-acd1fa5abd32]. \n\nThe failure mechanism appears to be a memory corruption or an unhandled exception triggered during the processing of rapid-fire inputs from the Control Display Unit (CDU). The log indicates a high density of \"FMS button push\" events (indices ranging from 1 to 40) immediately preceding the fault [Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 496a152b-0b70-4652-86ac-acd1fa5abd32]. The proximity of the `Software fault address` to the `FMS button push` indices suggests a buffer overflow or a race condition within the input processing stack of the FMS software.",
     "cascade_sequence": "1. **Input Saturation:** The pilot/operator engaged in a rapid sequence of CDU/FMS button presses, generating a high volume of input interrupts [Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 496a152b-0b70-4652-86ac-acd1fa5abd32].\n2. **State Update Execution:** NODE_A attempted to update the Aircraft State, including lateral leg sequences and guidance modes (Lnav: 1, Ils: 17) [Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 496a152b-0b70-4652-86ac-acd1fa5abd32].\n3. **Memory Violation:** The software processing logic encountered an invalid state or memory pointer at address `318767105` [Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 496a152b-0b70-4652-86ac-acd1fa5abd32].\n4. **System Halt/Fault Capture:** The system triggered a fault capture, recording the current aircraft parameters (Gross weight: 160045.10, Track: 785.08) at the moment of failure [Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 496a152b-0b70-4652-86ac-acd1fa5abd32].",
@@ -27402,7 +27402,7 @@
     ],
     "event_count": 95,
     "raw_occurrences": 121,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved high-frequency flight plan modifications and performance data updates across the Master (NODE_A) and Spare (NODE_C) FMS nodes during the entry of origin and departure procedures. While the system successfully maintained Dual mode throughout the event, the rapid succession of concurrent operator interactions suggests a high-load synchronization period between the Captain and First Officer stations.",
     "root_cause": "The primary trigger was the operator interaction to enter the origin runway and subsequent departure procedure using a \"Temporary Efb\" flight plan source `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 180 | UUID: dbeb4c78-4003-4185-a0b9-8e024f6a7b8a]`. The failure mechanism is identified as a high-frequency state transition cycle where both the Master and Spare nodes attempted to synchronize performance data and optimized steps simultaneously following the ingestion of external EFB data.",
     "cascade_sequence": "1. **[10:01:39]** NODE_A (Captain/Master) initiates the \"enter origin runway\" command for airport Ifse `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 174 | UUID: 7c09c9c4-d908-4f52-ba09-4f50a070ee0b]`.\n2. **[10:01:41]** NODE_C (First Officer/Spare) executes a mirroring \"enter origin runway\" command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 176 | UUID: d87b5ae6-f72a-4d63-99d7-21dc81b825f7]`.\n3. **[10:01:41]** NODE_A reports a \"Performance Data Changed\" event originating from the Standby node `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 177 | UUID: 2928f7dd-4a4a-48ef-89ec-a8ce412ba619]`.\n4. **[10:01:47]** NODE_A enters the departure procedure (Sobr1y) utilizing the \"Temporary Efb\" flight plan source `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 180 | UUID: dbeb4c78-4003-4185-a0b9-8e024f6a7b8a]`.\n5. **[10:01:48]** NODE_C concurrently enters the same departure procedure via the \"Temporary Efb\" source `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 182 | UUID: 42c9db2f-85c5-4fad-aac0-ef26f94a6652]`.\n6. **[10:01:51]** NODE_A executes a \"temporary insert\" command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 184 | UUID: 93008fc6-4f1d-4ad0-8d65-46370bf2b5b7]`.\n7. **[10:04:32]** NODE_C executes a delayed \"temporary insert\" command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 218 | UUID: 8062d3a9-3910-4a0b-9e38-efae94886a3d]`.",
@@ -30299,7 +30299,7 @@
     "end_time": "2032-06-18T10:01:56",
     "start_clock": "10:01:56",
     "end_clock": "10:01:56",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -30455,7 +30455,7 @@
     "end_time": "2032-06-18T10:04:35",
     "start_clock": "10:04:35",
     "end_clock": "10:04:35",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -30613,13 +30613,13 @@
     "end_time": "2032-06-18T10:06:00",
     "start_clock": "10:06:00",
     "end_clock": "10:06:00",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "HIGH",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_A involving the Flight Display Control Panel (CP) identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: c03c833f-07ba-401c-949f-28cc93690e8f]. The system was operating within nominal parameters in a Dual FMS configuration, maintaining full redundancy across Master, Standby, and Spare nodes [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: c03c833f-07ba-401c-949f-28cc93690e8f].",
     "root_cause": "The triggering condition was a software-initiated broadcast of the Flight Display CP identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: c03c833f-07ba-401c-949f-28cc93690e8f]. This event appears to be a routine state-reporting mechanism or a telemetry update within the Flight Management System (FMS) software stack, rather than a hardware-induced failure or an uncommanded state transition.",
     "cascade_sequence": "As no system failure was detected, the sequence describes the state of the distributed avionics at the time of the event:\n1. **NODE_A** executes a software event to report the Flight Display CP identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: c03c833f-07ba-401c-949f-28cc93690e8f].\n2. The FMS hierarchy is confirmed as Left FMS (Master), Center FMS (Standby), and Right FMS (Spare) [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: c03c833f-07ba-401c-949f-28cc93690e8f].\n3. The system maintains a \"Dual\" operational mode with a \"Plan\" scale of 10.000000 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: c03c833f-07ba-401c-949f-28cc93690e8f].",
@@ -32648,7 +32648,7 @@
     ],
     "event_count": 42,
     "raw_occurrences": 55,
-    "severity": "HIGH",
+    "severity": "WARNING",
     "executive_summary": "The incident involved high-frequency, concurrent Flight Management System (FMS) updates where operator inputs from the First Officer (via NODE_C) were simultaneously processed by the Master node (NODE_A). This resulted in rapid-fire state transitions, including waypoint insertions and optimized step selections, across the distributed avionics architecture.",
     "root_cause": "The primary trigger was a series of operator interactions initiated by the First Officer via NODE_C [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 244 | UUID: 4ce6b640-df96-4689-886d-9d381b371ac2]. \n\nThe failure mechanism is identified as **Input Cross-Propagation/Lack of Arbitration**. When the First Officer entered a new waypoint, the command was not isolated to the Spare/First Officer node; instead, NODE_A (the Master/Captain node) simultaneously registered the event and explicitly identified the \"Source fms node\" as \"First officer\" [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 97 | UUID: 90f9adc1-475d-4d18-bfd9-7cbe8add866e]. This indicates that the distributed system architecture allows input from a non-master functional position to trigger state changes in the Master node without explicit command handoff.",
     "cascade_sequence": "1. **[10:11:25] Initial Command Entry:** The First Officer initiates a \"new waypoint\" command (Identifier: Bobix) on NODE_C [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 244 | UUID: 4ce6b640-df96-4689-886d-9d381b371ac2].\n2. **[10:11:25] Master Node Synchronization:** NODE_A (Master) simultaneously receives the \"new waypoint\" string [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 242 | UUID: ae6cc2a1-eeff-433c-b04f-5585fe8621bb] and identifies the source as the First Officer [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 97 | UUID: 90f9adc1-475d-4d18-bfd9-7cbe8add866e].\n3. **[10:11:26] Automated State Transition:** NODE_A executes an \"Optimized Step Selected\" operational event based on the propagated input [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 245 | UUID: 912e39da-26b6-4ac0-9081-ba5b4558fdf2].\n4. **[10:11:28] Concurrent Temporary Insertion:** A \"new waypoint insert temporary\" command is issued, which is processed simultaneously by both NODE_A [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 248 | UUID: 9017ec31-9af9-44db-8bfb-7c0bd57c7de5] and NODE_C [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 250 | UUID: 116b0802-e2e7-437a-a5ab-9f16c342f5a0].\n5. **[10:11:29] Dual-Node Optimization:** Both nodes finalize the state change by selecting the optimized step [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 250 | UUID: 47385e6b-fedb-4580-9a01-36069bba7ea0] and [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: 064643b8-6b59-48f2-b2e6-86158fed8014].\n6. **[10:11:56] Subsequent Command Propagation:** A second waypoint (Mosma) is entered, again triggering simultaneous processing across the Master/First Officer node hierarchy [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 251 | UUID: 9d488312-a7be-4d65-bce5-ab43d43c9213].",
@@ -35370,7 +35370,7 @@
     "end_time": "2032-06-18T10:13:44",
     "start_clock": "10:13:44",
     "end_clock": "10:13:44",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -36279,13 +36279,13 @@
     "end_time": "2032-06-18T10:15:51",
     "start_clock": "10:15:51",
     "end_clock": "10:15:51",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "A critical software fault was detected within the Flight Management System (FMS) logic of NODE_A during an aircraft state update. The incident is characterized by a specific software fault address being flagged during a high-frequency sequence of CDU (Control Display Unit) interactions, indicating a potential memory corruption or illegal instruction execution within the navigation processing thread.",
     "root_cause": "The primary trigger for this incident is a **Software Fault Execution** occurring during a state transition update `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 21 | UUID: c499992d-bdaf-453a-81ef-e699e97721bc]`. \n\nThe failure mechanism is identified by the presence of a specific `Software fault address: 17170434` `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 21 | UUID: c499992d-bdaf-453a-81ef-e699e97721bc]`. This fault was captured simultaneously with a massive accumulation of FMS button push indices (up to index 40), suggesting that a rapid succession of pilot inputs via the CDU may have induced a race condition or a stack overflow within the navigation state machine, leading to the invalid memory address access.",
     "cascade_sequence": "1. **Input Saturation:** The system recorded a high density of FMS button pushes (indices 1 through 40) within the state update cycle `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 21 | UUID: c499992d-bdaf-453a-81ef-e699e97721bc]`.\n2. **State Update Trigger:** The aircraft state update process attempted to reconcile the current lateral leg sequence (`1409310786`) and the next lateral leg sequence (`-1935671229`) `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 21 | UUID: c499992d-bdaf-453a-81ef-e699e97721bc]`.\n3. **Memory Fault:** During the processing of the `Simsoft data` and the update of the navigation pointers, the processor attempted to access or execute code at the invalid address `17170434` `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 21 | UUID: c499992d-bdaf-453a-81ef-e699e97721bc]`.\n4. **Fault Capture:** The system logged the fault address and the BITE (Built-In Test Equipment) history (Left: 2, Right: 224) as the state update failed `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 21 | UUID: c499992d-bdaf-453a-81ef-e699e97721bc]`.",
@@ -36443,7 +36443,7 @@
     ],
     "event_count": 76,
     "raw_occurrences": 104,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a concurrent flight plan modification attempt by two different functional positions (Captain and First Officer) across the Master and Spare FMS nodes. This resulted in simultaneous offset and temporary EFB data entries, creating a high risk of data divergence between the distributed avionics nodes.",
     "root_cause": "The primary trigger was a **concurrent operator interaction** event where two separate flight management nodes received conflicting or identical modification commands within a 1-second window. Specifically, the Captain (NODE_A, Master) initiated an offset data initialization `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 290 | UUID: 60403dfa-dd3a-4714-a2ed-a6c45ffb547a]` followed immediately by the First Officer (NODE_C, Spare) initiating an identical offset initialization `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 292 | UUID: a560cbf3-ddae-43cd-b234-cf43a0583202]`. This indicates a failure in the system's ability to arbitrate simultaneous write-access requests to the shared flight plan state.",
     "cascade_sequence": "1. **[10:18:27]** NODE_A (Master/Captain) initiates offset data initialization `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 290 | UUID: 60403dfa-dd3a-4714-a2ed-a6c45ffb547a]`.\n2. **[10:18:28]** NODE_C (Spare/First Officer) simultaneously initiates offset data initialization `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 292 | UUID: a560cbf3-ddae-43cd-b234-cf43a0583202]`.\n3. **[10:18:30 - 10:18:32]** The failure propagates as both nodes attempt to process waypoint and performance data changes independently; NODE_A enters an offset start waypoint `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 293 | UUID: deb379e7-8ce8-4094-8e33-f5b8035d51b6]` while NODE_C simultaneously enters the same waypoint `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 295 | UUID: 3ea294ea-271e-43c5-9771-8aaa982160ea]`.\n4. **[10:18:39 - 10:18:41]** The conflict escalates to flight plan source modifications, where both nodes attempt to insert temporary data from an Electronic Flight Bag (EFB) `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 300 | UUID: d29634eb-eb9c-4a46-9938-924fb6bda2ab]` and `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 302 | UUID: 3b7948f1-450a-4f35-b147-0f017b3066af]`.",
@@ -38729,7 +38729,7 @@
     "end_time": "2032-06-18T10:18:44",
     "start_clock": "10:18:44",
     "end_clock": "10:18:44",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -47973,7 +47973,7 @@
     ],
     "event_count": 72,
     "raw_occurrences": 94,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a high-frequency sequence of flight management system (FMS) updates initiated by simultaneous operator interactions on both the Master (Captain) and Spare (First Officer) nodes. While the system maintained Dual mode throughout the event, the rapid succession of destination changes, temporary flight plan insertions, and approach entries created a period of intense data bus activity and performance data recalculations.",
     "root_cause": "The primary trigger was a concurrent operator interaction event where both the Captain (NODE_A) `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 405 | UUID: a73e5dd1-3274-488a-b48d-76355f24a6fd]` and the First Officer (NODE_C) `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 409 | UUID: d749b26f-ba4b-48a1-9e82-40d92991633a]` entered a \"new destination\" string (Endu) within one second of each other. This triggered a race condition in the distributed FMS state synchronization, leading to a rapid cascade of performance data updates and flight plan source transitions.",
     "cascade_sequence": "1. **Initial Input:** NODE_A (Captain) initiated a \"new destination\" command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 405 | UUID: a73e5dd1-3274-488a-b48d-76355f24a6fd]`.\n2. **Concurrent Input:** NODE_C (First Officer) simultaneously entered the same \"new destination\" command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 409 | UUID: d749b26f-ba4b-48a1-9e82-40d92991633a]`.\n3. **Performance Recalculation:** Both nodes registered immediate \"Performance Data Changed\" events `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 408 | UUID: b453486d-0ec3-492b-99bb-ee1f4b9808d4]`.\n4. **Flight Plan Transition:** The flight plan source transitioned from \"ActPrimary\" to \"TmpyPrimary\" via a \"temporary insert\" command on both nodes `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 410 | UUID: a7c878b5-0a03-40bd-b115-c1f48dc067a9]`.\n5. **State Propagation:** NODE_A selected an \"Optimized Step\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 412 | UUID: 518f9375-c97d-4d0f-8308-cec653ab8d27]`, which was subsequently mirrored/processed by NODE_C `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 416 | UUID: 22e8438d-89ed-421e-8f98-1cf61b1a82f6]`.\n6. **Approach Entry:** The sequence concluded with both nodes executing the \"enter approach\" command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 415 | UUID: b893fb5e-d143-45bb-840b-6287337aba11]` and `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 419 | UUID: f44349ab-205a-4af3-b14a-6003b62d9814]`.",
@@ -50570,7 +50570,7 @@
     ],
     "event_count": 15,
     "raw_occurrences": 16,
-    "severity": "HIGH",
+    "severity": "WARNING",
     "executive_summary": "The incident involved a period of rapid state transitions within the Flight Management System (FMS) triggered by concurrent Navigation Database Refresh Cycles on both the Master (NODE_A) and Spare (NODE_C) nodes. While the system maintained Dual mode operational status, the simultaneous refresh activity caused oscillating vertical guidance sequences and optimized step selections across the distributed architecture.",
     "root_cause": "The primary trigger was an **Operator Interaction** initiating a **Navigation Database Refresh Cycle** on the Master FMS node (NODE_A) `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 441 | UUID: 963eadde-2b79-4901-b262-2ff44f8beb69]`. \n\nThe failure mechanism is identified as a **concurrent refresh synchronization conflict**. Shortly after the Master node initiated its cycle, the Spare node (NODE_C) also entered a Navigation Database Refresh Cycle `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 445 | UUID: 7c684f4e-f0ca-4745-9ed4-7bbea48b5f9c]`. This simultaneous processing of database updates across the distributed nodes appears to have caused transient instability in the LNAV and Vertical Guidance state machines.",
     "cascade_sequence": "1.  **Initial Trigger:** NODE_A (Captain/Master) initiates a Navigation Database Refresh Cycle `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 441 | UUID: 963eadde-2b79-4901-b262-2ff44f8beb69]`.\n2.  **Master State Change:** NODE_A processes an \"Optimized Step Selected\" operational event `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 442 | UUID: 5b2994d5-37fa-4617-b9ab-36110fcb589e]`.\n3.  **Concurrent Trigger:** NODE_C (First Officer/Spare) initiates a secondary Navigation Database Refresh Cycle `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 445 | UUID: 7c684f4e-f0ca-4745-9ed4-7bbea48b5f9c]`.\n4.  **Cross-Node Propagation:** NODE_C reports an \"Optimized Step Selected\" event, but the data source is identified as the Captain (Master) node, indicating data synchronization during the refresh `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 446 | UUID: 5f63621c-ad96-4e3b-aa06-c4351bb1dfc2]`.\n5.  **Guidance Instability:** Rapid changes in the Vertical Guidance Sequence are observed on NODE_C `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 447 | UUID: 45751506-9c1c-49ba-aa04-4e12f69bf289]` and subsequently on NODE_A `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 445 | UUID: ad9029db-2bfb-4c1f-8857-a655d5d6810c]`.\n6.  **Cycle Persistence:** NODE_C undergoes a subsequent refresh cycle attempt at 10:49:50 `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 448 | UUID: ef1fba85-c16d-470c-bf6e-5a96107f29a8]`, continuing the state oscillation.",
@@ -51041,7 +51041,7 @@
     ],
     "event_count": 28,
     "raw_occurrences": 30,
-    "severity": "CRITICAL",
+    "severity": "WARNING",
     "executive_summary": "The incident involved a synchronized timing violation across both the Master (NODE_A) and Spare (NODE_C) Flight Management System (FMS) nodes following a high-load data uplink. The primary failure mechanism was a \"Scheduled FMS Activity Missed Timing Requirement\" (Fault Code 6000), triggered by the processing of an operational data link flight plan uplink. While guidance recalculation eventually completed, the simultaneous deadline misses across distributed nodes indicate a systemic processing bottleneck.",
     "root_cause": "The primary trigger for the incident was the **Operator interaction insert operational data link flight plan uplink** `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 447 | UUID: 8d9fb53f-b03e-4f1c-bf40-4d19364565a5]`. \n\nThe mechanism of failure is identified as a **Deadline Miss** in the background service `[Source: NODE_A_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 222 | UUID: 4075eb11-35e7-41df-b340-c8eca6d032c0]`. The ingestion and processing of the flight plan uplink caused the FMS task scheduler to exceed its allotted execution window, resulting in a **Scheduled FMS Activity Missed Timing Requirement (Code: 6000)** `[Source: NODE_A_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 222 | UUID: 4075eb11-35e7-41df-b340-c8eca6d032c0]`. This was not an isolated node event, as NODE_C also reported the same timing fault `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 235 | UUID: 38cd5162-444f-4c42-bdec-34b8f886f5cf]`.",
     "cascade_sequence": "1.  **Data Ingestion:** NODE_A (Master) and NODE_C (Spare) both receive an FMS operational uplink from a Standby source `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 446 | UUID: 7e4391a8-fbfb-4715-b455-efd6315c399c]`, `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 450 | UUID: 1e409809-0d99-425a-a128-4627c4f75063]`.\n2.  **Uplink Processing:** The operator interaction to insert the operational data link flight plan is processed by both nodes `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 447 | UUID: 8d9fb53f-b03e-4f1c-bf40-4d19364565a5]`, `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 451 | UUID: a08a57eb-37ac-47a1-9897-944774e7d85c]`.\n3.  **Scheduling Violation (NODE_A):** NODE_A experiences a \"Thunderbolt fault\" (Code 6000) due to a missed timing requirement in its background service `[Source: NODE_A_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 222 | UUID: 4075eb11-35e7-41df-b340-c8eca6d032c0]`.\n4.  **Scheduling Violation (NODE_C):** NODE_C concurrently reports a missed timing requirement (Code 6000) `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 235 | UUID: 38cd5162-444f-4c42-bdec-34b8f886f5cf]`.\n5.  **System Warning State:** Both nodes enter a state where \"Check data base cycle\" messages are issued `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 179 | UUID: 798a19c3-2905-4786-b2df-bc819c3529cb]`, `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 182 | UUID: 8224cfba-47e3-4cb6-b3fa-fa726eabcb21]`.\n6.  **Recovery:** NODE_A completes the guidance recalculation sequence `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 451 | UUID: 66bb1585-a7c6-496a-b91a-72136319b093]`.",
@@ -51876,7 +51876,7 @@
     "end_time": "2032-06-18T10:54:43",
     "start_clock": "10:54:43",
     "end_clock": "10:54:43",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -52041,11 +52041,11 @@
     "raw_occurrences": 63,
     "severity": "HIGH",
     "executive_summary": "The incident involved a high-density sequence of Flight Management System (FMS) updates initiated by near-simultaneous operator interactions on both the Master (NODE_A) and Spare (NODE_C) nodes. The event sequence progressed from cruise flight entry and performance parameter modification to a final transition of the flight plan source to a temporary Electronic Flight Bag (EFB) input.",
-    "root_cause": "The primary trigger was a series of rapid, concurrent operator interactions across the distributed avionics architecture. Specifically, the Captain (Master/NODE_A) and First Officer (Spare/NODE_C) initiated identical flight management state transitions\u2014entering cruise flight, cost index, and block data\u2014within seconds of each other `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`. This resulted in a high volume of state change requests being processed by the dual-mode system.",
+    "root_cause": "The primary trigger was a series of rapid, concurrent operator interactions across the distributed avionics architecture. Specifically, the Captain (Master/NODE_A) and First Officer (Spare/NODE_C) initiated identical flight management state transitions—entering cruise flight, cost index, and block data—within seconds of each other `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`. This resulted in a high volume of state change requests being processed by the dual-mode system.",
     "cascade_sequence": "1. **Initial State Transition:** NODE_A (Captain) initiated the \"enter crz fl\" (cruise flight) command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]`.\n2. **Redundant Command Entry:** Within one second, NODE_C (First Officer) initiated an identical \"enter crz fl\" command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`.\n3. **Parameter Modification Cascade:** Both nodes processed subsequent operator inputs for \"cost index\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 454 | UUID: dbfa6d34-51d1-4c56-8bed-6e4506717d2d]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 458 | UUID: fd358a70-f7e1-498d-8b51-587d03459c80]` and \"block\" data `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 455 | UUID: 78f8371e-64e6-4b74-a54d-82b63e1989ac]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 459 | UUID: 8d90a342-a617-4ce0-9172-61695c24e2a0]`.\n4. **Performance Data Update:** The rapid succession of inputs triggered a \"Performance Data Changed\" event on NODE_A `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1265bed4-85f7-41f5-a3c8-b1c0f9bc542c]` and subsequent updates on NODE_C `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 461 | UUID: fef80773-573e-4ca0-9e72-38e967a9f218]`.\n5. **Flight Plan Source Shift:** The sequence concluded with NODE_A inserting a temporary flight plan from an external EFB source `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 472 | UUID: b713cf0f-a4ab-4efe-a19c-74f74bca396c]`.",
     "system_impact": "* **Redundancy Status:** The system maintained \"Dual\" mode throughout the duration of the event `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]`.\n* **Functional Availability:** While functional availability remained intact, the system experienced a high density of events (55 events in 124 seconds), indicating a period of intense computational load during the synchronization of performance data.\n* **Flight Management Mode:** The system successfully transitioned from primary FMS management to a \"Temporary Efb\" flight plan source on the Captain's node `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 472 | UUID: b713cf0f-a4ab-4efe-a19c-74f74bca396c]`.",
     "corrective_actions": "1. **FMS Synchronization Logic Audit:** Conduct a software review of the FMS synchronization protocols to ensure that near-simultaneous identical inputs from Master and Spare nodes are de-conflicted or coalesced to prevent redundant processing cycles.\n2. **EFB Integration Stability Test:** Perform hardware-in-the-loop (HITL) testing to validate the stability of the \"Temporary Efb\" flight plan source transition, specifically monitoring for any latency in performance data propagation during external data injection.\n3. **Operator Interface Review:** Evaluate the cockpit interface design to determine if the ability to perform identical high-level FMS modifications on both Master and Spare nodes simultaneously presents a risk of unintended data race conditions.",
-    "full_markdown": "# AVIATION FORENSIC INVESTIGATION REPORT: cluster-0b0c7268\n\n## 1. Incident Overview\n\n| Date | Duration | Affected Nodes | Total Events | Severity Rating |\n| :--- | :--- | :--- | :--- | :--- |\n| 2032-06-18 | 00:02:04 | NODE_A, NODE_C | 55 | WARNING |\n\n## 2. Executive Summary\nThe incident involved a high-density sequence of Flight Management System (FMS) updates initiated by near-simultaneous operator interactions on both the Master (NODE_A) and Spare (NODE_C) nodes. The event sequence progressed from cruise flight entry and performance parameter modification to a final transition of the flight plan source to a temporary Electronic Flight Bag (EFB) input.\n\n## 3. Root Cause Analysis (Primary Trigger)\nThe primary trigger was a series of rapid, concurrent operator interactions across the distributed avionics architecture. Specifically, the Captain (Master/NODE_A) and First Officer (Spare/NODE_C) initiated identical flight management state transitions\u2014entering cruise flight, cost index, and block data\u2014within seconds of each other `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`. This resulted in a high volume of state change requests being processed by the dual-mode system.\n\n## 4. Failure Cascade & Propagation Sequence\n1. **Initial State Transition:** NODE_A (Captain) initiated the \"enter crz fl\" (cruise flight) command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]`.\n2. **Redundant Command Entry:** Within one second, NODE_C (First Officer) initiated an identical \"enter crz fl\" command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`.\n3. **Parameter Modification Cascade:** Both nodes processed subsequent operator inputs for \"cost index\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 454 | UUID: dbfa6d34-51d1-4c56-8bed-6e4506717d2d]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 458 | UUID: fd358a70-f7e1-498d-8b51-587d03459c80]` and \"block\" data `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 455 | UUID: 78f8371e-64e6-4b74-a54d-82b63e1989ac]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 459 | UUID: 8d90a342-a617-4ce0-9172-61695c24e2a0]`.\n4. **Performance Data Update:** The rapid succession of inputs triggered a \"Performance Data Changed\" event on NODE_A `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1265bed4-85f7-41f5-a3c8-b1c0f9bc542c]` and subsequent updates on NODE_C `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 461 | UUID: fef80773-573e-4ca0-9e72-38e967a9f218]`.\n5. **Flight Plan Source Shift:** The sequence concluded with NODE_A inserting a temporary flight plan from an external EFB source `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 472 | UUID: b713cf0f-a4ab-4efe-a19c-74f74bca396c]`.\n\n## 5. System Impact Assessment\n* **Redundancy Status:** The system maintained \"Dual\" mode throughout the duration of the event `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]`.\n* **Functional Availability:** While functional availability remained intact, the system experienced a high density of events (55 events in 124 seconds), indicating a period of intense computational load during the synchronization of performance data.\n* **Flight Management Mode:** The system successfully transitioned from primary FMS management to a \"Temporary Efb\" flight plan source on the Captain's node `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 472 | UUID: b713cf0f-a4ab-4efe-a19c-74f74bca396c]`.\n\n## 6. Recommended Corrective & Maintenance Actions\n1. **FMS Synchronization Logic Audit:** Conduct a software review of the FMS synchronization protocols to ensure that near-simultaneous identical inputs from Master and Spare nodes are de-conflicted or coalesced to prevent redundant processing cycles.\n2. **EFB Integration Stability Test:** Perform hardware-in-the-loop (HITL) testing to validate the stability of the \"Temporary Efb\" flight plan source transition, specifically monitoring for any latency in performance data propagation during external data injection.\n3. **Operator Interface Review:** Evaluate the cockpit interface design to determine if the ability to perform identical high-level FMS modifications on both Master and Spare nodes simultaneously presents a risk of unintended data race conditions.",
+    "full_markdown": "# AVIATION FORENSIC INVESTIGATION REPORT: cluster-0b0c7268\n\n## 1. Incident Overview\n\n| Date | Duration | Affected Nodes | Total Events | Severity Rating |\n| :--- | :--- | :--- | :--- | :--- |\n| 2032-06-18 | 00:02:04 | NODE_A, NODE_C | 55 | WARNING |\n\n## 2. Executive Summary\nThe incident involved a high-density sequence of Flight Management System (FMS) updates initiated by near-simultaneous operator interactions on both the Master (NODE_A) and Spare (NODE_C) nodes. The event sequence progressed from cruise flight entry and performance parameter modification to a final transition of the flight plan source to a temporary Electronic Flight Bag (EFB) input.\n\n## 3. Root Cause Analysis (Primary Trigger)\nThe primary trigger was a series of rapid, concurrent operator interactions across the distributed avionics architecture. Specifically, the Captain (Master/NODE_A) and First Officer (Spare/NODE_C) initiated identical flight management state transitions—entering cruise flight, cost index, and block data—within seconds of each other `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`. This resulted in a high volume of state change requests being processed by the dual-mode system.\n\n## 4. Failure Cascade & Propagation Sequence\n1. **Initial State Transition:** NODE_A (Captain) initiated the \"enter crz fl\" (cruise flight) command `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]`.\n2. **Redundant Command Entry:** Within one second, NODE_C (First Officer) initiated an identical \"enter crz fl\" command `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1a54739f-9dda-41a2-9936-82647f521ca9]`.\n3. **Parameter Modification Cascade:** Both nodes processed subsequent operator inputs for \"cost index\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 454 | UUID: dbfa6d34-51d1-4c56-8bed-6e4506717d2d]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 458 | UUID: fd358a70-f7e1-498d-8b51-587d03459c80]` and \"block\" data `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 455 | UUID: 78f8371e-64e6-4b74-a54d-82b63e1989ac]` `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 459 | UUID: 8d90a342-a617-4ce0-9172-61695c24e2a0]`.\n4. **Performance Data Update:** The rapid succession of inputs triggered a \"Performance Data Changed\" event on NODE_A `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 456 | UUID: 1265bed4-85f7-41f5-a3c8-b1c0f9bc542c]` and subsequent updates on NODE_C `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 461 | UUID: fef80773-573e-4ca0-9e72-38e967a9f218]`.\n5. **Flight Plan Source Shift:** The sequence concluded with NODE_A inserting a temporary flight plan from an external EFB source `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 472 | UUID: b713cf0f-a4ab-4efe-a19c-74f74bca396c]`.\n\n## 5. System Impact Assessment\n* **Redundancy Status:** The system maintained \"Dual\" mode throughout the duration of the event `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 452 | UUID: 617d7ec2-f3cb-4c72-9e91-dad25091f63e]`.\n* **Functional Availability:** While functional availability remained intact, the system experienced a high density of events (55 events in 124 seconds), indicating a period of intense computational load during the synchronization of performance data.\n* **Flight Management Mode:** The system successfully transitioned from primary FMS management to a \"Temporary Efb\" flight plan source on the Captain's node `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 472 | UUID: b713cf0f-a4ab-4efe-a19c-74f74bca396c]`.\n\n## 6. Recommended Corrective & Maintenance Actions\n1. **FMS Synchronization Logic Audit:** Conduct a software review of the FMS synchronization protocols to ensure that near-simultaneous identical inputs from Master and Spare nodes are de-conflicted or coalesced to prevent redundant processing cycles.\n2. **EFB Integration Stability Test:** Perform hardware-in-the-loop (HITL) testing to validate the stability of the \"Temporary Efb\" flight plan source transition, specifically monitoring for any latency in performance data propagation during external data injection.\n3. **Operator Interface Review:** Evaluate the cockpit interface design to determine if the ability to perform identical high-level FMS modifications on both Master and Spare nodes simultaneously presents a risk of unintended data race conditions.",
     "events": [
       {
         "event_id": "617d7ec2-f3cb-4c72-9e91-dad25091f63e",
@@ -53702,7 +53702,7 @@
     "end_time": "2032-06-18T11:02:07",
     "start_clock": "11:02:07",
     "end_clock": "11:02:07",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -53761,13 +53761,13 @@
     "end_time": "2032-06-18T11:02:37",
     "start_clock": "11:02:37",
     "end_clock": "11:02:37",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event occurring on NODE_A involving the Flight Display Control Panel (CP) identifier. The system was operating in a stable Dual mode configuration with a fully defined Flight Management System (FMS) redundancy hierarchy.",
     "root_cause": "The primary trigger was a software-initiated event to identify the Flight Display CP identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 190 | UUID: 7abe5d42-5894-4641-b290-c29874289bd1]. This event appears to be a routine state reporting or identification process within the software layer rather than a hardware-induced failure or unexpected state transition.",
     "cascade_sequence": "Based on the provided telemetry, no failure cascade occurred. The sequence of events is limited to a single isolated software event:\n1. **NODE_A** executed a software event to process the Flight display cp identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 190 | UUID: 7abe5d42-5894-4641-b290-c29874289bd1].\n2. No subsequent error flags, bus contention, or node-to-node propagation were detected following this identification event.",
@@ -54438,13 +54438,13 @@
     "end_time": "2032-06-18T11:14:19",
     "start_clock": "11:14:19",
     "end_clock": "11:14:19",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "A critical software exception occurred within NODE_A during a routine Aircraft State Update, triggered by an IOCI (Input/Output Control Interface) interaction. The event resulted in an immediate software fault at memory address 3296, potentially compromising the integrity of the Flight Management System (FMS) state data for the affected node.",
     "root_cause": "The primary trigger was a specific IOCI button push event that directly correlated with a software fault address `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 1289f5b3-6fcd-4215-80db-beb1130a08aa]`. The investigation identifies a critical mismatch where the `Ioci button push` index of `3296` matches the `Software fault address: 3296` `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 1289f5b3-6fcd-4215-80db-beb1130a08aa]`. This indicates a failure mechanism where an unvalidated input from the IOCI was likely used as a pointer or jump address, leading to an illegal instruction or memory access violation during the Aircraft State Update process.",
     "cascade_sequence": "1. **Input Capture:** The system received an IOCI button push command with an index value of 3296 `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 1289f5b3-6fcd-4215-80db-beb1130a08aa]`.\n2. **State Update Initiation:** NODE_A attempted to execute an `Aircraft State Update` to synchronize navigation and performance parameters `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 1289f5b3-6fcd-4215-80db-beb1130a08aa]`.\n3. **Execution Fault:** The software attempted to process the IOCI input, resulting in an immediate jump to or access of the invalid `Software fault address: 3296` `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 1289f5b3-6fcd-4215-80db-beb1130a08aa]`.\n4. **Process Termination:** The Aircraft State Update routine was interrupted by the fault, halting the update of critical parameters such as Track, Gross Weight, and FMS button indices `[Source: NODE_A_Aircraft_State_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 1289f5b3-6fcd-4215-80db-beb1130a08aa]`.",
@@ -55457,7 +55457,7 @@
     ],
     "event_count": 17,
     "raw_occurrences": 24,
-    "severity": "HIGH",
+    "severity": "WARNING",
     "executive_summary": "The investigation identified a software-level data attribution error occurring during simultaneous Flight Management System (FMS) updates by the Captain and First Officer. While the flight plan modifications (waypoint entry and temporary flight plan insertion) were successfully processed in Dual mode, the system incorrectly cross-attributed the \"Source fms node\" identity between the two functional positions.",
     "root_cause": "The primary trigger was a rapid sequence of operator interactions involving the entry of a new waypoint \"ato\" [Lumen] `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 497 | UUID: e281fc23-4001-461f-9167-3738f65bf0f5]` and subsequent temporary flight plan insertions `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 503 | UUID: 07136d70-14a8-4b83-9c0d-76b9d7f0374d]`. \n\nThe failure mechanism is a logic error within the FMS software event identifier handler. During the synchronization of \"Dual\" mode flight plan data, the system failed to maintain the integrity of the operator's functional identity, resulting in the \"Source fms node\" field being incorrectly mapped to the opposite cockpit position during state transitions `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 199 | UUID: 252bed3b-c79a-4b64-a7f3-60ecb438ad61]`.",
     "cascade_sequence": "1. **11:19:39:** NODE_A (Captain/Master) initiates a new waypoint entry `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 497 | UUID: e281fc23-4001-461f-9167-3738f65bf0f5]`, but the software event identifier incorrectly logs the source as \"First officer\" `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 199 | UUID: 252bed3b-c79a-4b64-a7f3-60ecb438ad61]`.\n2. **11:19:40:** NODE_C (First Officer/Spare) enters the same waypoint `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 501 | UUID: 5141a8d1-39f0-4ba6-95d4-185cad214c45]`.\n3. **11:19:41:** NODE_A (Captain) performs a temporary flight plan insertion `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 503 | UUID: 07136d70-14a8-4b83-9c0d-76b9d7f0374d]`, which is again misattributed to the \"First officer\" in the software event log `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 201 | UUID: 3380f4b7-c4f4-4d60-98cf-48fce6fdb51e]`.\n4. **11:19:43:** NODE_C (First Officer) executes a matching temporary insertion `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 507 | UUID: 1f6e97ea-b8d6-4397-ab5c-f20bd31a877b]`.\n5. **11:19:51:** Upon the selection of an optimized step, NODE_C (First Officer) reports the event, but the FMS node source is incorrectly identified as \"Captain\" `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 509 | UUID: 9df20f30-be65-41f2-be17-19344324edc7]`.",
@@ -55981,7 +55981,7 @@
     "end_time": "2032-06-18T11:19:46",
     "start_clock": "11:19:46",
     "end_clock": "11:19:46",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -56996,7 +56996,7 @@
     "end_time": "2032-06-18T11:24:06",
     "start_clock": "11:24:06",
     "end_clock": "11:24:06",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -57161,7 +57161,7 @@
     ],
     "event_count": 147,
     "raw_occurrences": 182,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a rapid succession of synchronized flight plan modifications performed simultaneously on both the Master (NODE_A) and Spare (NODE_C) FMS nodes. The high-frequency overlap of \"orient destination\" and \"vertical revision\" commands between the Captain and First Officer positions created a high-risk state for flight plan data inconsistency.",
     "root_cause": "The primary trigger was a **simultaneous multi-node operator interaction sequence** involving conflicting or redundant flight plan modification commands `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 520 | UUID: f64a533d-8e45-44da-8c75-5f696b736cd5]`. Specifically, the mechanism of failure is identified as a race condition potential during the \"flight plan orient destination\" and \"vertical revision\" phases, where both the Master node and the Spare node attempted to process identical or near-identical state changes within a 1-second window `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 524 | UUID: 30b6b8b1-53f4-40eb-bd91-07d1373b005c]`.",
     "cascade_sequence": "1.  **Initial Command Entry (NODE_A):** At 11:28:10, the Captain (Master) initiated a flight plan orientation event `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 520 | UUID: f64a533d-8e45-44da-8c75-5f696b736cd5]`.\n2.  **Synchronized Redundant Entry (NODE_C):** At 11:28:11, the First Officer (Spare) entered an identical orientation event `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 524 | UUID: 30b6b8b1-53f4-40eb-bd91-07d1373b005c]`.\n3.  **Vertical Revision Conflict (NODE_A):** At 11:28:23, NODE_A processed a vertical revision for fix \"Parch\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 522 | UUID: fbedd42e-8aff-4bb7-8d59-27024c43a80e]`.\n4.  **Vertical Revision Conflict (NODE_C):** At 11:28:25, NODE_C processed the same vertical revision `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 526 | UUID: a551ecf0-93d6-4f00-b8a4-361c1918fef9]`.\n5.  **Cross-Node Source Misidentification:** At 11:28:28, NODE_A recorded a flight plan orientation event where the source was identified as \"First officer\" despite NODE_A being the Master/Captain node `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 208 | UUID: dacf5520-ffab-4836-9997-64de5e04f37a]`.\n6.  **Waypoint Injection Overlap:** At 11:28:54, NODE_A initiated a new waypoint \"ato\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 527 | UUID: 99b321b1-1a81-4949-83ed-932646a83179]`, followed immediately at 11:28:55 by a redundant entry on NODE_C `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 531 | UUID: db2aa76f-79df-44c4-aaf5-ed191a2042b6]`.",
@@ -61371,13 +61371,13 @@
     "end_time": "2032-06-18T11:33:24",
     "start_clock": "11:33:24",
     "end_clock": "11:33:24",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 2,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "At 11:33:24, a \"Performance Defined Event\" was triggered on NODE_C during an operator interaction [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b]. The event occurred while the aircraft was in a low-altitude, low-airspeed regime with the node operating in a \"Spare\" master status [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b]. No subsequent system degradation or loss of control was recorded in the provided telemetry.",
     "root_cause": "The primary trigger for this incident was a manual **Operator Interaction** [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b]. This interaction resulted in a \"Performance Defined Event\" with an assigned event value of 4 [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b]. The mechanism appears to be a software-defined threshold or state change triggered by pilot input during a critical flight phase, characterized by an altitude of 343.000916 ft and a calibrated airspeed of 35.000000 knots [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b].",
     "cascade_sequence": "As the incident is recorded as a single discrete event, the propagation sequence is limited to the internal processing of the interaction:\n\n1. **Triggering Input:** An operator interaction is initiated at the First Officer functional position [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b].\n2. **Node Processing:** NODE_C, currently configured in \"Dual mode\" with a \"Spare\" master status, receives the input [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b].\n3. **Event Generation:** The system classifies the interaction as a \"Performance Defined Event\" (Value 4) based on the current flight parameters (Altitude: 343 ft, Airspeed: 35 kts) [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 609 | UUID: a8149a6e-da3c-44ec-a963-e90948425a7b].",
@@ -61424,7 +61424,7 @@
     "end_time": "2032-06-18T11:34:04",
     "start_clock": "11:34:04",
     "end_clock": "11:34:04",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -61477,13 +61477,13 @@
     "end_time": "2032-06-18T11:34:44",
     "start_clock": "11:34:44",
     "end_clock": "11:34:44",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 2,
-    "severity": "CRITICAL",
+    "severity": "WARNING",
     "executive_summary": "At 11:34:44, an operator interaction on NODE_C triggered a \"Performance Defined Event\" (Value 6) while the system was operating in Dual mode [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647]. The node was functioning in a \"Spare\" master status assigned to the First Officer position at the time of the event [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647].",
     "root_cause": "The primary trigger for this incident was a direct **Operator Interaction** [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647]. The failure mechanism is classified as a \"Performance Defined Event\" with an event value of 6, occurring during a specific flight state characterized by an altitude of 343.001526 and a calibrated airspeed of 35.000000 [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647].",
     "cascade_sequence": "1. **Interaction Initiation:** An operator performed an action on the interface associated with NODE_C, which was assigned to the First Officer functional position [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647].\n2. **State Evaluation:** The system evaluated the interaction while in \"Dual\" mode with the node's master status set to \"Spare\" [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647].\n3. **Event Generation:** The interaction resulted in the immediate logging of a Performance Defined Event (Value 6) [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 613 | UUID: 052c573d-cbe8-4915-8c12-9be879bd0647].",
@@ -61530,13 +61530,13 @@
     "end_time": "2032-06-18T11:35:24",
     "start_clock": "11:35:24",
     "end_clock": "11:35:24",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 2,
-    "severity": "CRITICAL",
+    "severity": "WARNING",
     "executive_summary": "On 2032-06-18, a Performance Defined Event was triggered on NODE_C following direct operator interaction during a low-altitude, low-airspeed flight phase `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`. While the system maintained Dual mode operationality, the event indicates a specific performance deviation or threshold breach associated with manual input `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`.",
     "root_cause": "The primary trigger for this incident was an **Operator Interaction Event** `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`. Specifically, the interaction originated from the functional position of the First Officer `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`. This interaction occurred while the aircraft was at an altitude of approximately 343 feet `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]` and a calibrated airspeed of 35 knots `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`. The resulting \"Performance Defined Event\" with an event value of 7 suggests that the manual input caused the system to register a state that deviated from standard performance parameters `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`.",
     "cascade_sequence": "The event was characterized by a singular, non-propagating transition:\n1. **Trigger:** Manual input/interaction initiated by the First Officer `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`.\n2. **System Response:** NODE_C, operating in a \"Spare\" master status `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`, processed the interaction.\n3. **Event Generation:** The system logged a \"Performance Defined Event\" (Value: 7) as a direct consequence of the interaction within the current flight envelope `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 615 | UUID: 02ced562-407c-457f-89dd-381734d4b23c]`.",
@@ -61583,7 +61583,7 @@
     "end_time": "2032-06-18T11:36:04",
     "start_clock": "11:36:04",
     "end_clock": "11:36:04",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -61636,13 +61636,13 @@
     "end_time": "2032-06-18T11:36:44",
     "start_clock": "11:36:44",
     "end_clock": "11:36:44",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 2,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "An operator interaction event was recorded on NODE_C during a critical flight phase characterized by low altitude and low airspeed [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641]. While the system remained in Dual mode, the event triggered a \"Performance Defined Event\" (Value: 9) while the node was in a Spare master status [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641].",
     "root_cause": "The primary trigger for this incident was an **Operator Interaction** [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641]. This interaction resulted in a \"Performance Defined Event\" with an assigned value of 9 [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641]. The event occurred at an altitude of 343.000671 and a calibrated airspeed of 35.000000, suggesting the interaction took place during a high-workload phase such as approach or landing [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641].",
     "cascade_sequence": "1. **Input Initiation:** An operator performed an interaction via the interface assigned to the First Officer functional position [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641].\n2. **Node Processing:** NODE_C, operating in a \"Spare\" master status, processed the interaction [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641].\n3. **Event Generation:** The interaction triggered a \"Performance Defined Event\" (Value 9) within the distributed avionics logic [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 619 | UUID: 25bf2ea2-a77f-4dbe-85b3-9ea655c8a641].",
@@ -61689,7 +61689,7 @@
     "end_time": "2032-06-18T11:37:26",
     "start_clock": "11:37:26",
     "end_clock": "11:37:26",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -61748,7 +61748,7 @@
     ],
     "event_count": 28,
     "raw_occurrences": 36,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a rapid succession of flight plan modifications and source transitions initiated by operator interaction on NODE_C. While the system maintained \"Dual mode\" operational status `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 623 | UUID: 06646722-70e6-45d4-bd53-619447ac549d]`, the flight plan source transitioned from \"ActPrimary\" to \"Temporary Efb\" `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 634 | UUID: 76fde9ca-a72a-4d25-9f3f-38d1c1510e19]`, triggering multiple performance data update events across the FMS nodes.",
     "root_cause": "The primary trigger was a high-frequency sequence of **Operator Interactions** involving flight plan reconfiguration `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 627 | UUID: 5ae75a6d-a18a-4157-b599-1b9a9d8c46d4]`. Specifically, the manual deletion of disconnections and the subsequent insertion of temporary data caused a state transition in the flight plan source from the primary active source to a temporary Electronic Flight Bag (EFB) source `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 634 | UUID: 76fde9ca-a72a-4d25-9f3f-38d1c1510e19]`.",
     "cascade_sequence": "1. **Flight Plan Orientation:** The operator initiated a flight plan orient destination event via the First Officer's display system `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 627 | UUID: 5ae75a6d-a18a-4157-b599-1b9a9d8c46d4]`.\n2. **Leg Term Clearance:** A \"clear leg term\" command was executed, modifying the existing flight path `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 631 | UUID: 2245534c-55d9-4b2c-9e84-77319c2a9354]`.\n3. **Source Transition:** The operator performed a \"delete discon\" action, which forced the flight plan source to shift from \"ActPrimary\" to \"TmpyPrimary\" (Temporary EFB) `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 634 | UUID: 76fde9ca-a72a-4d25-9f3f-38d1c1510e19]`.\n4. **Temporary Data Insertion:** New temporary data was inserted into the system `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 637 | UUID: 6243e9a9-6c28-4e16-a28a-1b5cdf5524e0]`.\n5. **Performance Data Propagation:** The modification of the flight plan and cost index `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 645 | UUID: 5d7737f8-f618-41d4-9ab6-23aa46fd2b41]` triggered a cascade of \"Performance Data Changed\" events across both the Standby FMS node `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 658 | UUID: bb83b55a-fd18-42c3-a51d-4a62ae1d68a2]` and the Captain FMS node `[Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 659 | UUID: 24890694-1d9a-4835-b98f-da0951b1b51b]`.",
@@ -62591,7 +62591,7 @@
     "end_time": "2032-06-18T11:42:46",
     "start_clock": "11:42:46",
     "end_clock": "11:42:46",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -83712,13 +83712,13 @@
     "end_time": "2032-06-18T12:04:10",
     "start_clock": "12:04:10",
     "end_clock": "12:04:10",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "NODE_C experienced a critical system failure characterized by a \"Thunderbolt fault\" following a sudden power loss event. The module failed to recover, resulting in an \"unequipped\" state for both the module and its associated context, effectively removing the node from active flight management operations.",
     "root_cause": "The primary trigger for this incident was a sudden **Power Loss** event, which served as the last recorded reason for the module reset `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 249 | UUID: 19cb6c38-bd44-48c4-9eab-0c7b14010cba]`. This loss of electrical continuity initiated a hardware-level fault identified by the sub-code \"Thunderbolt fault\" `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 249 | UUID: 19cb6c38-bd44-48c4-9eab-0c7b14010cba]`.",
     "cascade_sequence": "1. **Power Interruption:** A power loss event occurred, forcing a module reset `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 249 | UUID: 19cb6c38-bd44-48c4-9eab-0c7b14010cba]`.\n2. **Fault Detection:** Upon attempted initialization/recovery, the system flagged a \"Thunderbolt fault\" `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 249 | UUID: 19cb6c38-bd44-48c4-9eab-0c7b14010cba]`.\n3. **Module State Transition:** The module failed to initialize its functional parameters, transitioning to a \"Ms unequipped e\" state `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 249 | UUID: 19cb6c38-bd44-48c4-9eab-0c7b14010cba]`.\n4. **Contextual Failure:** The failure propagated to the context layer, resulting in a \"Cs not equipped e\" state, indicating a total loss of operational context for the node `[Source: NODE_C_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 249 | UUID: 19cb6c38-bd44-48c4-9eab-0c7b14010cba]`.",
@@ -84404,7 +84404,7 @@
     "end_time": "2032-06-18T12:07:56",
     "start_clock": "12:07:56",
     "end_clock": "12:07:56",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -89594,7 +89594,7 @@
     ],
     "event_count": 122,
     "raw_occurrences": 155,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "A critical failure occurred within the NODE_B Flight Management System (FMS) triggered by an OS-level library loading error, which forced a service restart and a transition to \"Spare\" status. This event resulted in the immediate loss of dual-mode redundancy and caused a functional display outage for the First Officer.",
     "root_cause": "The primary trigger was a software-level failure within the Deos operating system on NODE_B, specifically an inability to load the required library `Libpssl dtf manager so.so` `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 462 | UUID: c51772e1-e198-49cd-aa87-18b7e1cac332]`. This failure was preceded by a Background Service Identity Failure (Code: 6025) where the system failed to retrieve the current process ID `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 458 | UUID: ea7db662-1406-4ca0-84ae-88b560cd51c7]`.",
     "cascade_sequence": "1. **Identity Failure:** NODE_B encountered a Background Service Identity Failure (Code: 6025) during initialization `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 458 | UUID: ea7db662-1406-4ca0-84ae-88b560cd51c7]`.\n2. **Library Load Failure:** The system failed to load the `Libpssl dtf manager so.so` library (Code: 6052) `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 462 | UUID: c51772e1-e198-49cd-aa87-18b7e1cac332]`.\n3. **OS-Level Cascade:** The library failure triggered a cascade of OS faults, including \"Client Cb not found\" (Code: 6035) `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 466 | UUID: 5090748c-eb4b-45c1-8d5f-efbf6870c460]`, \"Task Client not found\" (Code: 6024) `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 474 | UUID: efe4a333-6fbf-4e7c-b5e3-3a2c1e7c8dd8]`, and \"Deos Api failure\" regarding background task priority (Code: 6080) `[Source: NODE_B_FAULT_REPOSITORY_01_1_Decoded_report.html | Seq: 476 | UUID: 4adcfb06-51ca-4731-95fa-fdca590a162b]`.\n4. **System Reset:** NODE_B initiated an \"Operational startup cold\" to recover from the service failures `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 17 | UUID: 2cc69106-50de-4664-848a-2a5a24ae45a7]`.\n5. **Redundancy Reconfiguration:** Upon restart, NODE_B transitioned its Master status to \"Spare\" `[Source: NODE_B_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 9 | UUID: 71b747af-0202-4490-beda-4b96e8293ee9]`.",
@@ -99080,7 +99080,7 @@
     ],
     "event_count": 59,
     "raw_occurrences": 66,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a momentary loss of Vertical Navigation (VNAV) guidance during a critical flight phase transition from Climb to Cruise. This was triggered by manual Flight Management System (FMS) operator interactions, specifically flight plan copying and index refreshing, which resulted in the VNAV status reverting to \"none\" before being re-established via a new leg sequence.",
     "root_cause": "The primary trigger was a series of **Operator Interactions** involving flight plan management and data refreshing during a phase transition `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 19f66817-9bb2-4c60-8754-bddbe2068d59]`. Specifically, the execution of \"Operator interaction copy flight plan\" `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 83 | UUID: d1fcf166-cd7b-4540-a07e-0f984cd1f96a]` and index refreshes caused the FMS to invalidate the current vertical guidance mode, transitioning the VNAV status to \"none\" on both the Master and Spare nodes `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: 7b50eb96-8fbd-495e-8af2-8066be4faa23]`, `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 87 | UUID: 121eca38-8b3f-4817-a048-3d6f6096058f]`.",
     "cascade_sequence": "1. **Initial Interaction:** The First Officer initiated an operator interaction refresh of the second index data on NODE_B `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 19f66817-9bb2-4c60-8754-bddbe2068d59]`.\n2. **Mode Invalidation:** Subsequent operator interactions caused the VNAV status to drop to \"none\" across the distributed system `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: 7b50eb96-8fbd-495e-8af2-8066be4faa23]`.\n3. **Guidance Instability:** The Vertical Guidance Sequence underwent multiple changes as the system processed standby inputs `[Source: NODE_B_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 76 | UUID: 84f372ba-0ad9-4795-a504-5df2c0aa19e2]`.\n4. **Phase Transition:** The aircraft transitioned from the \"Climb\" phase to the \"Cruise\" phase `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 91 | UUID: 4d7f39fc-7c71-4b0d-b1c4-a834555281bb]`.\n5. **Sequence Re-establishment:** The Top of Climb (TOC) was sequenced `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 88 | UUID: 8204e3e7-d104-43f3-8667-447d647b6ce0]`, and the vertical guidance was restored following the confirmation of the new leg sequence \"Kusom To Gubax\" `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 105 | UUID: 52bd1959-75ad-46bd-820b-7bafa38998db]`.",
@@ -100768,13 +100768,13 @@
     "end_time": "2032-06-18T12:42:18",
     "start_clock": "12:42:18",
     "end_clock": "12:42:18",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a discrete software event involving the selection of the vertical speed identifier on NODE_A. The system successfully processed a 32-bit floating-point data input, maintaining a dual-redundant Flight Management System (FMS) configuration with the Left FMS acting as the Master node.",
     "root_cause": "The primary trigger was a software-level command for the \"Selection vertical speed identifier\" `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 108 | UUID: 86710dea-d5e3-4a02-9af3-fefa8d098177]`. The failure mechanism (if any) was not observed; rather, the event represents a state transition initiated by the ingestion of a 32-bit float value of 0.989146 into the FMS architecture `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 108 | UUID: 86710dea-d5e3-4a02-9af3-fefa8d098177]`.",
     "cascade_sequence": "1. **Data Input Initiation:** A software event was triggered via the selection of the vertical speed identifier on NODE_A `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 108 | UUID: 86710dea-d5e3-4a02-9af3-fefa8d098177]`.\n2. **Data Formatting:** The input was processed and formatted as a 32-bit float (Value: 0.989146) `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 108 | UUID: 86710dea-d5e3-4a02-9af3-fefa8d098177]`.\n3. **System State Verification:** The FMS hierarchy was confirmed, establishing the Left FMS as the Master node and the Center FMS as the Spare in a Dual configuration `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 108 | UUID: 86710dea-d5e3-4a02-9af3-fefa8d098177]`.",
@@ -100825,7 +100825,7 @@
     ],
     "event_count": 52,
     "raw_occurrences": 56,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The investigation analyzed a high-density sequence of Flight Management System (FMS) state transitions and operator interactions involving the Master (NODE_A) and Spare (NODE_B) nodes. The event cluster was characterized by rapid successive leg sequence confirmations and a critical performance data update triggered by manual pressure setting entries. While system redundancy remained intact, the high frequency of state changes required synchronized updates across the distributed avionics architecture.",
     "root_cause": "The primary trigger for the high-density event cluster was a manual **Operator Interaction** involving the entry of a new pressure setting `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 93 | UUID: c35e78a3-5a12-406e-923b-d7ab8743072c]`. This interaction initiated a state transition within the FMS logic, specifically resulting in a \"Performance Data Changed\" event `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: 4f342e9c-7dab-4a8f-9498-02db037bd57d]`, which necessitated immediate recalculation of flight path parameters and leg sequences.",
     "cascade_sequence": "The following chronological sequence details the propagation of state changes through the distributed nodes:\n\n1.  **Initial Vertical Speed Selection:** Vertical speed identifiers were established on NODE_B `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 117 | UUID: 25b534bc-8fa7-4a60-88c9-a562a53cd2c4]` and subsequently on NODE_A `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 109 | UUID: 90907bbc-171f-48da-8678-c72c67328707]`.\n2.  **First Leg Sequence Confirmation:** Operators confirmed the \"Gubax To Ravki\" leg sequence on both the Master and Spare nodes `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 118 | UUID: c27a62dc-bd25-4793-9c3b-e1dcc6b2dc6f]`.\n3.  **Second Leg Sequence Transition:** The flight plan transitioned to the \"Ravki To Ditam\" sequence, confirmed via NODE_B `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 123 | UUID: 6014dd0a-9ef8-4068-baf7-cb7ae1b321e7]`.\n4.  **Performance Data Trigger:** Manual entry of pressure settings on NODE_A `[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 93 | UUID: c35e78a3-5a12-406e-923b-d7ab8743072c]` forced a \"Performance Data Changed\" status across the dual-mode system `[Source: NODE_B_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: 643cfc2c-2c31-48a8-bd1f-e77eef7d2203]`.\n5.  **Final Leg Sequence Update:** Following the performance data change, the leg sequence was updated to \"Ditam To Oboka\" on the Master node (NODE_A) `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 124 | UUID: b35e6107-79da-4ea0-be00-92eede3e241e]`.\n6.  **Vertical Speed Re-adjustment:** Final vertical speed adjustments were logged on NODE_B `[Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 135 | UUID: 150fb845-d4da-41ab-aa4d-19af9d5dfa60]` and NODE_A `[Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 126 | UUID: 843aa0fb-f362-4366-aee5-861b413b779e]`.",
@@ -113565,7 +113565,7 @@
     "end_time": "2032-06-18T12:58:44",
     "start_clock": "12:58:44",
     "end_clock": "12:58:44",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_B"
     ],
@@ -113615,7 +113615,7 @@
     "end_time": "2032-06-18T12:58:46",
     "start_clock": "12:58:46",
     "end_clock": "12:58:46",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -113665,13 +113665,13 @@
     "end_time": "2032-06-18T12:58:46",
     "start_clock": "12:58:46",
     "end_clock": "12:58:46",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "HIGH",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_C involving the selection of a vertical speed identifier. At the time of the event, the Flight Management System (FMS) was operating in a \"Single\" dual-mode configuration, with the Left FMS acting as the Master node `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 0072a553-3381-4fd5-a88f-c64aa9386551]`.",
     "root_cause": "The primary trigger was a software-level data input event identified as the \"Selection vertical speed identifier\" `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 0072a553-3381-4fd5-a88f-c64aa9386551]`. The mechanism involved the processing of a 32-bit floating-point value, specifically recorded as `0.556107`, within the NODE_C software environment `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 0072a553-3381-4fd5-a88f-c64aa9386551]`.",
     "cascade_sequence": "As the log contains only a single discrete event, no propagation or cascade was observed. The sequence of the recorded event is as follows:\n1. **Data Input:** The vertical speed identifier was selected/input into the system `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 0072a553-3381-4fd5-a88f-c64aa9386551]`.\n2. **Data Formatting:** The system formatted the input as a \"Format one float 32\" `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 0072a553-3381-4fd5-a88f-c64aa9386551]`.\n3. **State Verification:** The system logged the current FMS hierarchy: Left FMS (Master), Center FMS (Spare), and Right FMS (Standby) `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 0072a553-3381-4fd5-a88f-c64aa9386551]`.",
@@ -113715,13 +113715,13 @@
     "end_time": "2032-06-18T12:59:13",
     "start_clock": "12:59:13",
     "end_clock": "12:59:13",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 2,
-    "severity": "INFORMATIONAL",
+    "severity": "HIGH",
     "executive_summary": "At 12:59:13, a software event was recorded on NODE_C involving the selection of a vertical speed identifier `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`. The event occurred during a flight phase at an altitude of approximately 7,009 feet `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`, resulting in a vertical speed command of -24.847773 `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`.",
     "root_cause": "The primary trigger for this event was a **Software Event: Selection vertical speed identifier** `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`. This indicates a state transition initiated by a data input (Format: float 32) to the Flight Management System (FMS) to modify the vertical profile `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`.",
     "cascade_sequence": "1. **Input Initiation:** A selection command for the vertical speed identifier was processed by NODE_C `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`.\n2. **FMS Configuration Check:** The system identified the FMS node hierarchy as Left: Master, Center: Spare, and Right: Standby `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`.\n3. **Mode Transition:** The system state was recorded under the \"Dual: Single\" operational mode `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`.\n4. **Parameter Application:** The vertical speed parameter was updated to a value of -24.847773 `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 19 | UUID: bfe3c7c4-808c-4bf7-861c-3eabb7f8b140]`.",
@@ -113765,13 +113765,13 @@
     "end_time": "2032-06-18T12:59:17",
     "start_clock": "12:59:17",
     "end_clock": "12:59:17",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_B"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single discrete software event recorded on NODE_B involving the selection of a vertical speed identifier. The system was operating in a Dual FMS configuration at the time of the event, and no subsequent error states or hardware failures were captured within the provided telemetry window.",
     "root_cause": "The primary trigger for this event was a software-level selection of the vertical speed identifier [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 226 | UUID: a752d55b-3dbb-42ef-99fb-ff02f8cbbaa8]. This event represents a state transition in the Flight Management System (FMS) where the vertical speed parameter was updated to a value of -23.006844 [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 226 | UUID: a752d55b-3dbb-42ef-99fb-ff02f8cbbaa8]. There is no evidence in the current log to suggest this was an uncommanded or erroneous input.",
     "cascade_sequence": "Based on the provided data, no failure cascade occurred. The event was isolated to a single software log entry:\n1. **[12:59:17]** NODE_B processed a software event for the selection of the vertical speed identifier [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 226 | UUID: a752d55b-3dbb-42ef-99fb-ff02f8cbbaa8].\n2. **No further propagation** or secondary node alerts were detected following this selection.",
@@ -113815,13 +113815,13 @@
     "end_time": "2032-06-18T12:59:18",
     "start_clock": "12:59:18",
     "end_clock": "12:59:18",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single discrete software event involving the selection of a vertical speed identifier on the Master Flight Management System (FMS) node. The event recorded a specific vertical speed command during a flight phase at an altitude of approximately 7,008 feet, with no evidence of system instability or hardware failure detected in the provided telemetry.",
     "root_cause": "The primary trigger for this event was a software-level command to select a vertical speed identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 217 | UUID: b53ad59a-f880-4185-b10f-b08f808c464e]. This selection initiated a data update within the FMS to process a 32-bit floating-point value representing a vertical speed of -22.994541 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 217 | UUID: b53ad59a-f880-4185-b10f-b08f808c464e].",
     "cascade_sequence": "As this event represents a standard software selection rather than a system crash, the \"cascade\" describes the data processing flow:\n1. **Input Capture:** The Master FMS (NODE_A) captured the vertical speed identifier selection [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 217 | UUID: b53ad59a-f880-4185-b10f-b08f808c464e].\n2. **Data Parsing:** The system parsed the input using a Float 32 data format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 217 | UUID: b53ad59a-f880-4185-b10f-b08f808c464e].\n3. **State Update:** The FMS updated the flight parameters at coordinates 50.988327, 7.051092 at an altitude of 7008.067871 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 217 | UUID: b53ad59a-f880-4185-b10f-b08f808c464e].",
@@ -113865,13 +113865,13 @@
     "end_time": "2032-06-18T13:00:15",
     "start_clock": "13:00:15",
     "end_clock": "13:00:15",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_B"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_B involving the selection of a vertical speed identifier. The event represents a standard data entry within the Flight Management System (FMS) and did not result in any observed system deviation or operational interruption.",
     "root_cause": "The primary trigger for this event was a software-level selection of the vertical speed identifier [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 227 | UUID: 56330aa1-b993-406f-8666-545d179690ca]. The failure mechanism was not present; rather, the event was a successful data input of a 32-bit float value [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 227 | UUID: 56330aa1-b993-406f-8666-545d179690ca].",
     "cascade_sequence": "As no system failure occurred, the following sequence describes the data propagation through the distributed avionics architecture:\n1. **Data Input:** The vertical speed identifier was selected with a value of 26.322182 [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 227 | UUID: 56330aa1-b993-406f-8666-545d179690ca].\n2. **Data Formatting:** The system processed the input using a 32-bit float format [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 227 | UUID: 56330aa1-b993-406f-8666-545d179690ca].\n3. **Node Distribution:** The data was integrated into the FMS architecture, which is currently operating in a Dual configuration [Source: NODE_B_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 227 | UUID: 56330aa1-b993-406f-8666-545d179690ca].",
@@ -113915,13 +113915,13 @@
     "end_time": "2032-06-18T13:00:16",
     "start_clock": "13:00:16",
     "end_clock": "13:00:16",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a discrete software event occurring on NODE_A within the Flight Management System (FMS) architecture. The event involved the selection of a vertical speed identifier with a specific float 32 value, occurring while the system was operating in a Dual redundancy configuration. No subsequent system degradation or propagation was observed in the provided telemetry.",
     "root_cause": "The primary trigger for this event was a software-level selection of the vertical speed identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 218 | UUID: fc33ad0c-79f8-4ecf-8a81-0076450dcdf8]. The mechanism involved the processing of a 32-bit floating-point data format, specifically assigning a value of 26.563202 to the vertical speed parameter [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 218 | UUID: fc33ad0c-79f8-4ecf-8a81-0076450dcdf8].",
     "cascade_sequence": "Based on the available forensic data, no failure cascade occurred. The event was isolated to a single software state change:\n1. **State Transition:** NODE_A processed the selection of the vertical speed identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 218 | UUID: fc33ad0c-79f8-4ecf-8a81-0076450dcdf8].\n2. **Termination:** The event concluded within the same second without triggering secondary faults or error flags in the Master, Spare, or Standby nodes.",
@@ -116183,7 +116183,7 @@
     "end_time": "2032-06-18T13:04:00",
     "start_clock": "13:04:00",
     "end_clock": "13:04:00",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -116233,7 +116233,7 @@
     "end_time": "2032-06-18T13:04:00",
     "start_clock": "13:04:00",
     "end_clock": "13:04:00",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -119018,13 +119018,13 @@
     "end_time": "2032-06-18T13:07:24",
     "start_clock": "13:07:24",
     "end_clock": "13:07:24",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single discrete software event occurring on NODE_C involving the selection of a vertical speed identifier. The event resulted in a commanded vertical speed value of -1002.305176, processed via the Master Flight Management System (FMS) while operating in Dual mode. No system degradation or loss of redundancy was observed during this specific telemetry window.",
     "root_cause": "The primary trigger for this event was a **state transition command** initiated via the selection of the vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 56 | UUID: 31eaf19e-537b-424e-96fc-69ed0fb9aa4e]. The mechanism involved the injection of a 32-bit floating-point value into the FMS command buffer, specifically setting a descent rate of -1002.305176 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 56 | UUID: 31eaf19e-537b-424e-96fc-69ed0fb9aa4e].",
     "cascade_sequence": "As this was a single-event log, the propagation is limited to the internal data processing sequence within NODE_C:\n\n1.  **Command Input:** The system received a selection request for the vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 56 | UUID: 31eaf19e-537b-424e-96fc-69ed0fb9aa4e].\n2.  **Data Formatting:** The input was parsed and formatted as a `Format one float 32` data type [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 56 | UUID: 31eaf19e-537b-424e-96fc-69ed0fb9aa4e].\n3.  **FMS Synchronization:** The value was applied to the Left FMS (designated as Master), with the Right FMS maintaining its status as Spare [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 56 | UUID: 31eaf19e-537b-424e-96fc-69ed0fb9aa4e].",
@@ -119075,7 +119075,7 @@
     ],
     "event_count": 26,
     "raw_occurrences": 30,
-    "severity": "HIGH",
+    "severity": "WARNING",
     "executive_summary": "The incident involved a coordinated Flight Management System (FMS) reconfiguration during a transition from Descent to Approach flight phases. While the dual-mode redundancy remained intact, the sequence involved significant manual input for leg sequence confirmation and vertical guidance adjustments, resulting in a series of speed and vertical speed identifier updates across both Master (NODE_A) and Spare (NODE_C) nodes.",
     "root_cause": "The primary trigger was a series of **Operator Interactions** initiated by the First Officer and Captain to transition the FMS flight path [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 28 | UUID: 907216fd-9c63-41d4-a9a6-4402d78cd8ce] [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 216 | UUID: 47ae3e23-8124-4d5b-8a0e-25a9679d5bd5]. Specifically, the manual selection of a new leg sequence (\"T-P To Cf23l\") and the subsequent confirmation of the sequence forced a state transition in the flight management logic [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 60 | UUID: debb1bf9-045d-459d-8226-9e47c94f16a3] [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 32 | UUID: 710aa48b-344f-43ed-9c15-d57d0e9dee33].",
     "cascade_sequence": "1. **Initial Parameter Setting:** NODE_C recorded initial vertical speed identifier selections ranging from -1012.81 to -1001.96 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 57 | UUID: c9d39288-d875-4611-b661-d87cdd096504] [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 59 | UUID: 2759561f-f959-473a-a790-c17b96750f2e].\n2. **Leg Sequence Modification:** Operators initiated a leg sequence change to \"T-P To Cf23l\" [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 60 | UUID: debb1bf9-045d-459d-8226-9e47c94f16a3].\n3. **Phase Transition:** The FMS logic processed a flight phase change from \"Descent\" to \"Approach\" across both NODE_A and NODE_C [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 62 | UUID: 88e56a81-e5c3-48f0-99bd-7b60ad16fd91] [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 247 | UUID: e9c65718-34e5-455c-9873-a644d360d4f8].\n4. **Vertical Guidance Update:** Following the phase change, a \"Vertical Guidance Sequence Changed\" event was propagated to both nodes [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 33 | UUID: 0693bb05-f872-446f-893e-cc5a2319116a] [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 221 | UUID: 6191c13e-b3c7-431d-a122-2949763a668c].\n5. **Dynamic Speed Adjustment:** A cascade of selection speed identifier updates occurred as the aircraft transitioned into the approach profile, with speeds decreasing from 222.66 to 207.46 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 63 | UUID: 2f5f53ee-8544-41fa-937a-c72fc79ec213] [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 68 | UUID: d6a0d348-e4b5-4858-aa95-050edcc3351a].",
@@ -119830,7 +119830,7 @@
     "end_time": "2032-06-18T13:09:41",
     "start_clock": "13:09:41",
     "end_clock": "13:09:41",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -119880,7 +119880,7 @@
     "end_time": "2032-06-18T13:09:48",
     "start_clock": "13:09:48",
     "end_clock": "13:09:48",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -119930,13 +119930,13 @@
     "end_time": "2032-06-18T13:09:55",
     "start_clock": "13:09:55",
     "end_clock": "13:09:55",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "At 13:09:55, NODE_A recorded a discrete software event involving the selection of a speed identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0]. The Flight Management System (FMS) maintained full operational redundancy in Dual mode during this state transition [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0].",
     "root_cause": "The primary trigger was a software-level state transition identified as a \"Selection speed identifier\" event [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0]. This event involved the processing of a 32-bit floating-point data format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0] to set a specific speed value of 200.260071 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0].",
     "cascade_sequence": "As the recorded data represents a single discrete event, no failure propagation or secondary node degradation was observed. The sequence of the single recorded event is as follows:\n1. **Event Initiation:** NODE_A executes a software event for speed identifier selection [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0].\n2. **Data Formatting:** The system processes the identifier using a float 32 data format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0].\n3. **State Confirmation:** The system confirms the selection value of 200.260071 while maintaining Dual mode status [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 252 | UUID: f6ac28c9-beb4-4c02-ba1f-dff2b2073dd0].",
@@ -119980,7 +119980,7 @@
     "end_time": "2032-06-18T13:09:56",
     "start_clock": "13:09:56",
     "end_clock": "13:09:56",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -120030,13 +120030,13 @@
     "end_time": "2032-06-18T13:10:02",
     "start_clock": "13:10:02",
     "end_clock": "13:10:02",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software-driven state transition occurring on NODE_C involving a speed identifier update. The Flight Management System (FMS) was operating in a stable Dual mode configuration with the Left FMS acting as the Master node [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 71 | UUID: a504bba5-5b64-42ea-ac28-1e4a2a5059e7]. No system degradation or redundancy loss was detected during this event.",
     "root_cause": "The triggering condition was a software-initiated \"Selection speed identifier\" event [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 71 | UUID: a504bba5-5b64-42ea-ac28-1e4a2a5059e7]. This event represents a state transition where a 32-bit float value was processed by the FMS to update the active selection speed [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 71 | UUID: a504bba5-5b64-42ea-ac28-1e4a2a5059e7]. The mechanism appears to be a standard data update within the FMS software logic.",
     "cascade_sequence": "As the event was a discrete software update rather than a hardware malfunction, no failure cascade was observed. The chronological sequence of the state change is as follows:\n\n1. **Event Initiation:** NODE_C triggered a software event for \"Selection speed identifier\" [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 71 | UUID: a504bba5-5b64-42ea-ac28-1e4a2a5059e7].\n2. **Data Processing:** The system processed the identifier using a 32-bit float data format [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 71 | UUID: a504bba5-5b64-42ea-ac28-1e4a2a5059e7].\n3. **Value Assignment:** The selection speed was updated to the specific value of 197.665802 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 71 | UUID: a504bba5-5b64-42ea-ac28-1e4a2a5059e7].",
@@ -120080,13 +120080,13 @@
     "end_time": "2032-06-18T13:10:11",
     "start_clock": "13:10:11",
     "end_clock": "13:10:11",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software-level event recorded on NODE_A involving a speed identifier selection [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a]. The Flight Management System (FMS) maintained operational integrity in Dual mode, with the Left FMS functioning as the Master node [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a].",
     "root_cause": "The triggering condition was a software-initiated \"Selection speed identifier\" event [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a]. This event represents a state transition where a specific speed value (196.533630) was processed as a 32-bit float [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a]. There is no evidence of hardware malfunction or external interference in the provided telemetry.",
     "cascade_sequence": "As the event was a discrete software state update rather than a system failure, no destructive cascade was observed. The sequence of data propagation is as follows:\n1. **Data Input:** The system processed a \"Selection speed identifier\" software event [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a].\n2. **Data Formatting:** The identifier was formatted as a 32-bit float with a value of 196.533630 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a].\n3. **Node Synchronization:** The data was handled by the Master FMS (Left) while the Spare FMS (Right) maintained standby status [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 253 | UUID: e899b9bc-322b-48ac-9306-e7faa0f1869a].",
@@ -120130,7 +120130,7 @@
     "end_time": "2032-06-18T13:10:12",
     "start_clock": "13:10:12",
     "end_clock": "13:10:12",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -120180,13 +120180,13 @@
     "end_time": "2032-06-18T13:10:25",
     "start_clock": "13:10:25",
     "end_clock": "13:10:25",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event on NODE_C involving the selection of a vertical speed identifier. The Flight Management System (FMS) maintained operational integrity in Dual mode with no loss of redundancy or functional degradation.",
     "root_cause": "The primary trigger was a software-level event initiated by the selection of a vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 73 | UUID: 4ed04c65-2bf8-4958-8ac9-b40b5c85fff2]. The failure mechanism, if any, is currently categorized as a standard parameter update, where the system processed a 32-bit float value of -500.001709 for the vertical speed selection [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 73 | UUID: 4ed04c65-2bf8-4958-8ac9-b40b5c85fff2].",
     "cascade_sequence": "1. **Event Initiation:** NODE_C executes a software event for the selection of the vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 73 | UUID: 4ed04c65-2bf8-4958-8ac9-b40b5c85fff2].\n2. **Data Processing:** The system assigns the value -500.001709 using a Format one float 32 data structure [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 73 | UUID: 4ed04c65-2bf8-4958-8ac9-b40b5c85fff2].\n3. **System State Maintenance:** The FMS architecture maintains its Dual mode configuration, with the Left FMS node acting as the Master and the Right FMS node acting as the Spare [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 73 | UUID: 4ed04c65-2bf8-4958-8ac9-b40b5c85fff2].",
@@ -120230,13 +120230,13 @@
     "end_time": "2032-06-18T13:10:52",
     "start_clock": "13:10:52",
     "end_clock": "13:10:52",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "HIGH",
     "executive_summary": "The investigation analyzed a single software-level event occurring on NODE_A involving the flight display control panel (CP) identifier. The aircraft was operating in a stable Dual FMS configuration at an altitude of 3,671.5 feet, and no subsequent system degradation or error states were observed.",
     "root_cause": "The triggering condition was a software-driven state update identified as \"Flight display cp identifier\" [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 254 | UUID: de291b7b-1012-4d42-a929-e3680c4f781e]. This event appears to be a routine identification broadcast or a status refresh within the flight management software rather than a hardware malfunction or external interference.",
     "cascade_sequence": "As the event was isolated and did not result in a system fault, the sequence is limited to the single recorded state change:\n\n1. **[13:10:52]** NODE_A initiated a software event to report the Flight display CP identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 254 | UUID: de291b7b-1012-4d42-a929-e3680c4f781e].\n2. **[13:10:52]** The system reported the current operational state, including FMS roles and flight plan mode, without triggering any downstream error flags or bus contention [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 254 | UUID: de291b7b-1012-4d42-a929-e3680c4f781e].",
@@ -121647,13 +121647,13 @@
     "end_time": "2032-06-18T13:17:48",
     "start_clock": "13:17:48",
     "end_clock": "13:17:48",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_C involving the selection of a vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155]. The Flight Management System (FMS) was operating in Dual mode with the Left FMS acting as the Master node at the time of the event [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155].",
     "root_cause": "The primary trigger was a software-level command to select a vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155]. The mechanism involved the input of a 32-bit floating-point value (float 32) representing a descent rate of -1100.000000 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155].",
     "cascade_sequence": "As the log contains only a single discrete event, the propagation is limited to the processing of the data packet within the node:\n1. **Input Reception:** The system received a selection command for the vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155].\n2. **Data Parsing:** The Master FMS node (Left FMS) parsed the data as a float 32 format [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155].\n3. **State Update:** The system updated the flight parameters to reflect a vertical speed of -1100.000000 at an altitude of 2870.024658 and coordinates 51.375229, 6.794652 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 89 | UUID: f18d2acb-fe64-489f-89c2-ba9a0cac3155].",
@@ -121697,13 +121697,13 @@
     "end_time": "2032-06-18T13:17:49",
     "start_clock": "13:17:49",
     "end_clock": "13:17:49",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_C involving a target altitude identifier selection. The Flight Management System (FMS) was operating in a stable Dual configuration with the Left FMS acting as the Master node and the Right FMS acting as the Spare.",
     "root_cause": "The event was triggered by a software-level command to update the \"Selection altitude identifier\" [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: 943634fd-e2db-4045-8950-7eea7ba5afb3]. This represents a state transition where a specific altitude value of 18140.000000 was processed using a 32-bit float data format [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: 943634fd-e2db-4045-8950-7eea7ba5afb3]. No anomalous triggering mechanism (such as power loss or hardware fault) was identified within the provided telemetry.",
     "cascade_sequence": "As the event was a discrete software state update rather than a system failure, the sequence describes the data propagation through the FMS architecture:\n\n1. **Data Input:** The system received a request to set the selection altitude identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: 943634fd-e2db-4045-8950-7eea7ba5afb3].\n2. **Data Formatting:** The identifier was processed as a single float 32 value, specifically 18140.000000 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: 943634fd-e2db-4045-8950-7eea7ba5afb3].\n3. **Node Synchronization:** The data was handled by NODE_C while the system maintained its Dual-mode operational state [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 90 | UUID: 943634fd-e2db-4045-8950-7eea7ba5afb3].",
@@ -121747,7 +121747,7 @@
     "end_time": "2032-06-18T13:17:51",
     "start_clock": "13:17:51",
     "end_clock": "13:17:51",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -121797,7 +121797,7 @@
     "end_time": "2032-06-18T13:17:53",
     "start_clock": "13:17:53",
     "end_clock": "13:17:53",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -121848,7 +121848,7 @@
     "end_time": "2032-06-18T13:17:54",
     "start_clock": "13:17:54",
     "end_clock": "13:17:54",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -121899,13 +121899,13 @@
     "end_time": "2032-06-18T13:17:59",
     "start_clock": "13:17:59",
     "end_clock": "13:17:59",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_C involving a vertical speed identifier selection. The Flight Management System (FMS) was operating in a stable Dual mode configuration with no evidence of system degradation or error propagation.",
     "root_cause": "The primary trigger for this event was a software-level selection of a vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 97ccb2c7-f63b-431d-8afd-326f2486d85c]. The mechanism involved the input of a 32-bit floating-point value (float 32) representing a vertical speed of -1000.000000 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 97ccb2c7-f63b-431d-8afd-326f2486d85c]. This appears to be a standard operational parameter entry rather than a system malfunction.",
     "cascade_sequence": "No failure cascade was observed during this incident interval. The sequence of events is limited to a single discrete transaction:\n\n1. **[13:17:59]** NODE_C processes a software event for the selection of the vertical speed identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 97ccb2c7-f63b-431d-8afd-326f2486d85c].\n2. **[13:17:59]** The system registers the data format as a float 32 with a value of -1000.000000 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 92 | UUID: 97ccb2c7-f63b-431d-8afd-326f2486d85c].",
@@ -121949,7 +121949,7 @@
     "end_time": "2032-06-18T13:17:59",
     "start_clock": "13:17:59",
     "end_clock": "13:17:59",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
@@ -121999,19 +121999,19 @@
     "end_time": "2032-06-18T13:18:00",
     "start_clock": "13:18:00",
     "end_clock": "13:18:00",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "The investigation identified a critical data integrity anomaly within the Flight Management System (FMS) during a heading identifier selection event [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. An out-of-range negative float value was processed by the Master FMS node, potentially compromising navigation accuracy and system state consistency.",
-    "root_cause": "The primary trigger was a **Software Event** involving the selection of a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. \n\nThe failure mechanism is identified as an **Input Validation Failure**. The system accepted a 32-bit float value of `-80.000000` for a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. In standard aeronautical navigation logic, heading values are expected to be within a positive 0\u2013360 degree range. The acceptance of a negative value indicates that the software layer failed to perform boundary checking on the incoming float data during the selection process.",
+    "root_cause": "The primary trigger was a **Software Event** involving the selection of a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. \n\nThe failure mechanism is identified as an **Input Validation Failure**. The system accepted a 32-bit float value of `-80.000000` for a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. In standard aeronautical navigation logic, heading values are expected to be within a positive 0–360 degree range. The acceptance of a negative value indicates that the software layer failed to perform boundary checking on the incoming float data during the selection process.",
     "cascade_sequence": "1. **Initiation:** A software command was issued to select a heading identifier on the Master FMS (NODE_A) [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n2. **Data Injection:** The system processed the selection using a 32-bit float format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n3. **State Corruption:** The invalid value of `-80.000000` was committed to the Master FMS node's active state [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].",
     "system_impact": "* **Redundancy Status:** At the time of the event, the system was operating in **Dual mode**, with NODE_A serving as the Master and the Right FMS node serving as the Spare [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n* **Functional Availability:** While the system maintained Dual mode configuration [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa], the injection of a negative heading value poses a high risk of \"Split-Brain\" scenarios or mode reversion. If the Spare node performs a sanity check on the Master's data and rejects the negative value, the system may drop from Dual to Single mode, significantly reducing navigational redundancy.",
     "corrective_actions": "1. **Software Logic Update:** Implement mandatory range-validation constraints on all FMS heading identifier inputs to reject any float values outside the $0.0 \\le x < 360.0$ range.\n2. **Bus Integrity Inspection:** Conduct a diagnostic check of the data bus connecting the pilot interface (CDU/MCDU) to NODE_A to ensure no bit-flipping or signal degradation is causing sign-bit errors in float transmissions.\n3. **Regression Testing:** Perform high-fidelity simulation testing of the FMS software to verify that invalid heading inputs trigger a \"Data Invalid\" flag rather than committing the value to the active flight state.",
-    "full_markdown": "# AVIATION FORENSIC INVESTIGATION REPORT: cluster-a24fbc8e\n\n## 1. Incident Overview\n\n| Date | Duration | Affected Nodes | Total Events | Severity Rating |\n| :--- | :--- | :--- | :--- | :--- |\n| 2032-06-18 | 00:00:00 | NODE_A | 1 | CRITICAL |\n\n## 2. Executive Summary\nThe investigation identified a critical data integrity anomaly within the Flight Management System (FMS) during a heading identifier selection event [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. An out-of-range negative float value was processed by the Master FMS node, potentially compromising navigation accuracy and system state consistency.\n\n## 3. Root Cause Analysis (Primary Trigger)\nThe primary trigger was a **Software Event** involving the selection of a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. \n\nThe failure mechanism is identified as an **Input Validation Failure**. The system accepted a 32-bit float value of `-80.000000` for a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. In standard aeronautical navigation logic, heading values are expected to be within a positive 0\u2013360 degree range. The acceptance of a negative value indicates that the software layer failed to perform boundary checking on the incoming float data during the selection process.\n\n## 4. Failure Cascade & Propagation Sequence\n1. **Initiation:** A software command was issued to select a heading identifier on the Master FMS (NODE_A) [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n2. **Data Injection:** The system processed the selection using a 32-bit float format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n3. **State Corruption:** The invalid value of `-80.000000` was committed to the Master FMS node's active state [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n\n## 5. System Impact Assessment\n* **Redundancy Status:** At the time of the event, the system was operating in **Dual mode**, with NODE_A serving as the Master and the Right FMS node serving as the Spare [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n* **Functional Availability:** While the system maintained Dual mode configuration [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa], the injection of a negative heading value poses a high risk of \"Split-Brain\" scenarios or mode reversion. If the Spare node performs a sanity check on the Master's data and rejects the negative value, the system may drop from Dual to Single mode, significantly reducing navigational redundancy.\n\n## 6. Recommended Corrective & Maintenance Actions\n1. **Software Logic Update:** Implement mandatory range-validation constraints on all FMS heading identifier inputs to reject any float values outside the $0.0 \\le x < 360.0$ range.\n2. **Bus Integrity Inspection:** Conduct a diagnostic check of the data bus connecting the pilot interface (CDU/MCDU) to NODE_A to ensure no bit-flipping or signal degradation is causing sign-bit errors in float transmissions.\n3. **Regression Testing:** Perform high-fidelity simulation testing of the FMS software to verify that invalid heading inputs trigger a \"Data Invalid\" flag rather than committing the value to the active flight state.",
+    "full_markdown": "# AVIATION FORENSIC INVESTIGATION REPORT: cluster-a24fbc8e\n\n## 1. Incident Overview\n\n| Date | Duration | Affected Nodes | Total Events | Severity Rating |\n| :--- | :--- | :--- | :--- | :--- |\n| 2032-06-18 | 00:00:00 | NODE_A | 1 | CRITICAL |\n\n## 2. Executive Summary\nThe investigation identified a critical data integrity anomaly within the Flight Management System (FMS) during a heading identifier selection event [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. An out-of-range negative float value was processed by the Master FMS node, potentially compromising navigation accuracy and system state consistency.\n\n## 3. Root Cause Analysis (Primary Trigger)\nThe primary trigger was a **Software Event** involving the selection of a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. \n\nThe failure mechanism is identified as an **Input Validation Failure**. The system accepted a 32-bit float value of `-80.000000` for a heading identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa]. In standard aeronautical navigation logic, heading values are expected to be within a positive 0–360 degree range. The acceptance of a negative value indicates that the software layer failed to perform boundary checking on the incoming float data during the selection process.\n\n## 4. Failure Cascade & Propagation Sequence\n1. **Initiation:** A software command was issued to select a heading identifier on the Master FMS (NODE_A) [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n2. **Data Injection:** The system processed the selection using a 32-bit float format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n3. **State Corruption:** The invalid value of `-80.000000` was committed to the Master FMS node's active state [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n\n## 5. System Impact Assessment\n* **Redundancy Status:** At the time of the event, the system was operating in **Dual mode**, with NODE_A serving as the Master and the Right FMS node serving as the Spare [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa].\n* **Functional Availability:** While the system maintained Dual mode configuration [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 266 | UUID: 24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa], the injection of a negative heading value poses a high risk of \"Split-Brain\" scenarios or mode reversion. If the Spare node performs a sanity check on the Master's data and rejects the negative value, the system may drop from Dual to Single mode, significantly reducing navigational redundancy.\n\n## 6. Recommended Corrective & Maintenance Actions\n1. **Software Logic Update:** Implement mandatory range-validation constraints on all FMS heading identifier inputs to reject any float values outside the $0.0 \\le x < 360.0$ range.\n2. **Bus Integrity Inspection:** Conduct a diagnostic check of the data bus connecting the pilot interface (CDU/MCDU) to NODE_A to ensure no bit-flipping or signal degradation is causing sign-bit errors in float transmissions.\n3. **Regression Testing:** Perform high-fidelity simulation testing of the FMS software to verify that invalid heading inputs trigger a \"Data Invalid\" flag rather than committing the value to the active flight state.",
     "events": [
       {
         "event_id": "24b1ed9b-5565-4bd4-94a9-cf7b9ccef4fa",
@@ -122049,13 +122049,13 @@
     "end_time": "2032-06-18T13:18:00",
     "start_clock": "13:18:00",
     "end_clock": "13:18:00",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software state transition event recorded on NODE_C involving the a350 autopilot identifier. The system successfully transitioned to an active autopilot state while maintaining full redundancy in a Dual FMS configuration.",
     "root_cause": "The triggering condition was a software-level state transition event identified as \"Autopilot identifier a350\" `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: babb4b03-517a-4c32-8be2-3233ae5123db]`. This event signaled the engagement of Autopilot 1 `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: babb4b03-517a-4c32-8be2-3233ae5123db]`. No hardware fault or power loss was detected during this specific timestamp.",
     "cascade_sequence": "As this was a single-event state transition rather than a progressive failure, the sequence is limited to the following state confirmation:\n1. **State Identification:** NODE_C processed a software event for the a350 autopilot identifier `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: babb4b03-517a-4c32-8be2-3233ae5123db]`.\n2. **Status Verification:** The system logged the operational status of Autopilot 1 as \"on\" `[Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 94 | UUID: babb4b03-517a-4c32-8be2-3233ae5123db]`.",
@@ -122100,13 +122100,13 @@
     "end_time": "2032-06-18T13:18:02",
     "start_clock": "13:18:02",
     "end_clock": "13:18:02",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "INFORMATIONAL",
+    "severity": "HIGH",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_A regarding the autopilot identification sequence. The event confirms the successful activation and identification of Autopilot 1 within a dual-redundant Flight Management System (FMS) architecture. No system degradation or functional loss was observed during this timestamp.",
     "root_cause": "The event was triggered by a **Software State Transition/Identification** sequence. The primary mechanism involved the system executing a software event to assign and verify the \"a350\" autopilot identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 267 | UUID: df2cddc7-239b-42c4-b8e5-e95f144deaf2]. This appears to be a standard initialization or status reporting procedure rather than a spontaneous failure.",
     "cascade_sequence": "As the event represents a successful state confirmation rather than a failure, the sequence describes the logic flow of the software event:\n\n1. **Identifier Assignment:** NODE_A initiated a software event to register the autopilot identifier as \"a350\" using a fixed string format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 267 | UUID: df2cddc7-239b-42c4-b8e5-e95f144deaf2].\n2. **Redundancy Verification:** The system validated the FMS node hierarchy, designating the Left FMS node as \"Master\" and the Right FMS node as \"Spare\" [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 267 | UUID: df2cddc7-239b-42c4-b8e5-e95f144deaf2].\n3. **Operational Confirmation:** The system concluded the sequence by confirming the operational status of the autopilot, specifically stating \"Auto pilot 1 is on\" [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 267 | UUID: df2cddc7-239b-42c4-b8e5-e95f144deaf2].",
@@ -122151,13 +122151,13 @@
     "end_time": "2032-06-18T13:18:19",
     "start_clock": "13:18:19",
     "end_clock": "13:18:19",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_A involving the selection of a speed identifier. The system successfully processed a 32-bit float value while maintaining a stable Dual FMS configuration with the Left FMS acting as the Master node.",
     "root_cause": "The event was triggered by a software-initiated selection of a speed identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 268 | UUID: 480496c0-d974-406a-9e3a-a5c1740d1e47]. The mechanism involved the processing of a specific data identifier formatted as a 32-bit float [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 268 | UUID: 480496c0-d974-406a-9e3a-a5c1740d1e47], resulting in a selection value of 202.437668 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 268 | UUID: 480496c0-d974-406a-9e3a-a5c1740d1e47].",
     "cascade_sequence": "As the event was a nominal software state update, no failure cascade occurred. The sequence of data propagation is as follows:\n1. **Data Initiation:** NODE_A executes a software event to select a speed identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 268 | UUID: 480496c0-d974-406a-9e3a-a5c1740d1e47].\n2. **Data Formatting:** The identifier is encapsulated in a 32-bit float format [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 268 | UUID: 480496c0-d974-406a-9e3a-a5c1740d1e47].\n3. **System Synchronization:** The value is applied within the existing FMS architecture, where the Left FMS maintains Master status and the Right FMS remains in Spare mode [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 268 | UUID: 480496c0-d974-406a-9e3a-a5c1740d1e47].",
@@ -122201,13 +122201,13 @@
     "end_time": "2032-06-18T13:18:28",
     "start_clock": "13:18:28",
     "end_clock": "13:18:28",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 1,
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "executive_summary": "The investigation analyzed a single software event recorded on NODE_C regarding the flap configuration identifier. The system was operating in a nominal Dual mode with the Left FMS acting as the Master and the Right FMS as the Spare [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840]. No system degradation or flight control anomalies were detected during this telemetry window.",
     "root_cause": "The event was triggered by a software-level execution of the \"Flap tomconf identifier\" data process [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840]. This appears to be a routine state-reporting mechanism or a configuration verification check utilizing \"Format str 44\" [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840]. There is no evidence of a hardware fault or an unplanned state transition.",
     "cascade_sequence": "As no failure occurred, the following sequence describes the data propagation of the software event:\n1. **NODE_C** initiates a software event to identify the flap configuration (tomconf) [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840].\n2. The system validates the FMS architecture, confirming a \"Dual\" mode status [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840].\n3. The FMS roles are verified with the Left FMS assigned as Master and the Right FMS assigned as Spare [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840].\n4. The flap position data is successfully captured and logged at a value of 1 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 95 | UUID: 375abf2f-d199-4f5b-9725-0d8ea215e840].",
@@ -122251,7 +122251,7 @@
     "end_time": "2032-06-18T13:18:29",
     "start_clock": "13:18:29",
     "end_clock": "13:18:29",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -122308,7 +122308,7 @@
     ],
     "event_count": 24,
     "raw_occurrences": 25,
-    "severity": "CRITICAL",
+    "severity": "WARNING",
     "executive_summary": "During a cruise flight level transition, a data synchronization mismatch occurred between the Master (NODE_A) and Spare (NODE_C) Flight Management System (FMS) nodes. While the system maintained Dual mode operational status, a logic error resulted in the inversion of S-pad message identifier mappings for \"Desired track heading\" and \"New crz altitude\" between the two nodes.",
     "root_cause": "The primary trigger for the event was an operator interaction to enter the cruise flight level (\"enter crz fl\") [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 238 | UUID: bd8cebd8-d849-45db-9f52-8d9d2e7237ee]. The failure mechanism is identified as a cross-node S-pad message identifier mapping inconsistency. Upon processing the flight level change, the Master and Spare nodes assigned the \"Left\" (L) and \"Right\" (R) message identifiers to different data parameters, creating a non-parity state between the redundant nodes.",
     "cascade_sequence": "1. **Operator Command Initiation:** The operator initiated the \"enter crz fl\" command [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 238 | UUID: bd8cebd8-d849-45db-9f52-8d9d2e7237ee], which was registered by both NODE_A (Master) and NODE_C (Spare) [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 50 | UUID: 252bb52e-32e7-4b26-b92a-33bf2de4f87c].\n2. **Master Node Identifier Assignment:** NODE_A assigned the \"Desired track heading\" to the L message identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 277 | UUID: 323ab156-fa97-4b6c-903a-875c4e04ebf3] and the \"New crz altitude\" to the R message identifier [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 278 | UUID: 4246bf19-c008-4c6d-b044-ebfed41f5bdf].\n3. **Spare Node Identifier Inversion:** Simultaneously, NODE_C assigned the \"New crz altitude\" to the L message identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 102 | UUID: fdce663a-04f3-466f-8f86-6cce2bcde9df] and the \"Desired track heading\" to the R message identifier [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 103 | UUID: cbb77940-ed41-4b18-b115-d79518b946e3].\n4. **Data Inconsistency Propagation:** The mismatch propagated through the S-pad message identifiers, resulting in divergent data structures for L and R messages between the two nodes [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 279 | UUID: 401fab26-09f2-4570-bea9-d9f3bd652128] and [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 104 | UUID: ad7fa30a-e020-41b0-b66b-64607c2b7af4].",
@@ -122999,7 +122999,7 @@
     ],
     "event_count": 27,
     "raw_occurrences": 29,
-    "severity": "INFORMATIONAL",
+    "severity": "HIGH",
     "executive_summary": "The incident involved a controlled transition of the Flight Management System (FMS) from the \"Approach\" phase to the \"Done\" phase. This transition was preceded by manual configuration changes to airspeed, altitude, and heading, and concluded with a shift in Lnav status to heading mode following operator interaction.",
     "root_cause": "The primary trigger for the terminal sequence of this cluster was manual **Operator Interaction** [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 52 | UUID: efab87c7-d68f-4edc-817d-567fddbdd2d6], which initiated an FMS phase change [Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 240 | UUID: 60894bbb-8691-48d9-b3d6-9003796dbb81]. This interaction occurred following a series of manual parameter adjustments including selection of a new altitude (440.0) [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 114 | UUID: 6eb9a954-18d6-4bf7-8d21-91fd582cbe5d] and heading (66.0) [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 115 | UUID: 56017bd0-e75f-47f0-8ef1-01351c2109a8].",
     "cascade_sequence": "1. **Initial State:** Autopilot 1 was identified as \"off\" across both Master and Spare FMS nodes [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 106 | UUID: 87d8aee3-0b00-45e4-8ba1-2f04711a381d].\n2. **Configuration Update:** System received \"New crz altitude\" messages and flap position was set to 2 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 282 | UUID: ebf36c2d-3d1f-4a1e-a040-2323036f2463; Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 109 | UUID: d90d9728-d5ef-4614-b2ee-4221fd4d8f40].\n3. **Landing Configuration Confirmation:** Air-ground status was recorded as 49 [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 285 | UUID: 40c97ec3-1207-4132-b43d-3867c96ea7e7] and the nose gear was confirmed as \"down\" [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 111 | UUID: 6ec95e55-cfba-4fe0-afe9-3725e8463210].\n4. **Parameter Selection:** Operators selected a speed of 140.179398 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 113 | UUID: 1596a310-7044-4675-a902-677344547d1e], an altitude of 440.0 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 114 | UUID: 6eb9a954-18d6-4bf7-8d21-91fd582cbe5d], and a heading of 66.0 [Source: NODE_C_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 115 | UUID: 56017bd0-e75f-47f0-8ef1-01351c2109a8].\n5. **Phase Transition:** Operator interaction triggered a \"Vertical Guidance Sequence Changed\" event [Source: NODE_C_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 54 | UUID: 8d95f5a9-9ecb-4ab3-b5c3-faad6139240a], resulting in the flight phase transitioning from \"Approach\" to \"Done\" [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 290 | UUID: 95f8f9f7-d2bf-42f1-a39e-090da9160975].\n6. **Navigation Mode Shift:** The Lnav status transitioned to \"L navigation hdg\" [Source: NODE_A_FM_LBPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 291 | UUID: 4f139b76-8e05-49ea-81c3-8b7e41b94529].",
@@ -125275,13 +125275,13 @@
     "end_time": "2032-06-18T13:46:48",
     "start_clock": "13:46:48",
     "end_clock": "13:46:48",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_C"
     ],
     "event_count": 1,
     "raw_occurrences": 2,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "NODE_C underwent an instantaneous state transition from Master status to Spare status [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3]. While the system maintained a \"Dual\" mode status, the invalidity of the Standby FMS node position indicates a significant loss of system redundancy and potential flight management degradation [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3].",
     "root_cause": "The primary trigger was a spontaneous state transition within NODE_C, where the node demoted itself from Master to Spare [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3]. The failure mechanism is strongly correlated with the reported \"FMS node invalid\" status for the Standby FMS node position [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3]. It is hypothesized that the Master node logic triggered a demotion due to the inability to verify or synchronize with a valid Standby FMS node.",
     "cascade_sequence": "1. **Detection of Invalid State:** The system identified the Standby FMS node position as \"FMS node invalid\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3].\n2. **State Transition Execution:** NODE_C initiated a state transition, moving from Master status to Spare status [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3].\n3. **Functional Reassignment:** The functional position was maintained at the First Officer station, but the node's authority was reduced to Spare [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 13 | UUID: 00eb25e0-6f42-4051-a9ef-f42cf2d370d3].",
@@ -125322,7 +125322,7 @@
     "end_time": "2032-06-18T13:46:49",
     "start_clock": "13:46:49",
     "end_clock": "13:46:49",
-    "duration_sec": 1,
+    "duration_sec": 0,
     "nodes": [
       "NODE_A"
     ],
@@ -125375,7 +125375,7 @@
     ],
     "event_count": 10,
     "raw_occurrences": 12,
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "executive_summary": "NODE_C experienced a rapid and continuous state oscillation, repeatedly attempting to transition from Master to Spare status over a 17-second window. This instability was driven by intermittent and fluctuating health telemetry from the opposite Flight Management System (FMS) node, preventing the establishment of a stable dual-mode operational state.",
     "root_cause": "The primary trigger for this incident is the intermittent health status of the \"Opposite fms\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 15 | UUID: 7015efeb-89b6-4154-913b-c52e7eb6cae0]. \n\nThe failure mechanism is identified as **State Flapping (Chatter)**. The system's logic for maintaining Master/Spare roles is reacting to a rapidly oscillating health signal from the peer node, which fluctuated between \"Unstable\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 17 | UUID: 3956c742-ae44-4b4c-92ae-37e648fa002a], \"Not ok\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 2efb12b0-74de-47b8-9277-c47d76baa428], and \"Ok\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 20 | UUID: 4ee44762-2d45-40d0-8768-cc0ac1f982aa]. This prevents NODE_C from maintaining a consistent functional state.",
     "cascade_sequence": "1. **Initial Instability [13:59:52]:** NODE_C initiates a transition to Spare status due to the opposite FMS reporting an \"Unstable\" condition [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 15 | UUID: 7015efeb-89b6-4154-913b-c52e7eb6cae0].\n2. **Brief Stabilization Attempt [13:59:54]:** The opposite FMS reports \"Ok\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 16 | UUID: 1b5ac5bc-dfb6-434d-9a0b-fdf216d35240], but NODE_C continues to log transition attempts to Spare.\n3. **Critical Degradation [14:00:00]:** The opposite FMS status drops to \"Not ok\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 18 | UUID: 2efb12b0-74de-47b8-9277-c47d76baa428], exacerbating the transition loop.\n4. **Rapid Oscillation Cycle [14:00:01 - 14:00:09]:** The system enters a high-frequency chatter state, cycling through \"Ok\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 24 | UUID: 8e5aa36f-528f-44c1-9a4a-6d0609786bfd], \"Unstable\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 25 | UUID: 1ffe849e-007c-4474-b7f9-b3a144c832f8], and \"Ok\" [Source: NODE_C_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 26 | UUID: 0cfb9343-e349-4320-9fe9-1e1a139be4c1] statuses in rapid succession.",
@@ -125638,7 +125638,7 @@
     ],
     "event_count": 6,
     "raw_occurrences": 6,
-    "severity": "HIGH",
+    "severity": "WARNING",
     "executive_summary": "NODE_A experienced a rapid oscillation in the health status of the opposite Flight Management System (FMS) while maintaining its role as the Master node. While the system successfully remained in \"Dual mode,\" the intermittent \"Unstable\" status of the opposite FMS indicates a potential communication or hardware integrity issue within the redundancy monitoring loop.",
     "root_cause": "The primary trigger is an intermittent signal or data integrity failure regarding the \"Opposite fms ok\" status parameter. The failure mechanism is characterized by a rapid state oscillation between \"Ok\" and \"Unstable\" [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 55 | UUID: 5fd9005d-5f60-450c-ab73-1ac4cd3927be]. This oscillation suggests that the monitoring logic is receiving inconsistent health telemetry from the secondary FMS node, preventing a stable redundancy state.",
     "cascade_sequence": "1. **[13:59:58]** Initial detection of \"Unstable\" status for the opposite FMS while NODE_A maintained Master status and Dual mode [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 55 | UUID: 5fd9005d-5f60-450c-ab73-1ac4cd3927be].\n2. **[13:59:59]** Status recovered to \"Ok\" for the opposite FMS [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 56 | UUID: 48b283bd-8d3c-4b1e-866f-c21318c795ad].\n3. **[14:00:00]** Status reverted to \"Unstable\" [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 57 | UUID: 1d4ab224-7159-47c1-a61a-abe9c606f8c1].\n4. **[14:00:01]** Status recovered to \"Ok\" [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 58 | UUID: 7a0c0bd6-a4f6-4ed6-9632-a817d1804c50].\n5. **[14:00:03]** Status reverted to \"Unstable\" [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 59 | UUID: 0675268f-03a4-4fff-a2e0-8c53a13a5f15].\n6. **[14:00:04]** Status returned to \"Ok\" [Source: NODE_A_State_Transition_Buffer_Log_6_Custom_Log_Decoded_Report.html | Seq: 60 | UUID: 343ed644-f5ad-4336-825d-c22b5373d6e5].",

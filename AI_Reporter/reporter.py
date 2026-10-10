@@ -174,8 +174,9 @@ def _write_deterministic_fallback(raw_content: str, output_path: str):
         print(f"Fallback generation error: {ex}", flush=True)
 
 def main():
-    input_dir = r"d:\TRACE\Timeline\transcripts"
-    output_dir = r"d:\TRACE\AI_Reporter\final_reports"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    input_dir = os.path.join(base_dir, "Timeline", "transcripts")
+    output_dir = os.path.join(base_dir, "AI_Reporter", "final_reports")
     
     os.makedirs(output_dir, exist_ok=True)
     

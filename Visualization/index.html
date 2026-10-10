@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRACE — Avionics Black Box Forensic Tape &amp; Infinite Zoom Storyboard</title>
+  <title>TRACE — Timeline Reconstruction and Correlation Engine | Honeywell Avionics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
     <div class="brand-zone">
       <div class="pulse-beacon"></div>
       <div class="brand-titles">
-        <h1 class="brand-name">TRACE <span class="edition-pill">BLACK BOX STORYBOARD</span></h1>
-        <p class="brand-caption">Flight Day 2032-06-18 • 124 Multi-Node Distributed Incident Records</p>
+        <h1 class="brand-name">TRACE <span class="edition-pill">HONEYWELL AVIONICS</span></h1>
+        <p class="brand-caption"><strong class="brand-acronym-expansion">Timeline Reconstruction &amp; Correlation Engine</strong> • 124 Multi-Node Distributed Incident Records</p>
       </div>
     </div>
 
@@ -50,8 +50,9 @@
       <div class="filter-pills">
         <button class="filter-chip active" data-filter="all">ALL (124)</button>
         <button class="filter-chip chip-crit" data-filter="CRITICAL">CRITICAL (72)</button>
+        <button class="filter-chip chip-high" data-filter="HIGH">HIGH (36)</button>
         <button class="filter-chip chip-warn" data-filter="WARNING">WARNING (6)</button>
-        <button class="filter-chip chip-rout" data-filter="ROUTINE">ROUTINE (46)</button>
+        <button class="filter-chip chip-info" data-filter="INFORMATIONAL">INFO (10)</button>
       </div>
     </div>
   </header>
@@ -126,9 +127,9 @@
             <span class="alt-step-marker">10,000 FT</span>
             <span class="alt-step-desc">TRANSITION ALTITUDE</span>
           </div>
-          <div class="alt-step" style="bottom: 8%;">
+          <div class="alt-step alt-step-0ft">
             <span class="alt-step-marker">0 FT</span>
-            <span class="alt-step-desc">SEA LEVEL • RUNWAYS 09L / 27R</span>
+            <span class="alt-step-desc">SEA LEVEL</span>
           </div>
         </div>
 
@@ -185,13 +186,13 @@
         <!-- INTERACTIVE SVG TRAJECTORY & INCIDENT BEACONS -->
         <svg class="flight-trajectory-svg" id="flight-trajectory-svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 2000 600">
           <defs>
-            <!-- Glowing Trajectory Gradient -->
+            <!-- Deep Aerospace Trajectory Ribbon Gradient (High Contrast on Light Sky) -->
             <linearGradient id="traj-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
-              <stop offset="15%" stop-color="#00f5d4" stop-opacity="0.95" />
-              <stop offset="50%" stop-color="#38bdf8" stop-opacity="1" />
-              <stop offset="85%" stop-color="#818cf8" stop-opacity="0.95" />
-              <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.9" />
+              <stop offset="0%" stop-color="#1e3a8a" stop-opacity="1" />
+              <stop offset="15%" stop-color="#1d4ed8" stop-opacity="1" />
+              <stop offset="50%" stop-color="#2563eb" stop-opacity="1" />
+              <stop offset="85%" stop-color="#1d4ed8" stop-opacity="1" />
+              <stop offset="100%" stop-color="#1e3a8a" stop-opacity="1" />
             </linearGradient>
 
             <!-- Altitude Horizon Guides Pattern -->
@@ -207,8 +208,22 @@
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
+            <filter id="glow-high" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
             <filter id="glow-warn" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-info" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4.5" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -572,6 +587,9 @@
       </div>
     </div>
   </div>
+
+  <!-- COCKPIT TOAST NOTIFICATION -->
+  <div id="cockpit-toast" class="cockpit-toast" aria-live="polite"></div>
 
   <!-- LOAD COMPILED DATASET -->
   <script src="viz_data.js"></script>

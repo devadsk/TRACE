@@ -34,8 +34,9 @@ def get_parser(filename: str):
     return None
 
 def main():
-    node_dir = r"d:\TRACE\NODE"
-    output_dir = r"d:\TRACE\Ingestion"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    node_dir = os.path.join(base_dir, "NODE")
+    output_dir = os.path.join(base_dir, "Ingestion")
     output_file = os.path.join(output_dir, "normalized_events.jsonl")
     skipped_file = os.path.join(output_dir, "skipped_records.jsonl")
     

@@ -142,8 +142,9 @@ class Correlator:
         return clusters
 
 def run_correlation():
-    input_file = r"d:\TRACE\Ingestion\normalized_events.jsonl"
-    output_file = r"d:\TRACE\Correlation\correlated_clusters.json"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    input_file = os.path.join(base_dir, "Ingestion", "normalized_events.jsonl")
+    output_file = os.path.join(base_dir, "Correlation", "correlated_clusters.json")
     
     if not os.path.exists(input_file):
         print(f"Error: Input file {input_file} not found.")
@@ -176,12 +177,11 @@ def run_correlation():
     
     print(f"Successfully collapsed events into {len(clusters)} distinct incident clusters.")
     
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(clusters, f, indent=2)
         
     print(f"Output saved to {output_file}")
 
 if __name__ == "__main__":
-    # Create Correlation directory if it doesn't exist (though it should be the CWD)
-    os.makedirs(r"d:\TRACE\Correlation", exist_ok=True)
     run_correlation()

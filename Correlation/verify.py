@@ -1,7 +1,9 @@
+import os
 import json
 
 def verify_clusters():
-    filepath = r"d:\TRACE\Correlation\correlated_clusters.json"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filepath = os.path.join(base_dir, "Correlation", "correlated_clusters.json")
     
     with open(filepath, 'r', encoding='utf-8') as f:
         clusters = json.load(f)

@@ -1,5 +1,5 @@
 /* ==============================================================================
-   TRACE — AVIONICS FLIGHT PROFILE FORENSIC VISUALIZATION (CORE ENGINE)
+   TRACE — TIMELINE RECONSTRUCTION AND CORRELATION ENGINE (HONEYWELL AVIONICS)
    Visual Flight Trajectory (Runway ➔ Climb ➔ Cruise FL380 ➔ Descent ➔ Touchdown)
    3-Tier Semantic Zoom: Flight Trajectory ➔ Forensic Narration ➔ Raw Telemetry
    ============================================================================== */
@@ -142,8 +142,21 @@
     modalMarkdownContainer: document.getElementById('modal-markdown-container'),
     btnModalClose: document.getElementById('btn-modal-close'),
     btnModalDismiss: document.getElementById('btn-modal-dismiss'),
-    btnCopyFullMarkdown: document.getElementById('btn-copy-full-markdown')
+    btnCopyFullMarkdown: document.getElementById('btn-copy-full-markdown'),
+
+    // Toast
+    toast: document.getElementById('cockpit-toast')
   };
+
+  function showToast(msg) {
+    if (!dom.toast) return;
+    dom.toast.textContent = msg;
+    dom.toast.classList.add('show');
+    clearTimeout(dom.toast._timer);
+    dom.toast._timer = setTimeout(() => {
+      dom.toast.classList.remove('show');
+    }, 2200);
+  }
 
   // --------------------------------------------------------------------------
   // 1. FLIGHT MATHEMATICS & TRAJECTORY PROFILE CALCULATIONS
@@ -301,6 +314,9 @@
     dom.dotsGroup.innerHTML = '';
 
     state.incidents.forEach((inc) => {
+      inc._dotX = inc._x;
+      inc._dotY = inc._y;
+
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       const sevClass = inc.severity.toLowerCase();
       g.setAttribute('class', `incident-dot-group ${sevClass}`);
@@ -310,52 +326,97 @@
       const x = inc._x;
       const y = inc._y;
 
-      // Vertical stem / anchor line
-      const stem = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      stem.setAttribute('x1', x);
-      stem.setAttribute('y1', y);
-      stem.setAttribute('x2', x);
-      stem.setAttribute('y2', y - 18);
-      stem.setAttribute('stroke', 'rgba(255, 255, 255, 0.25)');
-      stem.setAttribute('stroke-width', '1');
-      stem.setAttribute('stroke-dasharray', '2,2');
-      stem.setAttribute('vector-effect', 'non-scaling-stroke');
+      // Generous invisible hit target to ensure effortless hovering and clicking at all zoom levels
+      const hitTarget = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      hitTarget.setAttribute('cx', x);
+      hitTarget.setAttribute('cy', y);
+      hitTarget.setAttribute('r', '16');
+      hitTarget.setAttribute('fill', 'transparent');
+      hitTarget.setAttribute('class', 'incident-hit-target');
 
-      // Outer pulsing beacon halo
+      // Outer pulsing beacon halo directly on the flight trajectory path
       const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       halo.setAttribute('cx', x);
       halo.setAttribute('cy', y);
-      halo.setAttribute('r', '10');
+      halo.setAttribute('r', '8.5');
       halo.setAttribute('class', 'incident-beacon-halo');
       halo.setAttribute('fill', 'none');
-      halo.setAttribute('stroke', inc.severity === 'CRITICAL' ? '#f43f5e' : (inc.severity === 'WARNING' ? '#f59e0b' : '#38bdf8'));
-      halo.setAttribute('stroke-width', '2');
+      let haloColor = '#0284c7';
+      if (inc.severity === 'CRITICAL') haloColor = '#e11900'; // Honeywell Red
+      else if (inc.severity === 'HIGH') haloColor = '#ea580c'; // Aerospace Orange
+      else if (inc.severity === 'WARNING') haloColor = '#d97706'; // Amber
+      halo.setAttribute('stroke', haloColor);
+      halo.setAttribute('stroke-width', '1.8');
       halo.setAttribute('vector-effect', 'non-scaling-stroke');
 
-      // Inner solid beacon dot
+      // Inner solid beacon dot directly on the line
       const core = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       core.setAttribute('cx', x);
       core.setAttribute('cy', y);
-      core.setAttribute('r', '5.5');
+      core.setAttribute('r', '4.8');
       core.setAttribute('class', 'incident-beacon-core');
       core.setAttribute('vector-effect', 'non-scaling-stroke');
 
-      // Micro index label tag (revealed on hover/selection)
+      // Micro index label tag (floats right above dot on hover/selection or zoom)
       const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       label.setAttribute('x', x);
-      label.setAttribute('y', y - 22);
+      label.setAttribute('y', y - 11);
       label.setAttribute('class', 'incident-dot-label');
       label.textContent = `#${String(inc.index).padStart(3, '0')}`;
 
-      g.appendChild(stem);
+      // Assemble elements: hitTarget is first so it catches all pointer events
+      g.appendChild(hitTarget);
       g.appendChild(halo);
       g.appendChild(core);
       g.appendChild(label);
+
+      // Direct interactive event listeners for 100% reliable hover and clicks at all zoom levels
+      g.addEventListener('mouseenter', (e) => {
+        // If we just finished a pan and landed on a dot, clear drag state so hover shows
+        if (camera.isDragging && !camera.hasDragged) {
+          camera.isDragging = false;
+          if (dom.flightCanvasViewport) dom.flightCanvasViewport.style.cursor = 'pointer';
+        }
+        if (camera.isDragging) return; // still genuinely panning — skip
+        camera.hasDragged = false; // ensure a clean click state
+        highlightIncidentDot(inc);
+        showIncidentHoverHud(inc);
+      });
+
+      g.addEventListener('mouseleave', () => {
+        if (camera.isDragging) return;
+        unhighlightIncidentDot(inc);
+        hideIncidentHoverHud();
+      });
+
+      g.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Unconditionally reset drag state — this is a definitive click on a dot
+        camera.isDragging = false;
+        camera.hasDragged = false;
+        if (dom.flightCanvasViewport) dom.flightCanvasViewport.style.cursor = 'pointer';
+        selectAndZoomToIncident(inc);
+      });
 
       dom.dotsGroup.appendChild(g);
     });
 
     updateIncidentFilters();
+    adaptBeaconsToZoom();
+  }
+
+  function highlightIncidentDot(inc) {
+    if (!inc) return;
+    const prev = dom.dotsGroup.querySelectorAll('.incident-dot-group.hovered');
+    prev.forEach(p => p.classList.remove('hovered'));
+    const el = dom.dotsGroup.querySelector(`[data-index="${inc.index}"]`);
+    if (el) el.classList.add('hovered');
+  }
+
+  function unhighlightIncidentDot(inc) {
+    if (!inc) return;
+    const el = dom.dotsGroup.querySelector(`[data-index="${inc.index}"]`);
+    if (el) el.classList.remove('hovered');
   }
 
   // --------------------------------------------------------------------------
@@ -377,15 +438,24 @@
     if (triggerText.includes('.')) triggerText = triggerText.split('.')[0] + '.';
     dom.hudTipTrigger.textContent = triggerText.replace(/\[Source:[^\]]+\]/g, '').trim();
 
-    // Position tooltip precisely using SVG transformation matrix (Zero Layout Thrashing)
+    // Position tooltip precisely using real screen bounding box of the dot
     try {
-      const pt = dom.flightSvg.createSVGPoint();
-      pt.x = inc._x;
-      pt.y = inc._y;
-      const screenPt = pt.matrixTransform(dom.flightSvg.getScreenCTM());
+      const el = dom.dotsGroup.querySelector(`[data-index="${inc.index}"]`);
       const viewRect = dom.flightCanvasViewport.getBoundingClientRect();
-      const left = screenPt.x - viewRect.left;
-      const top = screenPt.y - viewRect.top;
+      let left, top;
+
+      if (el) {
+        const dotRect = el.getBoundingClientRect();
+        left = (dotRect.left + dotRect.width / 2) - viewRect.left;
+        top = (dotRect.top + dotRect.height / 2) - viewRect.top;
+      } else {
+        const pt = dom.flightSvg.createSVGPoint();
+        pt.x = inc._dotX || inc._x;
+        pt.y = inc._dotY || inc._y;
+        const screenPt = pt.matrixTransform(dom.flightSvg.getScreenCTM());
+        left = screenPt.x - viewRect.left;
+        top = screenPt.y - viewRect.top;
+      }
 
       // Keep tooltip horizontally clamped inside viewport bounds
       const clampedLeft = Math.max(165, Math.min(viewRect.width - 165, left));
@@ -443,8 +513,9 @@
     const angle = getTrajectoryTangentAngle(state.currentFlightTime);
     const phase = getFlightPhase(state.currentFlightTime, alt);
 
-    // Move SVG aircraft group with dynamic pitch rotation
-    dom.aircraftGroup.setAttribute('transform', `translate(${x.toFixed(1)}, ${y.toFixed(1)}) rotate(${angle.toFixed(1)})`);
+    // Move SVG aircraft group with dynamic pitch rotation and zoom scale compensation
+    const planeScale = Math.max(0.4, 1 / Math.pow(camera.zoom, 0.35)).toFixed(2);
+    dom.aircraftGroup.setAttribute('transform', `translate(${x.toFixed(1)}, ${y.toFixed(1)}) rotate(${angle.toFixed(1)}) scale(${planeScale})`);
 
     // Update Head-Up Display Telemetry Gauges
     dom.hudClock.textContent = secondsToClockString(state.currentFlightTime);
@@ -456,6 +527,19 @@
     const pct = (state.currentFlightTime / MISSION_END_SEC) * 100;
     dom.scrubberFill.style.width = `${pct}%`;
     dom.scrubberHandle.style.left = `${pct}%`;
+
+    // Update dynamic traveled contrail line following aircraft
+    if (dom.trajTraveled) {
+      const stepCount = Math.max(1, Math.min(300, Math.floor((state.currentFlightTime / MISSION_END_SEC) * 300)));
+      let dTravel = '';
+      for (let i = 0; i <= stepCount; i++) {
+        const tStep = (i / 300) * state.currentFlightTime;
+        const tx = getXForTime(tStep);
+        const ty = getAltitudeAndYForTime(tStep).y;
+        dTravel += (i === 0 ? `M ${tx.toFixed(1)},${ty.toFixed(1)}` : ` L ${tx.toFixed(1)},${ty.toFixed(1)}`);
+      }
+      dom.trajTraveled.setAttribute('d', dTravel);
+    }
 
     // Highlight nearest incident dot on trajectory
     highlightNearestIncidentDot(state.currentFlightTime);
@@ -866,7 +950,14 @@
       if (!inc) return;
 
       // Severity check
-      const matchesSev = (state.filterSeverity === 'all' || inc.severity === state.filterSeverity);
+      let matchesSev = (state.filterSeverity === 'all');
+      if (!matchesSev) {
+        if (state.filterSeverity === 'INFORMATIONAL' || state.filterSeverity === 'ROUTINE') {
+          matchesSev = (inc.severity === 'INFORMATIONAL' || inc.severity === 'ROUTINE');
+        } else {
+          matchesSev = (inc.severity === state.filterSeverity);
+        }
+      }
 
       // Search query check
       let matchesQuery = true;
@@ -894,7 +985,7 @@
   const camera = {
     zoom: 1.0,
     minZoom: 1.0,
-    maxZoom: 8.0,
+    maxZoom: 16.0,
     baseW: 2000,
     baseH: 600,
     viewX: 0,
@@ -917,7 +1008,7 @@
     const newViewW = camera.baseW / clampedZoom;
     const newViewH = camera.baseH / clampedZoom;
 
-    // Anchor zoom around cursor position ratio (maintaining exact 2000:600 aspect ratio)
+    // Anchor zoom around cursor position ratio
     const currentAnchorX = camera.viewX + prevViewW * mouseRatioX;
     const currentAnchorY = camera.viewY + prevViewH * mouseRatioY;
 
@@ -934,6 +1025,36 @@
     updateCanvasViewBox();
   }
 
+  function adaptBeaconsToZoom() {
+    const z = camera.zoom;
+    const invScale = Math.max(0.35, 1 / Math.sqrt(z));
+    const coreR = (5.0 * invScale).toFixed(2);
+    const haloR = (9.0 * invScale).toFixed(2);
+    const strokeW = Math.max(0.9, 1.8 * invScale).toFixed(2);
+    const stemW = Math.max(0.6, 1 / Math.sqrt(z)).toFixed(2);
+    const labelFontSize = Math.max(8.5, 11 * invScale).toFixed(1);
+
+    const cores = dom.dotsGroup.querySelectorAll('.incident-beacon-core');
+    cores.forEach(c => c.setAttribute('r', coreR));
+
+    const halos = dom.dotsGroup.querySelectorAll('.incident-beacon-halo');
+    halos.forEach(h => {
+      h.setAttribute('r', haloR);
+      h.setAttribute('stroke-width', strokeW);
+    });
+
+    const stems = dom.dotsGroup.querySelectorAll('line');
+    stems.forEach(s => s.setAttribute('stroke-width', stemW));
+
+    const labels = dom.dotsGroup.querySelectorAll('.incident-dot-label');
+    labels.forEach(l => {
+      l.style.fontSize = `${labelFontSize}px`;
+    });
+
+    // When zoomed past 2.0x, auto-reveal labels for convenient scanning
+    dom.dotsGroup.classList.toggle('dots-auto-labels', z >= 2.0);
+  }
+
   function updateCanvasViewBox() {
     const viewW = camera.baseW / camera.zoom;
     const viewH = camera.baseH / camera.zoom;
@@ -941,9 +1062,16 @@
     if (dom.zoomFactorBadge) {
       dom.zoomFactorBadge.textContent = `${camera.zoom.toFixed(1)}x`;
     }
-    if (dom.flightCanvasViewport) {
-      dom.flightCanvasViewport.style.cursor = camera.zoom > 1 ? (camera.isDragging ? 'grabbing' : 'grab') : 'default';
+    // NOTE: cursor is managed exclusively by mousedown/mouseup/mouseenter handlers.
+    // updateCanvasViewBox is called during wheel-zoom where isDragging is unrelated
+    // to cursor state, so we must NOT touch cursor here to avoid grab cursor glitch.
+    if (dom.flightCanvasViewport && !camera.isDragging) {
+      // Only restore to default if we're not actively dragging (avoids cursor flicker)
+      // Do NOT set to 'grabbing' here — that is mousedown's responsibility
     }
+
+    // Dynamically scale dots and labels so they never overlap or bloat
+    adaptBeaconsToZoom();
 
     // Refresh hover tooltip position if visible
     if (state.hoveredIncident && dom.hoverHud && dom.hoverHud.classList.contains('visible')) {
@@ -967,11 +1095,96 @@
     dom.btnGotoL2.addEventListener('click', () => setZoomLevel(2));
     dom.btnGotoL3.addEventListener('click', () => setZoomLevel(3));
 
+    // Zoom Out Back Buttons
+    if (dom.btnBackToL1) dom.btnBackToL1.addEventListener('click', () => setZoomLevel(1));
+    if (dom.btnBackToL2) dom.btnBackToL2.addEventListener('click', () => setZoomLevel(2));
+
+    // Flight Replay Controls
+    if (dom.btnReplayFlight) dom.btnReplayFlight.addEventListener('click', toggleMissionReplay);
+    if (dom.btnResetFlight) dom.btnResetFlight.addEventListener('click', resetFlightMission);
+
+    // Replay Speed Buttons
+    if (dom.speedBtns) {
+      dom.speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          dom.speedBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.replaySpeed = Number(btn.dataset.speed) || 1;
+        });
+      });
+    }
+
+    // Phase Jump Buttons
+    if (dom.phaseJumpBtns) {
+      dom.phaseJumpBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          dom.phaseJumpBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const phase = btn.dataset.phase;
+          if (phase === 'all') {
+            resetCanvasZoom();
+            updateFlightAircraftPosition(0);
+          } else if (phase === 'takeoff') {
+            updateFlightAircraftPosition(0);
+          } else if (phase === 'climb') {
+            updateFlightAircraftPosition(720);
+          } else if (phase === 'cruise') {
+            updateFlightAircraftPosition(4500);
+          } else if (phase === 'descent') {
+            updateFlightAircraftPosition(13500);
+          }
+        });
+      });
+    }
+
+    // Interactive Mission Timeline Scrubber
+    if (dom.scrubberBar) {
+      let isScrubbing = false;
+      const handleScrubberSeek = (clientX) => {
+        const rect = dom.scrubberBar.getBoundingClientRect();
+        if (rect.width <= 0) return;
+        const fraction = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        const targetSec = fraction * MISSION_END_SEC;
+        updateFlightAircraftPosition(targetSec);
+      };
+
+      dom.scrubberBar.addEventListener('mousedown', (e) => {
+        isScrubbing = true;
+        handleScrubberSeek(e.clientX);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (isScrubbing) handleScrubberSeek(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isScrubbing) isScrubbing = false;
+      });
+    }
+
+    // Delegated click for copyable forensic citation tags
+    document.addEventListener('click', (e) => {
+      const tag = e.target.closest('.forensic-citation-tag');
+      if (tag) {
+        const citation = tag.dataset.citation || tag.textContent.trim();
+        navigator.clipboard.writeText(citation).then(() => {
+          showToast('✓ Forensic Citation copied to clipboard');
+        });
+      }
+    });
+
     // Canvas Zoom Controls (Buttons, Wheel, Pan)
     if (dom.btnZoomIn) {
       dom.btnZoomIn.addEventListener('click', (e) => {
         e.stopPropagation();
-        setCanvasZoom(camera.zoom * 1.4, 0.5, 0.5);
+        let anchorX = 0.5, anchorY = 0.5;
+        if (camera.zoom <= 1.05) {
+          const planeX = getXForTime(state.currentFlightTime);
+          const planeY = getAltitudeAndYForTime(state.currentFlightTime).y;
+          anchorX = Math.max(0.08, Math.min(0.92, planeX / camera.baseW));
+          anchorY = Math.max(0.08, Math.min(0.92, planeY / camera.baseH));
+        }
+        setCanvasZoom(camera.zoom * 1.4, anchorX, anchorY);
       });
     }
     if (dom.btnZoomOut) {
@@ -999,7 +1212,9 @@
 
     // Canvas Mousedown for Panning
     dom.flightCanvasViewport.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
       if (e.target.closest('.canvas-zoom-toolbar') || e.target.closest('#incident-hover-hud')) return;
+      if (e.target.closest('.incident-dot-group')) return;
 
       camera.isDragging = true;
       camera.hasDragged = false;
@@ -1012,12 +1227,30 @@
       }
     });
 
+    // Global Mouseup Handler: Ensures dragging is ALWAYS released and cursor restored
+    window.addEventListener('mouseup', (e) => {
+      if (camera.isDragging) {
+        // Only compute hasDragged from distance when a real drag was started
+        const dist = Math.hypot(e.clientX - camera.dragStartX, e.clientY - camera.dragStartY);
+        if (dist < 8) {
+          camera.hasDragged = false;
+        }
+        camera.isDragging = false;
+        if (dom.flightCanvasViewport) {
+          dom.flightCanvasViewport.style.cursor = 'default';
+        }
+      } else {
+        // Not a canvas drag — always safe to clear hasDragged on global mouseup
+        camera.hasDragged = false;
+      }
+    });
+
     // High-Precision Proximity Hover Engine (ZERO JITTER / ZERO FLICKER)
     dom.flightCanvasViewport.addEventListener('mousemove', (e) => {
       if (camera.isDragging) {
         const dx = e.clientX - camera.dragStartX;
         const dy = e.clientY - camera.dragStartY;
-        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        if (Math.hypot(dx, dy) > 8) {
           camera.hasDragged = true;
         }
         if (camera.zoom > 1.0) {
@@ -1052,8 +1285,10 @@
 
         for (let i = 0; i < state.incidents.length; i++) {
           const inc = state.incidents[i];
-          const dx = inc._x - svgP.x;
-          const dy = inc._y - svgP.y;
+          const dotX = inc._dotX || inc._x;
+          const dotY = inc._dotY || inc._y;
+          const dx = dotX - svgP.x;
+          const dy = dotY - svgP.y;
           const distSq = dx * dx + dy * dy;
           if (distSq < minDistanceSq) {
             minDistanceSq = distSq;
@@ -1063,8 +1298,10 @@
 
         // Hysteresis threshold: only switch target if clearly closer (eliminates flicker)
         if (state.hoveredIncident && closestInc && state.hoveredIncident !== closestInc) {
-          const curDx = state.hoveredIncident._x - svgP.x;
-          const curDy = state.hoveredIncident._y - svgP.y;
+          const hDotX = state.hoveredIncident._dotX || state.hoveredIncident._x;
+          const hDotY = state.hoveredIncident._dotY || state.hoveredIncident._y;
+          const curDx = hDotX - svgP.x;
+          const curDy = hDotY - svgP.y;
           const curDistSq = curDx * curDx + curDy * curDy;
           if (minDistanceSq > curDistSq * 0.65) {
             closestInc = state.hoveredIncident;
@@ -1074,20 +1311,15 @@
 
         if (closestInc && minDistanceSq <= snapRadiusSq) {
           if (state.hoveredIncident !== closestInc) {
-            const prevEl = dom.dotsGroup.querySelector('.incident-dot-group.hovered');
-            if (prevEl) prevEl.classList.remove('hovered');
-
-            const el = dom.dotsGroup.querySelector(`[data-index="${closestInc.index}"]`);
-            if (el) el.classList.add('hovered');
-
+            highlightIncidentDot(closestInc);
             showIncidentHoverHud(closestInc);
           }
           dom.flightCanvasViewport.style.cursor = 'pointer';
-        } else {
+        } else if (!e.target.closest('.incident-dot-group')) {
           if (state.hoveredIncident) {
             hideIncidentHoverHud();
           }
-          dom.flightCanvasViewport.style.cursor = camera.zoom > 1.0 ? 'grab' : 'default';
+          dom.flightCanvasViewport.style.cursor = 'default';
         }
       } catch (err) {
         // Fallback safely
@@ -1098,7 +1330,7 @@
       hideIncidentHoverHud();
       if (camera.isDragging) {
         camera.isDragging = false;
-        dom.flightCanvasViewport.style.cursor = camera.zoom > 1.0 ? 'grab' : 'default';
+        dom.flightCanvasViewport.style.cursor = 'default';
       }
     });
 
@@ -1130,6 +1362,9 @@
         if (prev) {
           state.selectedIncident = prev;
           state.selectedEventIndex = 0;
+          updateFlightAircraftPosition(prev._missionSec);
+          const dots = dom.dotsGroup.querySelectorAll('.incident-dot-group');
+          dots.forEach(d => d.classList.toggle('selected-active', Number(d.dataset.index) === prev.index));
           populateNarrationDeck();
         }
       }
@@ -1143,6 +1378,9 @@
         if (next) {
           state.selectedIncident = next;
           state.selectedEventIndex = 0;
+          updateFlightAircraftPosition(next._missionSec);
+          const dots = dom.dotsGroup.querySelectorAll('.incident-dot-group');
+          dots.forEach(d => d.classList.toggle('selected-active', Number(d.dataset.index) === next.index));
           populateNarrationDeck();
         }
       }
@@ -1183,6 +1421,7 @@
       dom.dossierBtnCopyCitation.addEventListener('click', () => {
         const text = dom.dossierCitationTag?.dataset?.rawCitation || dom.dossierCitationTag?.textContent || '';
         navigator.clipboard.writeText(text).then(() => {
+          showToast('✓ Forensic Citation copied to clipboard');
           dom.dossierBtnCopyCitation.textContent = '✓ COPIED';
           setTimeout(() => dom.dossierBtnCopyCitation.textContent = '📋 COPY VERIFIABLE CITATION', 1800);
         });
@@ -1202,6 +1441,7 @@
     dom.btnCopyFullMarkdown.addEventListener('click', () => {
       if (state.selectedIncident && state.selectedIncident.full_markdown) {
         navigator.clipboard.writeText(state.selectedIncident.full_markdown).then(() => {
+          showToast('✓ Full Investigation Report copied to clipboard');
           dom.btnCopyFullMarkdown.textContent = '✓ COPIED!';
           setTimeout(() => dom.btnCopyFullMarkdown.textContent = 'COPY MARKDOWN', 2000);
         });
@@ -1228,6 +1468,7 @@
     dom.btnCopyCitation.addEventListener('click', () => {
       const text = dom.termCitationTag.dataset.rawCitation || dom.termCitationTag.textContent;
       navigator.clipboard.writeText(text).then(() => {
+        showToast('✓ Forensic Citation copied to clipboard');
         dom.btnCopyCitation.textContent = '✓ COPIED';
         setTimeout(() => dom.btnCopyCitation.textContent = 'COPY CITATION', 1800);
       });

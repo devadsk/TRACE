@@ -78,8 +78,9 @@ def compile_cluster_to_markdown(cluster: dict, output_dir: str):
         f.write("\n".join(md_content))
 
 def main():
-    input_file = r"d:\TRACE\Correlation\correlated_clusters.json"
-    output_dir = r"d:\TRACE\Timeline\transcripts"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    input_file = os.path.join(base_dir, "Correlation", "correlated_clusters.json")
+    output_dir = os.path.join(base_dir, "Timeline", "transcripts")
     
     os.makedirs(output_dir, exist_ok=True)
     
@@ -98,6 +99,4 @@ def main():
     print(f"Success! {len(clusters)} Markdown files written to {output_dir}")
 
 if __name__ == "__main__":
-    # Ensure base directory exists
-    os.makedirs(r"d:\TRACE\Timeline", exist_ok=True)
     main()

@@ -1,35 +1,50 @@
 /* ==============================================================================
-   TRACE — BLACK BOX FLIGHT TAPE & INFINITE ZOOM STORYBOARD (STYLESHEET)
-   Zero-Plot / Pure Interactive Storyboard Aesthetic
+   TRACE — TIMELINE RECONSTRUCTION AND CORRELATION ENGINE (HONEYWELL AVIONICS)
+   Honeywell Aerospace High-Precision Light Theme (White / Honeywell Red / Cobalt)
    ============================================================================== */
 
 :root {
-  --bg-space: #070a11;
-  --bg-surface: #0d121f;
-  --bg-panel: rgba(18, 24, 38, 0.85);
-  --bg-card: rgba(22, 30, 48, 0.7);
-  --bg-card-hover: rgba(30, 42, 68, 0.95);
-  
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --border-focus: #38bdf8;
-  --border-glow-cyan: 0 0 25px rgba(56, 189, 248, 0.25);
-  
-  --cyan: #38bdf8;
-  --cyan-dim: rgba(56, 189, 248, 0.15);
-  --blue: #3b82f6;
-  --purple: #a855f7;
-  --purple-dim: rgba(168, 85, 247, 0.15);
-  --critical: #f43f5e;
-  --critical-dim: rgba(244, 63, 94, 0.18);
-  --warning: #f59e0b;
-  --warning-dim: rgba(245, 158, 11, 0.18);
-  --routine: #10b981;
-  --routine-dim: rgba(16, 185, 129, 0.18);
+  /* Honeywell Core Aerospace Palette */
+  --honeywell-red: #e11900;
+  --honeywell-red-dark: #b91500;
+  --honeywell-red-dim: rgba(225, 25, 0, 0.08);
+  --honeywell-red-border: rgba(225, 25, 0, 0.28);
+  --honeywell-red-glow: 0 0 16px rgba(225, 25, 0, 0.35);
 
-  --text-bright: #ffffff;
-  --text-main: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
+  /* Light Theme Surfaces */
+  --bg-space: #f1f5f9;              /* Slate 100 backdrop */
+  --bg-surface: #ffffff;            /* Pure white primary surface */
+  --bg-panel: #ffffff;              /* Crisp white panel */
+  --bg-card: #ffffff;               /* Crisp card */
+  --bg-card-hover: #f8fafc;         /* Soft hover highlight */
+  
+  --border-glass: #e2e8f0;          /* Subtle Slate 200 border */
+  --border-focus: var(--honeywell-red);
+  --border-glow-cyan: 0 0 0 3px rgba(225, 25, 0, 0.15);
+  
+  /* Status & Severity Accents (Honeywell Aerospace Standard) */
+  --critical: #e11900;              /* Honeywell Red */
+  --critical-dim: rgba(225, 25, 0, 0.1);
+  --high: #ea580c;                  /* Aerospace Orange 600 */
+  --high-dim: rgba(234, 88, 12, 0.1);
+  --warning: #d97706;               /* Amber 600 */
+  --warning-dim: rgba(217, 119, 6, 0.1);
+  --info: #0284c7;                  /* Sky Blue 600 */
+  --info-dim: rgba(2, 132, 199, 0.1);
+  --routine: #059669;               /* Emerald 600 */
+  --routine-dim: rgba(5, 150, 105, 0.1);
+
+  --blue: #1d4ed8;                  /* Cobalt Blue 700 */
+  --cyan: #0284c7;                  /* Aviation Link Cyan */
+  --cyan-dim: rgba(2, 132, 199, 0.1);
+  --purple: #7c3aed;                /* Violet 600 */
+  --purple-dim: rgba(124, 58, 237, 0.1);
+
+  /* Typography Colors (High Contrast on White) */
+  --text-bright: #0f172a;           /* Slate 900 */
+  --text-main: #1e293b;             /* Slate 800 */
+  --text-muted: #475569;            /* Slate 600 */
+  --text-dim: #64748b;              /* Slate 500 */
 
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -37,7 +52,12 @@
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-lg: 16px;
+
+  /* Crisp Aerospace Elevations */
+  --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-elevated: 0 10px 28px rgba(15, 23, 42, 0.09), 0 2px 6px rgba(15, 23, 42, 0.05);
+  --shadow-hud: 0 12px 35px rgba(15, 23, 42, 0.14), 0 0 20px rgba(225, 25, 0, 0.12);
 }
 
 * {
@@ -49,9 +69,9 @@
 body.avionics-storyboard {
   background-color: var(--bg-space);
   background-image: 
-    radial-gradient(ellipse at 15% 10%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 90%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
-    linear-gradient(to bottom, rgba(13, 18, 31, 0.8), rgba(7, 10, 17, 0.98));
+    radial-gradient(ellipse at 15% 10%, rgba(225, 25, 0, 0.025) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 90%, rgba(29, 78, 216, 0.03) 0%, transparent 50%),
+    linear-gradient(to bottom, #f8fafc, #f1f5f9);
   color: var(--text-main);
   font-family: var(--font-sans);
   height: 100vh;
@@ -62,11 +82,10 @@ body.avionics-storyboard {
 }
 
 /* --------------------------------------------------------------------------
-   1. TOP COCKPIT BAR & SEMANTIC ZOOM STEPPER
+   1. TOP COCKPIT BAR & SEMANTIC ZOOM STEPPER (HONEYWELL BRANDED)
    -------------------------------------------------------------------------- */
 .cockpit-bar {
-  background: rgba(13, 18, 31, 0.92);
-  backdrop-filter: blur(16px);
+  background: #ffffff;
   border-bottom: 1px solid var(--border-glass);
   padding: 10px 24px;
   display: flex;
@@ -75,6 +94,7 @@ body.avionics-storyboard {
   gap: 20px;
   z-index: 100;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .brand-zone {
@@ -84,24 +104,31 @@ body.avionics-storyboard {
 }
 
 .pulse-beacon {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 12px var(--cyan);
+  background: var(--honeywell-red);
+  box-shadow: 0 0 10px var(--honeywell-red);
   animation: beacon-pulse 2s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes beacon-pulse {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 20px var(--cyan); }
-  100% { transform: scale(0.9); opacity: 0.8; }
+  0% { transform: scale(0.92); opacity: 0.85; }
+  50% { transform: scale(1.18); opacity: 1; box-shadow: 0 0 16px var(--honeywell-red); }
+  100% { transform: scale(0.92); opacity: 0.85; }
+}
+
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .brand-name {
   font-size: 1.25rem;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   color: var(--text-bright);
   display: flex;
   align-items: center;
@@ -110,12 +137,13 @@ body.avionics-storyboard {
 
 .edition-pill {
   font-size: 0.65rem;
-  background: var(--cyan-dim);
-  color: var(--cyan);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: var(--honeywell-red-dim);
+  color: var(--honeywell-red);
+  border: 1px solid var(--honeywell-red-border);
   padding: 2px 8px;
   border-radius: 20px;
   letter-spacing: 0.5px;
+  font-weight: 800;
 }
 
 .brand-caption {
@@ -123,12 +151,18 @@ body.avionics-storyboard {
   color: var(--text-muted);
 }
 
+.brand-acronym-expansion {
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.2px;
+}
+
 /* SEMANTIC ZOOM STEPPER (BREADCRUMB) */
 .zoom-stepper {
   display: flex;
   align-items: center;
-  background: rgba(22, 30, 48, 0.7);
-  border: 1px solid var(--border-glass);
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
   padding: 4px 8px;
   border-radius: var(--radius-lg);
   gap: 6px;
@@ -149,22 +183,23 @@ body.avionics-storyboard {
 }
 
 .step-btn:hover {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-bright);
+  background: #ffffff;
 }
 
 .step-btn.active {
-  background: var(--cyan);
-  color: var(--bg-space);
+  background: var(--honeywell-red);
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 2px 10px rgba(225, 25, 0, 0.35);
 }
 
 .step-btn .step-num {
   font-family: var(--font-mono);
   font-weight: 800;
   font-size: 0.75rem;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--text-bright);
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -174,8 +209,8 @@ body.avionics-storyboard {
 }
 
 .step-btn.active .step-num {
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  color: #ffffff;
 }
 
 .step-btn .step-text {
@@ -185,13 +220,13 @@ body.avionics-storyboard {
 
 .step-btn .subtext {
   font-size: 0.65rem;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .step-connector {
   width: 14px;
   height: 2px;
-  background: var(--border-glass);
+  background: #cbd5e1;
 }
 
 /* SEARCH & CHIPS */
@@ -204,18 +239,19 @@ body.avionics-storyboard {
 .omni-search-wrapper {
   display: flex;
   align-items: center;
-  background: rgba(22, 30, 48, 0.8);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   border-radius: 20px;
   padding: 5px 14px;
   width: 280px;
   gap: 8px;
   transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .omni-search-wrapper:focus-within {
-  border-color: var(--cyan);
-  box-shadow: var(--border-glow-cyan);
+  border-color: var(--honeywell-red);
+  box-shadow: 0 0 0 3px rgba(225, 25, 0, 0.12);
   width: 330px;
 }
 
@@ -229,6 +265,10 @@ body.avionics-storyboard {
   outline: none;
 }
 
+.omni-search-wrapper input::placeholder {
+  color: var(--text-dim);
+}
+
 .btn-clear-search {
   background: none;
   border: none;
@@ -237,37 +277,73 @@ body.avionics-storyboard {
   font-size: 0.75rem;
 }
 
+.btn-clear-search:hover {
+  color: var(--honeywell-red);
+}
+
 .filter-pills {
   display: flex;
   gap: 4px;
 }
 
 .filter-chip {
-  background: rgba(22, 30, 48, 0.6);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   color: var(--text-muted);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 10px;
   border-radius: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .filter-chip:hover {
   color: var(--text-bright);
-  background: rgba(30, 42, 68, 0.8);
+  background: #f8fafc;
+  border-color: #94a3b8;
 }
 
 .filter-chip.active {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--cyan);
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
 }
 
-.filter-chip.chip-crit.active { background: var(--critical); border-color: #fda4af; }
-.filter-chip.chip-warn.active { background: var(--warning); border-color: #fde68a; }
-.filter-chip.chip-rout.active { background: var(--routine); border-color: #a7f3d0; }
+.filter-chip.chip-crit.active {
+  background: var(--honeywell-red);
+  color: #ffffff;
+  border-color: var(--honeywell-red);
+  box-shadow: 0 2px 8px rgba(225, 25, 0, 0.35);
+}
+
+.filter-chip.chip-high.active {
+  background: var(--high);
+  color: #ffffff;
+  border-color: var(--high);
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
+}
+
+.filter-chip.chip-warn.active {
+  background: var(--warning);
+  color: #ffffff;
+  border-color: var(--warning);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+}
+
+.filter-chip.chip-info.active {
+  background: var(--info);
+  color: #ffffff;
+  border-color: var(--info);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+}
+
+.filter-chip.chip-rout.active {
+  background: var(--routine);
+  color: #ffffff;
+  border-color: var(--routine);
+}
 
 /* --------------------------------------------------------------------------
    2. MAIN INFINITE ZOOM CANVAS VIEWPORT
@@ -285,11 +361,11 @@ body.avionics-storyboard {
   display: flex;
   flex-direction: column;
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px);
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 18px 24px;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 16px 24px;
 }
 
 .zoom-level.active {
@@ -307,13 +383,13 @@ body.avionics-storyboard {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: rgba(18, 24, 38, 0.85);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   padding: 10px 18px;
   margin-bottom: 12px;
   flex-shrink: 0;
-  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
 }
 
 .hud-left-group {
@@ -344,17 +420,16 @@ body.avionics-storyboard {
 }
 
 .hud-gauge-val.cyan-glow {
-  color: var(--cyan);
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  color: var(--honeywell-red);
 }
 
 .hud-gauge-val.phase-pill {
   font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 800;
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--cyan);
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: var(--honeywell-red-dim);
+  color: var(--honeywell-red);
+  border: 1px solid var(--honeywell-red-border);
   padding: 2px 8px;
   border-radius: 10px;
   letter-spacing: 0.5px;
@@ -373,8 +448,8 @@ body.avionics-storyboard {
 }
 
 .flight-btn {
-  background: rgba(30, 42, 68, 0.8);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   color: var(--text-main);
   font-size: 0.75rem;
   font-weight: 700;
@@ -385,29 +460,30 @@ body.avionics-storyboard {
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .flight-btn:hover {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--cyan);
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+  background: #f8fafc;
+  color: var(--text-bright);
+  border-color: #94a3b8;
 }
 
 .flight-btn.primary-pulse {
-  background: linear-gradient(135deg, #0284c7, #2563eb);
-  color: #fff;
-  border-color: var(--cyan);
+  background: linear-gradient(135deg, #e11900, #b91500);
+  color: #ffffff;
+  border-color: #b91500;
+  box-shadow: 0 2px 8px rgba(225, 25, 0, 0.35);
 }
 
 .flight-btn.primary-pulse:hover {
-  background: linear-gradient(135deg, #0369a1, #1d4ed8);
+  background: linear-gradient(135deg, #c41400, #9f1200);
 }
 
 .speed-toggle-group {
   display: flex;
-  background: rgba(22, 30, 48, 0.9);
-  border: 1px solid var(--border-glass);
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
   padding: 2px;
 }
@@ -425,8 +501,8 @@ body.avionics-storyboard {
 }
 
 .speed-btn.active {
-  background: var(--cyan);
-  color: #070a11;
+  background: var(--honeywell-red);
+  color: #ffffff;
 }
 
 .phase-jump-deck {
@@ -443,8 +519,8 @@ body.avionics-storyboard {
 }
 
 .phase-jump-btn {
-  background: rgba(22, 30, 48, 0.6);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   color: var(--text-muted);
   font-size: 0.68rem;
   font-weight: 600;
@@ -455,27 +531,28 @@ body.avionics-storyboard {
 }
 
 .phase-jump-btn:hover {
-  background: rgba(30, 42, 68, 0.9);
+  background: #f8fafc;
   color: var(--text-bright);
 }
 
 .phase-jump-btn.active {
-  background: rgba(56, 189, 248, 0.2);
-  color: var(--cyan);
-  border-color: var(--cyan);
+  background: var(--honeywell-red-dim);
+  color: var(--honeywell-red);
+  border-color: var(--honeywell-red);
+  font-weight: 700;
 }
 
 /* --------------------------------------------------------------------------
-   FLIGHT CANVAS VIEWPORT & AEROSPACE SKY
+   FLIGHT CANVAS VIEWPORT & AEROSPACE DAYLIGHT SKY
    -------------------------------------------------------------------------- */
 .flight-canvas-viewport {
   flex: 1;
   position: relative;
-  background: linear-gradient(180deg, #050914 0%, #081124 35%, #0d1935 70%, #060912 100%);
-  border: 1px solid var(--border-glass);
+  background: linear-gradient(180deg, #dbeafe 0%, #e0f2fe 32%, #f0f9ff 68%, #f8fafc 100%);
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.05), var(--shadow-card);
   user-select: none;
 }
 
@@ -488,12 +565,11 @@ body.avionics-storyboard {
   align-items: center;
   gap: 10px;
   z-index: 25;
-  background: rgba(13, 18, 31, 0.88);
-  backdrop-filter: blur(14px);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-md);
   padding: 4px 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-card);
 }
 
 .zoom-btn-group {
@@ -503,8 +579,8 @@ body.avionics-storyboard {
 }
 
 .zoom-tool-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-glass);
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
   color: var(--text-bright);
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -520,9 +596,9 @@ body.avionics-storyboard {
 }
 
 .zoom-tool-btn:hover {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--cyan);
+  background: var(--honeywell-red);
+  color: #ffffff;
+  border-color: var(--honeywell-red);
 }
 
 .zoom-tool-btn.reset {
@@ -536,7 +612,7 @@ body.avionics-storyboard {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 800;
-  color: var(--cyan);
+  color: var(--honeywell-red);
   padding: 0 6px;
 }
 
@@ -544,7 +620,7 @@ body.avionics-storyboard {
   font-family: var(--font-mono);
   font-size: 0.62rem;
   color: var(--text-dim);
-  border-left: 1px solid var(--border-glass);
+  border-left: 1px solid #e2e8f0;
   padding-left: 8px;
 }
 
@@ -552,61 +628,73 @@ body.avionics-storyboard {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 20px;
-  width: 170px;
+  left: 14px;
+  width: auto;
   pointer-events: none;
-  z-index: 10;
+  z-index: 4; /* Strictly BEHIND flight trajectory and aircraft marker */
 }
 
 .alt-step {
   position: absolute;
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* Prevent stretching across runway or aircraft */
   gap: 1px;
+  width: fit-content;
 }
 
 .alt-step-marker {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 800;
-  color: var(--cyan);
+  color: #0f172a;
   letter-spacing: 0.5px;
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  width: fit-content;
 }
 
 .alt-step-desc {
   font-family: var(--font-mono);
   font-size: 0.58rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
   font-weight: 600;
+  margin-top: 1px;
+  white-space: nowrap;
 }
 
-/* AMBIENT SKY & CLOUDS */
+.alt-step-0ft {
+  bottom: 8.4%;
+  z-index: 4;
+}
+
+.alt-step-0ft .alt-step-marker {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+/* AMBIENT SKY & DAYLIGHT CLOUDS */
 .sky-atmosphere-backdrop {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .stars-glimmer {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(1px 1px at 20% 15%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 45% 10%, #fff 100%, transparent),
-    radial-gradient(1.5px 1.5px at 70% 20%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 85% 12%, #fff 100%, transparent),
-    radial-gradient(1px 1px at 35% 25%, #94a3b8 100%, transparent),
-    radial-gradient(1px 1px at 60% 8%, #94a3b8 100%, transparent);
-  background-size: 100% 100%;
+  display: none; /* Replaced with clean daylight gradient */
 }
 
 .cloud-layer {
   position: absolute;
   width: 200%;
-  height: 90px;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  height: 100px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -628,13 +716,12 @@ body.avionics-storyboard {
 }
 
 /* RUNWAY GRAPHICS */
-/* MINIMAL SLEEK RUNWAYS (VERY SMALL AS REQUESTED) */
 .runway-zone {
   position: absolute;
-  bottom: 8px;
+  bottom: 6px;
   width: 75px;
-  height: 22px;
-  z-index: 5;
+  height: 20px;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -649,13 +736,13 @@ body.avionics-storyboard {
 .runway-tarmac {
   width: 100%;
   height: 12px;
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #334155;
+  border: 1px solid #475569;
   border-radius: 2px;
   position: relative;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.2);
 }
 
 .runway-threshold {
@@ -670,7 +757,7 @@ body.avionics-storyboard {
   font-family: var(--font-mono);
   font-size: 0.5rem;
   font-weight: 800;
-  color: #38bdf8;
+  color: #ffffff;
   letter-spacing: 0.5px;
 }
 
@@ -685,7 +772,7 @@ body.avionics-storyboard {
   left: 26px;
   right: 4px;
   height: 1px;
-  background: repeating-linear-gradient(90deg, #fef08a, #fef08a 6px, transparent 6px, transparent 10px);
+  background: repeating-linear-gradient(90deg, #facc15, #facc15 6px, transparent 6px, transparent 10px);
 }
 
 .runway-edge-lights {
@@ -694,8 +781,8 @@ body.avionics-storyboard {
   left: 0;
   right: 0;
   height: 2px;
-  background: repeating-linear-gradient(90deg, #22c55e, #22c55e 2px, transparent 2px, transparent 12px);
-  box-shadow: 0 0 4px #22c55e;
+  background: repeating-linear-gradient(90deg, #16a34a, #16a34a 2px, transparent 2px, transparent 12px);
+  box-shadow: 0 0 3px #16a34a;
 }
 
 .runway-caption {
@@ -722,28 +809,31 @@ body.avionics-storyboard {
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 8;
+  z-index: 10; /* In front of altitude elevation axis */
   overflow: visible;
 }
 
 .svg-alt-guide {
-  stroke: rgba(255, 255, 255, 0.06);
+  stroke: #94a3b8;
   stroke-width: 1;
   stroke-dasharray: 4, 8;
+  opacity: 0.6;
 }
 
 .fl380-line {
-  stroke: rgba(56, 189, 248, 0.15);
+  stroke: #3b82f6;
+  opacity: 0.45;
 }
 
 .ground-line {
-  stroke: rgba(255, 255, 255, 0.15);
+  stroke: #64748b;
+  opacity: 0.65;
 }
 
 .trajectory-glow-underlay {
   fill: none;
-  stroke: rgba(56, 189, 248, 0.22);
-  stroke-width: 10;
+  stroke: rgba(30, 64, 175, 0.15);
+  stroke-width: 12;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
@@ -755,36 +845,43 @@ body.avionics-storyboard {
   stroke-width: 3.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+  filter: drop-shadow(0 2px 4px rgba(30, 64, 175, 0.35));
   vector-effect: non-scaling-stroke;
 }
 
 .trajectory-traveled-path {
   fill: none;
-  stroke: #ffffff;
-  stroke-width: 3;
-  stroke-dasharray: 4, 6;
-  opacity: 0.7;
+  stroke: var(--honeywell-red);
+  stroke-width: 3.2;
+  stroke-dasharray: 5, 5;
+  opacity: 0.95;
   vector-effect: non-scaling-stroke;
 }
 
-/* INCIDENT BEACONS & DOTS ON SVG (ZERO JIGGLE / ZERO FLICKER) */
+/* INCIDENT BEACONS PINNED DIRECTLY ON THE TRAJECTORY LINE */
 .incident-dot-group {
-  pointer-events: none; /* Managed by high-precision cursor proximity engine */
+  pointer-events: auto;
+  cursor: pointer;
 }
 
-/* ZERO transform on hover - absolute geometric stability */
+.incident-hit-target {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.incident-dot-group:hover .incident-beacon-core,
 .incident-dot-group.hovered .incident-beacon-core,
 .incident-dot-group.selected-active .incident-beacon-core {
   fill: #ffffff !important;
-  stroke: var(--cyan) !important;
+  stroke: var(--honeywell-red) !important;
   stroke-width: 2.5px !important;
-  filter: drop-shadow(0 0 12px #38bdf8) !important;
+  filter: drop-shadow(0 0 8px rgba(225, 25, 0, 0.65)) !important;
 }
 
+.incident-dot-group:hover .incident-beacon-halo,
 .incident-dot-group.hovered .incident-beacon-halo,
 .incident-dot-group.selected-active .incident-beacon-halo {
-  stroke: #ffffff !important;
+  stroke: var(--honeywell-red) !important;
   stroke-width: 3px !important;
   opacity: 0.95;
   animation: beacon-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
@@ -794,7 +891,7 @@ body.avionics-storyboard {
   transform-box: fill-box;
   transform-origin: center;
   pointer-events: none !important;
-  opacity: 0.35;
+  opacity: 0.45;
   vector-effect: non-scaling-stroke;
 }
 
@@ -812,59 +909,79 @@ body.avionics-storyboard {
 }
 
 .incident-dot-group.critical .incident-beacon-core {
-  fill: var(--critical);
-  filter: url(#glow-crit);
+  fill: var(--honeywell-red);
+}
+
+.incident-dot-group.high .incident-beacon-core {
+  fill: var(--high);
 }
 
 .incident-dot-group.warning .incident-beacon-core {
   fill: var(--warning);
-  filter: url(#glow-warn);
+}
+
+.incident-dot-group.informational .incident-beacon-core,
+.incident-dot-group.info .incident-beacon-core {
+  fill: var(--info);
 }
 
 .incident-dot-group.routine .incident-beacon-core {
   fill: var(--routine);
-  filter: url(#glow-rout);
+}
+
+.incident-dot-group.active-aircraft-proximity .incident-beacon-halo {
+  stroke: var(--honeywell-red) !important;
+  stroke-width: 3px !important;
+  animation: proximity-radar-ping 1.4s infinite ease-out;
+}
+
+@keyframes proximity-radar-ping {
+  0% { r: 10; opacity: 1; stroke-width: 3; }
+  60% { r: 26; opacity: 0.1; stroke-width: 1; }
+  100% { r: 10; opacity: 0; }
 }
 
 .incident-dot-group.dimmed {
-  opacity: 0.12;
+  opacity: 0.14;
 }
 
 .incident-dot-group.highlighted .incident-beacon-core {
-  fill: #fff !important;
-  stroke: var(--cyan) !important;
+  fill: #ffffff !important;
+  stroke: var(--honeywell-red) !important;
   stroke-width: 3 !important;
 }
 
 .incident-dot-group.highlighted .incident-beacon-halo {
-  stroke: #fff;
+  stroke: var(--honeywell-red);
 }
 
-/* Incident label tag: only visible when hovered or selected, so labels never collide */
+/* Incident label tag: High contrast on light sky */
 .incident-dot-label {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
-  fill: #ffffff;
+  fill: #0f172a;
   text-anchor: middle;
   pointer-events: none !important;
   opacity: 0;
   transition: opacity 0.15s ease;
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.95);
+  filter: drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 6px #ffffff);
   user-select: none;
 }
 
+.incident-dot-group:hover .incident-dot-label,
 .incident-dot-group.hovered .incident-dot-label,
 .incident-dot-group.selected-active .incident-dot-label,
-.incident-dot-group.highlighted .incident-dot-label {
+.incident-dot-group.highlighted .incident-dot-label,
+.dots-auto-labels .incident-dot-label {
   opacity: 1;
 }
 
-/* THE AIRCRAFT MARKER GLYPH */
+/* THE AIRCRAFT MARKER GLYPH (HONEYWELL AERO WHITE / RED FIN) */
 .aircraft-marker {
   cursor: grab;
   transition: transform 0.15s ease-out;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow(0 3px 6px rgba(15, 23, 42, 0.45));
 }
 
 .aircraft-marker:active {
@@ -872,8 +989,8 @@ body.avionics-storyboard {
 }
 
 .aircraft-body {
-  fill: #f8fafc;
-  stroke: #38bdf8;
+  fill: #ffffff;
+  stroke: #1e3a8a;
   stroke-width: 1.5;
 }
 
@@ -882,8 +999,8 @@ body.avionics-storyboard {
 }
 
 .jet-afterburner {
-  fill: #38bdf8;
-  opacity: 0.8;
+  fill: var(--honeywell-red);
+  opacity: 0.85;
   animation: afterburner-flicker 0.1s infinite alternate;
 }
 
@@ -904,27 +1021,26 @@ body.avionics-storyboard {
 
 @keyframes nav-flash {
   0% { opacity: 0.5; }
-  100% { opacity: 1; filter: drop-shadow(0 0 5px #22c55e); }
+  100% { opacity: 1; filter: drop-shadow(0 0 5px #16a34a); }
 }
 
 @keyframes strobe-flash {
   0%, 90% { opacity: 0; }
-  95%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #fff); }
+  95%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #fff); }
 }
 
-/* FLOATING RADAR HUD TOOLTIP (ZERO FLICKER) */
+/* FLOATING RADAR HUD TOOLTIP (HONEYWELL WHITE & RED AESTHETIC) */
 .incident-hover-hud {
   position: absolute;
   display: none;
-  background: rgba(13, 18, 31, 0.96);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--cyan);
+  background: #ffffff;
+  border: 2px solid var(--honeywell-red);
   border-radius: var(--radius-md);
   padding: 12px 16px;
   width: 320px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.35);
+  box-shadow: var(--shadow-hud);
   z-index: 50;
-  pointer-events: none !important; /* Never intercept mouse cursor to eliminate flicker */
+  pointer-events: none !important;
   transform: translate(-50%, calc(-100% - 16px));
   transition: opacity 0.15s ease;
 }
@@ -939,7 +1055,7 @@ body.avionics-storyboard {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-glass);
+  border-bottom: 1px solid #e2e8f0;
   padding-bottom: 6px;
 }
 
@@ -947,14 +1063,14 @@ body.avionics-storyboard {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 800;
-  color: var(--cyan);
+  color: var(--honeywell-red);
 }
 
 .hud-tooltip-cluster {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
-  color: #fff;
+  color: #0f172a;
 }
 
 .hud-tooltip-sev {
@@ -965,7 +1081,9 @@ body.avionics-storyboard {
 }
 
 .hud-tooltip-sev.critical { background: var(--critical-dim); color: var(--critical); border: 1px solid var(--critical); }
+.hud-tooltip-sev.high { background: var(--high-dim); color: var(--high); border: 1px solid var(--high); }
 .hud-tooltip-sev.warning { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning); }
+.hud-tooltip-sev.informational, .hud-tooltip-sev.info { background: var(--info-dim); color: var(--info); border: 1px solid var(--info); }
 .hud-tooltip-sev.routine { background: var(--routine-dim); color: var(--routine); border: 1px solid var(--routine); }
 
 .hud-tooltip-body {
@@ -994,7 +1112,7 @@ body.avionics-storyboard {
 }
 
 .hud-tip-val.highlight {
-  color: #fff;
+  color: #0f172a;
   font-weight: 700;
 }
 
@@ -1006,7 +1124,7 @@ body.avionics-storyboard {
 }
 
 .hud-tooltip-footer {
-  border-top: 1px solid var(--border-glass);
+  border-top: 1px solid #e2e8f0;
   padding-top: 6px;
   margin-top: 2px;
 }
@@ -1014,7 +1132,7 @@ body.avionics-storyboard {
 .hud-tip-action {
   font-size: 0.68rem;
   font-weight: 800;
-  color: var(--cyan);
+  color: var(--honeywell-red);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1023,12 +1141,12 @@ body.avionics-storyboard {
 /* FLIGHT SCRUBBER TIMELINE DECK */
 .flight-scrubber-deck {
   margin-top: 12px;
-  background: rgba(18, 24, 38, 0.85);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   padding: 8px 16px;
   flex-shrink: 0;
-  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
 }
 
 .scrubber-phases-band {
@@ -1037,7 +1155,7 @@ body.avionics-storyboard {
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #cbd5e1;
 }
 
 .phase-segment {
@@ -1053,16 +1171,16 @@ body.avionics-storyboard {
   text-overflow: ellipsis;
 }
 
-.seg-takeoff { background: rgba(245, 158, 11, 0.25); color: #fde68a; border-right: 1px solid rgba(245, 158, 11, 0.3); }
-.seg-climb { background: rgba(56, 189, 248, 0.25); color: #bae6fd; border-right: 1px solid rgba(56, 189, 248, 0.3); }
-.seg-cruise { background: rgba(99, 102, 241, 0.25); color: #c7d2fe; border-right: 1px solid rgba(99, 102, 241, 0.3); }
-.seg-descent { background: rgba(168, 85, 247, 0.25); color: #e9d5ff; border-right: 1px solid rgba(168, 85, 247, 0.3); }
-.seg-rollout { background: rgba(16, 185, 129, 0.25); color: #a7f3d0; }
+.seg-takeoff { background: #fef3c7; color: #92400e; border-right: 1px solid #fde68a; }
+.seg-climb { background: #e0f2fe; color: #0369a1; border-right: 1px solid #bae6fd; }
+.seg-cruise { background: #ede9fe; color: #5b21b6; border-right: 1px solid #ddd6fe; }
+.seg-descent { background: #fce7f3; color: #9d174d; border-right: 1px solid #fbcfe8; }
+.seg-rollout { background: #dcfce7; color: #166534; }
 
 .scrubber-interaction-bar {
   height: 10px;
-  background: rgba(22, 30, 48, 0.95);
-  border: 1px solid var(--border-glass);
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
   border-radius: 5px;
   position: relative;
   cursor: pointer;
@@ -1074,9 +1192,9 @@ body.avionics-storyboard {
   top: 0;
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  background: linear-gradient(90deg, #e11900, #ff4d36);
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 8px rgba(225, 25, 0, 0.4);
 }
 
 .scrubber-plane-handle {
@@ -1087,12 +1205,12 @@ body.avionics-storyboard {
   width: 22px;
   height: 22px;
   background: #ffffff;
-  border: 2px solid var(--cyan);
+  border: 2px solid var(--honeywell-red);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 12px var(--cyan);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease;
   z-index: 10;
 }
@@ -1103,7 +1221,7 @@ body.avionics-storyboard {
 
 .handle-icon {
   font-size: 0.72rem;
-  color: #0d121f;
+  color: var(--honeywell-red);
   transform: rotate(45deg);
 }
 
@@ -1125,15 +1243,16 @@ body.avionics-storyboard {
   justify-content: space-between;
   margin-bottom: 16px;
   flex-shrink: 0;
-  background: rgba(18, 24, 38, 0.7);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   padding: 10px 16px;
+  box-shadow: var(--shadow-card);
 }
 
 .btn-back-zoom {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   color: var(--text-bright);
   font-family: var(--font-sans);
   font-size: 0.8rem;
@@ -1145,12 +1264,13 @@ body.avionics-storyboard {
   align-items: center;
   gap: 8px;
   transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .btn-back-zoom:hover {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: var(--cyan);
-  color: var(--cyan);
+  background: var(--honeywell-red-dim);
+  border-color: var(--honeywell-red);
+  color: var(--honeywell-red);
 }
 
 .kbd-hint {
@@ -1169,8 +1289,9 @@ body.avionics-storyboard {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 800;
-  color: var(--cyan);
-  background: var(--cyan-dim);
+  color: var(--honeywell-red);
+  background: var(--honeywell-red-dim);
+  border: 1px solid var(--honeywell-red-border);
   padding: 3px 8px;
   border-radius: 4px;
 }
@@ -1178,7 +1299,7 @@ body.avionics-storyboard {
 .incident-title-text {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #fff;
+  color: #0f172a;
 }
 
 .incident-time-badge {
@@ -1192,10 +1313,12 @@ body.avionics-storyboard {
   font-weight: 800;
   padding: 3px 10px;
   border-radius: 12px;
-  background: var(--critical-dim);
-  color: var(--critical);
-  border: 1px solid rgba(244, 63, 94, 0.4);
 }
+.incident-crit-badge.critical { background: var(--critical-dim); color: var(--critical); border: 1px solid var(--critical); }
+.incident-crit-badge.high { background: var(--high-dim); color: var(--high); border: 1px solid var(--high); }
+.incident-crit-badge.warning { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning); }
+.incident-crit-badge.informational, .incident-crit-badge.info { background: var(--info-dim); color: var(--info); border: 1px solid var(--info); }
+.incident-crit-badge.routine { background: var(--routine-dim); color: var(--routine); border: 1px solid var(--routine); }
 
 .deck-top-actions {
   display: flex;
@@ -1204,8 +1327,8 @@ body.avionics-storyboard {
 }
 
 .action-btn {
-  background: rgba(22, 30, 48, 0.8);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   color: var(--text-main);
   font-family: var(--font-sans);
   font-size: 0.75rem;
@@ -1214,23 +1337,24 @@ body.avionics-storyboard {
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .action-btn:hover {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: var(--cyan);
-  color: #fff;
+  background: var(--honeywell-red-dim);
+  border-color: var(--honeywell-red);
+  color: var(--honeywell-red);
 }
 
 .action-btn.primary {
-  background: var(--purple);
-  color: #fff;
-  border-color: #d8b4fe;
-  box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+  background: var(--honeywell-red);
+  color: #ffffff;
+  border-color: var(--honeywell-red);
+  box-shadow: 0 2px 8px rgba(225, 25, 0, 0.35);
 }
 
 .action-btn.primary:hover {
-  background: #c084fc;
+  background: var(--honeywell-red-dark);
 }
 
 /* SCROLLABLE DOSSIER GRID */
@@ -1238,7 +1362,7 @@ body.avionics-storyboard {
   flex: 1;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--cyan) rgba(22, 30, 48, 0.4);
+  scrollbar-color: var(--honeywell-red) #f1f5f9;
   padding-right: 6px;
 }
 
@@ -1255,18 +1379,18 @@ body.avionics-storyboard {
 }
 
 .glass-card {
-  background: var(--bg-panel);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
   padding: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-card);
 }
 
 .card-kicker {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 1.2px;
-  color: var(--text-dim);
+  color: var(--honeywell-red);
   margin-bottom: 12px;
   text-transform: uppercase;
 }
@@ -1278,18 +1402,26 @@ body.avionics-storyboard {
   gap: 12px;
 }
 
-.spec-cell { display: flex; flex-direction: column; }
+.spec-cell {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+}
+
 .spec-k { font-size: 0.65rem; color: var(--text-dim); font-weight: 600; }
-.spec-v { font-size: 0.9rem; font-family: var(--font-mono); font-weight: 700; color: #fff; }
+.spec-v { font-size: 0.9rem; font-family: var(--font-mono); font-weight: 700; color: #0f172a; }
 
 .narrative-body {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #e2e8f0;
+  color: #1e293b;
 }
 
 .root-cause-card {
-  border-left: 4px solid var(--cyan);
+  border-left: 4px solid var(--honeywell-red);
 }
 
 .kicker-row {
@@ -1302,9 +1434,9 @@ body.avionics-storyboard {
 .trigger-tag {
   font-size: 0.65rem;
   font-weight: 800;
-  background: var(--cyan-dim);
-  color: var(--cyan);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: var(--honeywell-red-dim);
+  color: var(--honeywell-red);
+  border: 1px solid var(--honeywell-red-border);
   padding: 2px 8px;
   border-radius: 4px;
 }
@@ -1312,14 +1444,15 @@ body.avionics-storyboard {
 .rca-description {
   font-size: 0.9rem;
   line-height: 1.55;
-  color: #cbd5e1;
+  color: #334155;
 }
 
 .sub-kicker {
   font-size: 0.68rem;
-  color: var(--cyan);
+  color: var(--honeywell-red);
   letter-spacing: 0.8px;
   margin-bottom: 4px;
+  font-weight: 700;
 }
 
 .text-block {
@@ -1345,10 +1478,11 @@ body.avionics-storyboard {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--purple);
-  background: var(--purple-dim);
+  color: var(--honeywell-red);
+  background: var(--honeywell-red-dim);
   padding: 2px 8px;
   border-radius: 4px;
+  border: 1px solid var(--honeywell-red-border);
 }
 
 .cascade-flowchart {
@@ -1358,8 +1492,8 @@ body.avionics-storyboard {
 }
 
 .flow-step-item {
-  background: rgba(22, 30, 48, 0.6);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-md);
   padding: 14px;
   display: flex;
@@ -1367,27 +1501,28 @@ body.avionics-storyboard {
   cursor: pointer;
   transition: all 0.25s ease;
   position: relative;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
 .flow-step-item:hover {
-  background: rgba(30, 42, 68, 0.9);
-  border-color: var(--purple);
+  background: #f8fafc;
+  border-color: var(--honeywell-red);
   transform: translateX(6px);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+  box-shadow: 0 4px 15px rgba(225, 25, 0, 0.12);
 }
 
 .flow-step-item.active {
-  border-color: var(--cyan);
-  background: rgba(56, 189, 248, 0.15);
-  box-shadow: var(--border-glow-cyan);
+  border-color: var(--honeywell-red);
+  background: var(--honeywell-red-dim);
+  box-shadow: 0 0 0 3px rgba(225, 25, 0, 0.15);
 }
 
 .flow-num-badge {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 800;
-  background: rgba(168, 85, 247, 0.2);
-  color: var(--purple);
+  background: var(--honeywell-red-dim);
+  color: var(--honeywell-red);
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -1395,7 +1530,7 @@ body.avionics-storyboard {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  border: 1px solid var(--honeywell-red-border);
 }
 
 .flow-content { flex: 1; }
@@ -1411,8 +1546,8 @@ body.avionics-storyboard {
 }
 
 .flow-node-tag {
-  background: #fff;
-  color: #000;
+  background: #0f172a;
+  color: #ffffff;
   font-weight: 800;
   padding: 1px 6px;
   border-radius: 4px;
@@ -1429,18 +1564,230 @@ body.avionics-storyboard {
 .flow-summary {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #fff;
+  color: #0f172a;
   margin-bottom: 6px;
 }
 
 .flow-citation {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--cyan);
-  background: rgba(56, 189, 248, 0.08);
+  color: var(--honeywell-red);
+  background: var(--honeywell-red-dim);
   padding: 2px 6px;
   border-radius: 4px;
   display: inline-block;
+}
+
+/* FLOW STEP CARD (MODULAR DOMINO CASCADE) */
+.flow-step-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.flow-step-card:hover {
+  background: #f8fafc;
+  border-color: var(--honeywell-red);
+  transform: translateX(4px);
+  box-shadow: 0 4px 14px rgba(225, 25, 0, 0.12);
+}
+
+.flow-step-card.pulse-active {
+  border-color: var(--honeywell-red);
+  background: var(--honeywell-red-dim);
+  box-shadow: 0 0 0 3px rgba(225, 25, 0, 0.2);
+  animation: cascade-pulse 0.7s ease-in-out;
+}
+
+@keyframes cascade-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); box-shadow: 0 0 15px rgba(225, 25, 0, 0.35); }
+  100% { transform: scale(1); }
+}
+
+.step-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.step-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  background: var(--honeywell-red-dim);
+  color: var(--honeywell-red);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--honeywell-red-border);
+}
+
+.step-time {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.step-node-badge {
+  align-self: flex-start;
+  background: #0f172a;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.step-body-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.flow-connector-arrow {
+  text-align: center;
+  color: var(--honeywell-red);
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: -6px 0;
+}
+
+/* FORMATTED MARKDOWN & CITATION TAGS */
+.forensic-citation-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--honeywell-red);
+  background: var(--honeywell-red-dim);
+  border: 1px solid var(--honeywell-red-border);
+  padding: 2px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 2px 2px;
+  vertical-align: middle;
+}
+
+.forensic-citation-tag:hover {
+  background: var(--honeywell-red);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(225, 25, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.md-h1, .md-h2, .md-h3 {
+  color: #0f172a;
+  margin: 12px 0 6px 0;
+  font-weight: 700;
+}
+.md-h1 { font-size: 1.15rem; color: var(--honeywell-red); }
+.md-h2 { font-size: 1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; }
+.md-h3 { font-size: 0.9rem; color: var(--text-bright); }
+
+.md-ul, .md-ol {
+  margin: 6px 0 10px 18px;
+}
+
+.md-li, .md-oli {
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+/* PARITY PILLS & TELEMETRY PARAMETER CELLS */
+.parity-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.parity-pill.parity-valid {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.parity-pill.parity-err {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  box-shadow: 0 0 8px rgba(225, 25, 0, 0.15);
+}
+
+.parity-pill.parity-dim {
+  background: #f1f5f9;
+  color: var(--text-dim);
+  border: 1px solid #cbd5e1;
+}
+
+.param-key-cell {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.param-val-cell {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.param-type-cell {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.param-parity-cell {
+  text-align: right;
+  padding: 6px 10px;
+}
+
+.empty-cell, .empty-state {
+  text-align: center;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 20px;
+}
+
+/* FLOATING COCKPIT TOAST */
+.cockpit-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #ffffff;
+  border: 2px solid var(--honeywell-red);
+  color: #0f172a;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-hud);
+  z-index: 3000;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.cockpit-toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* --------------------------------------------------------------------------
@@ -1452,10 +1799,11 @@ body.avionics-storyboard {
   justify-content: space-between;
   margin-bottom: 16px;
   flex-shrink: 0;
-  background: rgba(18, 24, 38, 0.7);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   padding: 10px 16px;
+  box-shadow: var(--shadow-card);
 }
 
 .terminal-breadcrumb {
@@ -1467,8 +1815,8 @@ body.avionics-storyboard {
 }
 
 .term-dim { color: var(--text-dim); }
-.term-sep { color: var(--border-glass); }
-.term-active { color: var(--purple); font-weight: 700; }
+.term-sep { color: #cbd5e1; }
+.term-active { color: var(--honeywell-red); font-weight: 800; }
 
 .terminal-nav-controls {
   display: flex;
@@ -1477,8 +1825,8 @@ body.avionics-storyboard {
 }
 
 .term-btn {
-  background: rgba(22, 30, 48, 0.8);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   color: var(--text-main);
   font-family: var(--font-sans);
   font-size: 0.75rem;
@@ -1486,11 +1834,13 @@ body.avionics-storyboard {
   padding: 6px 14px;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .term-btn:hover {
-  background: var(--purple);
-  color: #fff;
+  background: var(--honeywell-red-dim);
+  border-color: var(--honeywell-red);
+  color: var(--honeywell-red);
 }
 
 .term-pos {
@@ -1508,13 +1858,14 @@ body.avionics-storyboard {
 }
 
 .term-panel {
-  background: var(--bg-panel);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
   padding: 20px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
 .record-panel {
@@ -1536,26 +1887,26 @@ body.avionics-storyboard {
   border-radius: 4px;
 }
 
-.node-pill { background: #fff; color: #000; }
-.family-pill { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
-.timestamp-pill { background: rgba(255, 255, 255, 0.08); color: #fff; }
-.occurrences-pill { background: var(--warning-dim); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+.node-pill { background: #0f172a; color: #ffffff; }
+.family-pill { background: var(--honeywell-red-dim); color: var(--honeywell-red); border: 1px solid var(--honeywell-red-border); }
+.timestamp-pill { background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; }
+.occurrences-pill { background: var(--warning-dim); color: var(--warning); border: 1px solid rgba(217, 119, 6, 0.3); }
 
 .record-headline {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #fff;
+  color: #0f172a;
   margin-bottom: 16px;
   line-height: 1.35;
 }
 
 .citation-vault {
-  background: rgba(13, 18, 31, 0.85);
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: var(--radius-md);
   padding: 14px;
   margin-bottom: 18px;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
 .vault-header {
@@ -1569,13 +1920,13 @@ body.avionics-storyboard {
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.8px;
-  color: var(--purple);
+  color: var(--honeywell-red);
 }
 
 .copy-btn {
-  background: rgba(168, 85, 247, 0.2);
-  border: 1px solid var(--purple);
-  color: #fff;
+  background: var(--honeywell-red);
+  border: 1px solid var(--honeywell-red);
+  color: #ffffff;
   font-family: var(--font-sans);
   font-size: 0.68rem;
   font-weight: 700;
@@ -1585,10 +1936,10 @@ body.avionics-storyboard {
   transition: all 0.2s ease;
 }
 
-.copy-btn:hover { background: var(--purple); }
+.copy-btn:hover { background: var(--honeywell-red-dark); }
 
 .vault-code-wrapper {
-  background: #000;
+  background: #0f172a;
   border-radius: var(--radius-sm);
   padding: 10px;
   margin-bottom: 6px;
@@ -1609,22 +1960,23 @@ body.avionics-storyboard {
 }
 
 .json-drawer details {
-  background: rgba(13, 18, 31, 0.6);
-  border: 1px solid var(--border-glass);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: var(--radius-sm);
   padding: 8px 12px;
 }
 
 .json-drawer summary {
   font-size: 0.75rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
   cursor: pointer;
+  font-weight: 600;
 }
 
 .json-display {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: var(--cyan);
+  color: #0369a1;
   max-height: 180px;
   overflow-y: auto;
   margin-top: 8px;
@@ -1653,17 +2005,18 @@ body.avionics-storyboard {
 .param-count {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--cyan);
+  color: var(--honeywell-red);
+  font-weight: 700;
 }
 
 .telemetry-table-container {
   flex: 1;
   overflow-y: auto;
-  border: 1px solid var(--border-glass);
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-md);
-  background: rgba(13, 18, 31, 0.7);
+  background: #ffffff;
   scrollbar-width: thin;
-  scrollbar-color: var(--cyan) rgba(22, 30, 48, 0.4);
+  scrollbar-color: var(--honeywell-red) #f1f5f9;
 }
 
 .telemetry-table {
@@ -1673,7 +2026,7 @@ body.avionics-storyboard {
 }
 
 .telemetry-table th {
-  background: rgba(22, 30, 48, 0.95);
+  background: #f8fafc;
   padding: 8px 14px;
   text-align: left;
   font-size: 0.68rem;
@@ -1682,12 +2035,12 @@ body.avionics-storyboard {
   letter-spacing: 0.5px;
   position: sticky;
   top: 0;
-  border-bottom: 1px solid var(--border-glass);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .telemetry-table td {
   padding: 8px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .telemetry-table td:first-child {
@@ -1698,7 +2051,7 @@ body.avionics-storyboard {
 
 .telemetry-table td:last-child {
   font-family: var(--font-mono);
-  color: #fff;
+  color: #0f172a;
 }
 
 /* --------------------------------------------------------------------------
@@ -1708,8 +2061,8 @@ body.avionics-storyboard {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 2000;
   align-items: center;
   justify-content: center;
@@ -1719,45 +2072,46 @@ body.avionics-storyboard {
 .report-modal-overlay.open { display: flex; }
 
 .modal-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-lg);
   width: 900px;
   max-width: 95vw;
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
 }
 
 .modal-top {
   padding: 16px 24px;
-  border-bottom: 1px solid var(--border-glass);
+  border-bottom: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.modal-top h3 { font-size: 1.15rem; font-weight: 700; color: #fff; }
+.modal-top h3 { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
 .btn-close-modal { background: none; border: none; font-size: 1.2rem; color: var(--text-dim); cursor: pointer; }
+.btn-close-modal:hover { color: var(--honeywell-red); }
 
 .modal-scrollable {
   padding: 24px;
   overflow-y: auto;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #e2e8f0;
+  color: #1e293b;
 }
 
-.modal-scrollable h1 { font-size: 1.3rem; margin-bottom: 12px; color: var(--cyan); }
-.modal-scrollable h2 { font-size: 1.05rem; margin-top: 18px; margin-bottom: 8px; color: #fff; border-bottom: 1px solid var(--border-glass); padding-bottom: 4px; }
+.modal-scrollable h1 { font-size: 1.3rem; margin-bottom: 12px; color: var(--honeywell-red); }
+.modal-scrollable h2 { font-size: 1.05rem; margin-top: 18px; margin-bottom: 8px; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; }
 .modal-scrollable table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.82rem; }
-.modal-scrollable th, .modal-scrollable td { border: 1px solid var(--border-glass); padding: 8px 12px; }
-.modal-scrollable th { background: rgba(22, 30, 48, 0.8); }
+.modal-scrollable th, .modal-scrollable td { border: 1px solid #cbd5e1; padding: 8px 12px; }
+.modal-scrollable th { background: #f8fafc; color: #0f172a; }
 
 .modal-bottom {
   padding: 14px 24px;
-  border-top: 1px solid var(--border-glass);
+  border-top: 1px solid #e2e8f0;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
