@@ -220,7 +220,7 @@ def stage_4_forensic_reports(use_llm: bool = False) -> bool:
 
 
 def _run_standalone_narrator() -> None:
-    """Directly invoke ForensicNarrator on all transcript files."""
+    """Directly invoke ForensicNarrator on all transcript files in parallel."""
     sys.path.insert(0, str(PATHS["ai_reporter_dir"]))
     try:
         from standalone_narrator import ForensicNarrator  # type: ignore
@@ -232,26 +232,48 @@ def _run_standalone_narrator() -> None:
     transcripts = sorted(PATHS["transcripts_dir"].glob("*.md"))
     total = len(transcripts)
 
-    for idx, tp in enumerate(transcripts, 1):
+    # 1. Filter out already-verified reports for O(1) skip checks
+    pending = []
+    skipped = 0
+    for tp in transcripts:
         rp = PATHS["final_reports_dir"] / f"REPORT_{tp.name}"
-
-        # Skip already-verified reports
         if rp.exists():
             content = rp.read_text(encoding="utf-8")
             if len(content.strip()) > 500 and "## 6." in content:
-                if idx % 20 == 0 or idx == total:
-                    info(f"Skipped {idx}/{total} (already verified)")
+                skipped += 1
                 continue
+        pending.append(tp)
 
+    if skipped > 0:
+        info(f"Skipped {skipped}/{total} reports (already generated & verified)")
+
+    if not pending:
+        ok(f"All {total} reports verified -- nothing to regenerate")
+        return
+
+    # 2. Parallel thread execution for pending reports (I/O & CPU concurrency)
+    import concurrent.futures
+    max_workers = min(8, (os.cpu_count() or 4) * 2)
+    info(f"Generating {len(pending)} reports across {max_workers} threads ...")
+
+    def _generate_report(tp: Path) -> None:
         md = tp.read_text(encoding="utf-8")
-        try:
-            report = narrator.narrate_transcript(md, cluster_id=tp.stem)
-            rp.write_text(report, encoding="utf-8")
-        except Exception as exc:
-            warn(f"Narrator error on {tp.name}: {exc}")
+        report = narrator.narrate_transcript(md, cluster_id=tp.stem)
+        rp = PATHS["final_reports_dir"] / f"REPORT_{tp.name}"
+        rp.write_text(report, encoding="utf-8")
 
-        if idx % 25 == 0 or idx == total:
-            print(f"  {DIM}Progress: {idx}/{total} ({idx/total*100:.0f}%){RESET}", flush=True)
+    completed = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as pool:
+        future_map = {pool.submit(_generate_report, tp): tp for tp in pending}
+        for fut in concurrent.futures.as_completed(future_map):
+            completed += 1
+            tp = future_map[fut]
+            try:
+                fut.result()
+            except Exception as exc:
+                warn(f"Narrator error on {tp.name}: {exc}")
+            if completed % 25 == 0 or completed == len(pending):
+                print(f"  {DIM}Progress: {completed}/{len(pending)} ({completed/len(pending)*100:.0f}%){RESET}", flush=True)
 
 
 # ---------------------------------------------------------------------------
@@ -428,18 +450,16 @@ def stage_5_package_visualization() -> bool:
         if idx % 25 == 0 or idx == len(clusters):
             print(f"  {DIM}Packaged {idx}/{len(clusters)} incidents{RESET}", flush=True)
 
-    # Write viz_data.json
+    # Single-pass JSON serialization (avoids serializing 6MB data structure twice)
+    info("Serializing visualization dataset (single-pass) ...")
+    json_payload = json.dumps(incidents, indent=2, ensure_ascii=False)
+
     info("Writing viz_data.json ...")
-    with open(PATHS["viz_data_json"], "w", encoding="utf-8") as f:
-        json.dump(incidents, f, indent=2, ensure_ascii=False)
+    PATHS["viz_data_json"].write_text(json_payload, encoding="utf-8")
     ok(f"viz_data.json written ({PATHS['viz_data_json'].stat().st_size / 1024:.0f} KB)")
 
-    # Write viz_data.js
     info("Writing viz_data.js ...")
-    with open(PATHS["viz_data_js"], "w", encoding="utf-8") as f:
-        f.write("window.TRACE_INCIDENTS = ")
-        json.dump(incidents, f, indent=2, ensure_ascii=False)
-        f.write(";\n")
+    PATHS["viz_data_js"].write_text(f"window.TRACE_INCIDENTS = {json_payload};\n", encoding="utf-8")
     ok(f"viz_data.js written ({PATHS['viz_data_js'].stat().st_size / 1024:.0f} KB, "
        f"{len(incidents)} incidents)")
     return True
