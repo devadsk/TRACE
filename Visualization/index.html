@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Avionics Black Box Forensic Tape &amp; Infinite Zoom Storyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="avionics-storyboard">
+
+  <!-- TOP COCKPIT BAR -->
+  <header class="cockpit-bar">
+    <div class="brand-zone">
+      <div class="pulse-beacon"></div>
+      <div class="brand-titles">
+        <h1 class="brand-name">TRACE <span class="edition-pill">BLACK BOX STORYBOARD</span></h1>
+        <p class="brand-caption">Flight Day 2032-06-18 • 124 Multi-Node Distributed Incident Records</p>
+      </div>
+    </div>
+
+    <!-- SEMANTIC ZOOM BREADCRUMB / LEVEL INDICATOR -->
+    <div class="zoom-stepper">
+      <button class="step-btn active" id="btn-goto-level1" title="Zoom out to Flight Trajectory View">
+        <span class="step-num">1</span>
+        <span class="step-text">FLIGHT PATH <span class="subtext">(Runway ➔ FL380)</span></span>
+      </button>
+      <div class="step-connector"></div>
+      <button class="step-btn" id="btn-goto-level2" title="Zoom into Incident Forensic Narration">
+        <span class="step-num">2</span>
+        <span class="step-text">NARRATION <span class="subtext">&amp; Root Cause</span></span>
+      </button>
+      <div class="step-connector"></div>
+      <button class="step-btn" id="btn-goto-level3" title="Deep zoom to Raw Facts and Sensor Telemetry">
+        <span class="step-num">3</span>
+        <span class="step-text">RAW FACTS <span class="subtext">&amp; Telemetry Data</span></span>
+      </button>
+    </div>
+
+    <!-- GLOBAL STATS & FILTERS -->
+    <div class="header-controls">
+      <div class="omni-search-wrapper">
+        <span class="search-glyph">🔍</span>
+        <input type="text" id="omni-search" placeholder="Search incidents, codes (e.g. 6025, 6074), nodes, triggers..." autocomplete="off">
+        <button id="clear-search" class="btn-clear-search">✕</button>
+      </div>
+
+      <div class="filter-pills">
+        <button class="filter-chip active" data-filter="all">ALL (124)</button>
+        <button class="filter-chip chip-crit" data-filter="CRITICAL">CRITICAL (72)</button>
+        <button class="filter-chip chip-warn" data-filter="WARNING">WARNING (6)</button>
+        <button class="filter-chip chip-rout" data-filter="ROUTINE">ROUTINE (46)</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN INFINITE ZOOM CANVAS WRAPPER -->
+  <main class="storyboard-viewport" id="storyboard-viewport">
+
+    <!-- ====================================================================
+         LEVEL 1: VISUAL FLIGHT PROFILE & INCIDENT TRAJECTORY
+         ==================================================================== -->
+    <section class="zoom-level active" id="level-1-flight-tape">
+      <!-- FLIGHT TELEMETRY HUD & REPLAY SUBBAR -->
+      <div class="flight-hud-subbar">
+        <div class="hud-left-group">
+          <div class="hud-gauge">
+            <span class="hud-gauge-label">MISSION CLOCK</span>
+            <span class="hud-gauge-val" id="hud-clock">09:00:00 UTC</span>
+          </div>
+          <div class="hud-gauge">
+            <span class="hud-gauge-label">ALTITUDE</span>
+            <span class="hud-gauge-val cyan-glow" id="hud-alt">0 FT (RUNWAY 09L)</span>
+          </div>
+          <div class="hud-gauge">
+            <span class="hud-gauge-label">FLIGHT PHASE</span>
+            <span class="hud-gauge-val phase-pill" id="hud-phase">DEPARTURE ROLL</span>
+          </div>
+          <div class="hud-gauge">
+            <span class="hud-gauge-label">ACTIVE INCIDENTS</span>
+            <span class="hud-gauge-val" id="hud-incident-stat">124 Pinned Along Trajectory</span>
+          </div>
+        </div>
+
+        <div class="hud-controls-group">
+          <!-- FLIGHT REPLAY BUTTONS -->
+          <div class="replay-button-deck">
+            <button class="flight-btn primary-pulse" id="btn-replay-flight" title="Play simulated aircraft flight across timeline">
+              <span id="replay-play-icon">▶</span> <span id="replay-play-text">PLAY MISSION</span>
+            </button>
+            <button class="flight-btn" id="btn-reset-flight" title="Reset aircraft to Runway 09L">⏮ RESET</button>
+            <div class="speed-toggle-group">
+              <button class="speed-btn active" data-speed="1">1x</button>
+              <button class="speed-btn" data-speed="5">5x</button>
+              <button class="speed-btn" data-speed="20">20x</button>
+            </div>
+          </div>
+
+          <!-- PHASE JUMP BUTTONS -->
+          <div class="phase-jump-deck">
+            <span class="jump-label">JUMP TO PHASE:</span>
+            <button class="phase-jump-btn active" data-phase="all">ALL</button>
+            <button class="phase-jump-btn" data-phase="takeoff">🛫 RUNWAY</button>
+            <button class="phase-jump-btn" data-phase="climb">↗ CLIMB</button>
+            <button class="phase-jump-btn" data-phase="cruise">✈ CRUISE (FL380)</button>
+            <button class="phase-jump-btn" data-phase="descent">↘ DESCENT &amp; LANDING</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN FLIGHT TRAJECTORY CANVAS / VIEWPORT -->
+      <div class="flight-canvas-viewport" id="flight-canvas-viewport">
+        <!-- ALTITUDE REFERENCE ELEVATION AXIS -->
+        <div class="altitude-elevation-axis">
+          <div class="alt-step" style="top: 8%;">
+            <span class="alt-step-marker">FL380</span>
+            <span class="alt-step-desc">38,000 FT • STRATOSPHERE CRUISE</span>
+          </div>
+          <div class="alt-step" style="top: 36%;">
+            <span class="alt-step-marker">FL250</span>
+            <span class="alt-step-desc">25,000 FT • HIGH TROPOSPHERE</span>
+          </div>
+          <div class="alt-step" style="top: 64%;">
+            <span class="alt-step-marker">10,000 FT</span>
+            <span class="alt-step-desc">TRANSITION ALTITUDE</span>
+          </div>
+          <div class="alt-step" style="bottom: 8%;">
+            <span class="alt-step-marker">0 FT</span>
+            <span class="alt-step-desc">SEA LEVEL • RUNWAYS 09L / 27R</span>
+          </div>
+        </div>
+
+        <!-- CANVAS ZOOM CONTROLS (ZOOM & PAN FOR CLOSE CLUSTERS) -->
+        <div class="canvas-zoom-toolbar">
+          <div class="zoom-btn-group">
+            <button class="zoom-tool-btn" id="btn-zoom-in" title="Zoom in to separate close incidents (or use Mouse Wheel)">+</button>
+            <span class="zoom-factor-badge" id="zoom-factor-badge">1.0x</span>
+            <button class="zoom-tool-btn" id="btn-zoom-out" title="Zoom out">−</button>
+            <button class="zoom-tool-btn reset" id="btn-zoom-reset" title="Reset to full flight view">↺ RESET</button>
+          </div>
+          <span class="zoom-hint-text">🔍 Scroll to zoom • Drag to pan</span>
+        </div>
+
+        <!-- AMBIENT SKY & CLOUD LAYERS -->
+        <div class="sky-atmosphere-backdrop">
+          <div class="cloud-layer cloud-layer-1"></div>
+          <div class="cloud-layer cloud-layer-2"></div>
+          <div class="stars-glimmer"></div>
+        </div>
+
+        <!-- RUNWAY 09L (DEPARTURE) STRIP AT GROUND LEVEL -->
+        <div class="runway-zone runway-departure" id="runway-dep">
+          <div class="runway-tarmac">
+            <div class="runway-threshold">
+              <span class="runway-id">09L</span>
+              <div class="runway-stripes"></div>
+            </div>
+            <div class="runway-centerline"></div>
+            <div class="runway-edge-lights"></div>
+          </div>
+          <div class="runway-caption">
+            <span class="runway-caption-title">🛫 DEPARTURE RUNWAY 09L</span>
+            <span class="runway-caption-sub">09:00:00 — 09:12:00 UTC • Sea Level 0 FT</span>
+          </div>
+        </div>
+
+        <!-- RUNWAY 27R (ARRIVAL) STRIP AT GROUND LEVEL -->
+        <div class="runway-zone runway-arrival" id="runway-arr">
+          <div class="runway-tarmac">
+            <div class="runway-threshold">
+              <span class="runway-id">27R</span>
+              <div class="runway-stripes"></div>
+            </div>
+            <div class="runway-centerline"></div>
+            <div class="runway-edge-lights"></div>
+          </div>
+          <div class="runway-caption">
+            <span class="runway-caption-title">🛬 ARRIVAL RUNWAY 27R</span>
+            <span class="runway-caption-sub">13:48:00 — 14:00:04 UTC • Touchdown &amp; Rollout</span>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE SVG TRAJECTORY & INCIDENT BEACONS -->
+        <svg class="flight-trajectory-svg" id="flight-trajectory-svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 2000 600">
+          <defs>
+            <!-- Glowing Trajectory Gradient -->
+            <linearGradient id="traj-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+              <stop offset="15%" stop-color="#00f5d4" stop-opacity="0.95" />
+              <stop offset="50%" stop-color="#38bdf8" stop-opacity="1" />
+              <stop offset="85%" stop-color="#818cf8" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.9" />
+            </linearGradient>
+
+            <!-- Altitude Horizon Guides Pattern -->
+            <pattern id="altitude-grid" width="100" height="40" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="39" x2="100" y2="39" stroke="rgba(255, 255, 255, 0.04)" stroke-dasharray="4,4" />
+            </pattern>
+
+            <!-- Beacon Glow Filters -->
+            <filter id="glow-crit" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-warn" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-rout" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Ambient Horizontal Altitude Lines -->
+          <line x1="0" y1="70" x2="2000" y2="70" class="svg-alt-guide fl380-line" />
+          <line x1="0" y1="230" x2="2000" y2="230" class="svg-alt-guide fl250-line" />
+          <line x1="0" y1="390" x2="2000" y2="390" class="svg-alt-guide ft10k-line" />
+          <line x1="0" y1="550" x2="2000" y2="550" class="svg-alt-guide ground-line" />
+
+          <!-- Glow Underlay Ribbon -->
+          <path id="svg-trajectory-glow" class="trajectory-glow-underlay" d="" />
+
+          <!-- Main Flight Path Trajectory Curve -->
+          <path id="svg-trajectory-path" class="trajectory-main-path" d="" />
+
+          <!-- Traveled Contrail Line (Dynamic) -->
+          <path id="svg-trajectory-traveled" class="trajectory-traveled-path" d="" />
+
+          <!-- Container for all 124 Incident Dots -->
+          <g id="svg-incident-dots-group"></g>
+
+          <!-- The Plane Representation on Trajectory -->
+          <g id="svg-aircraft-group" class="aircraft-marker">
+            <!-- Wingtip Navigation Beacons -->
+            <circle cx="-12" cy="-6" r="3" fill="#22c55e" class="nav-light-green" />
+            <circle cx="-12" cy="6" r="3" fill="#ef4444" class="nav-light-red" />
+            <circle cx="20" cy="0" r="2.5" fill="#ffffff" class="nav-strobe" />
+            
+            <!-- Jet Silhouette (High Fidelity Vector) -->
+            <path class="aircraft-body" d="M 22,0 L 10,-4 L -4,-4 L -14,-22 L -18,-22 L -12,-4 L -22,-3 L -28,-10 L -31,-10 L -28,0 L -31,10 L -28,10 L -22,3 L -12,4 L -18,22 L -14,22 L -4,4 L 10,4 Z" />
+            <!-- Jet Cockpit Glass -->
+            <path class="aircraft-cockpit" d="M 16,-1.5 L 12,-2.5 L 9,-2.5 L 12,-0.5 Z" />
+            <!-- Jet Propulsion Glow -->
+            <circle cx="-32" cy="0" r="4" class="jet-afterburner" />
+          </g>
+        </svg>
+
+        <!-- FLOATING RADAR HUD TOOLTIP (Appears on Hovering Incident Dots) -->
+        <div class="incident-hover-hud" id="incident-hover-hud">
+          <div class="hud-tooltip-header">
+            <span class="hud-tooltip-index" id="hud-tip-index">#001</span>
+            <span class="hud-tooltip-cluster" id="hud-tip-cluster">cluster-28d5f74c</span>
+            <span class="hud-tooltip-sev" id="hud-tip-sev">CRITICAL</span>
+          </div>
+          <div class="hud-tooltip-body">
+            <div class="hud-tip-row">
+              <span class="hud-tip-label">Phase:</span>
+              <span class="hud-tip-val highlight" id="hud-tip-phase">CRUISE FL380 • 11:24:18 UTC</span>
+            </div>
+            <div class="hud-tip-row">
+              <span class="hud-tip-label">Systems:</span>
+              <span class="hud-tip-val" id="hud-tip-nodes">NODE_A, NODE_C</span>
+            </div>
+            <div class="hud-tip-row">
+              <span class="hud-tip-label">Trigger:</span>
+              <span class="hud-tip-val text-wrap" id="hud-tip-trigger">Navigation Database Refresh Cycle conflict</span>
+            </div>
+          </div>
+          <div class="hud-tooltip-footer">
+            <span class="hud-tip-action">🔍 Click dot to zoom into Forensic Narration</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM FLIGHT SCRUBBER & MISSION TIMELINE RIBBON -->
+      <div class="flight-scrubber-deck">
+        <div class="scrubber-phases-band">
+          <div class="phase-segment seg-takeoff" style="width: 5%;">
+            <span class="phase-seg-title">🛫 TAKEOFF (09:00 - 09:12)</span>
+          </div>
+          <div class="phase-segment seg-climb" style="width: 20%;">
+            <span class="phase-seg-title">↗ ASCENT &amp; CLIMB (09:12 - 10:15)</span>
+          </div>
+          <div class="phase-segment seg-cruise" style="width: 50%;">
+            <span class="phase-seg-title">✈ HIGH ALTITUDE CRUISE FL380 (10:15 - 12:45)</span>
+          </div>
+          <div class="phase-segment seg-descent" style="width: 20%;">
+            <span class="phase-seg-title">↘ DESCENT &amp; VECTORING (12:45 - 13:48)</span>
+          </div>
+          <div class="phase-segment seg-rollout" style="width: 5%;">
+            <span class="phase-seg-title">🛬 ROLLOUT (13:48 - 14:00)</span>
+          </div>
+        </div>
+
+        <div class="scrubber-interaction-bar" id="flight-scrubber-bar">
+          <div class="scrubber-progress-fill" id="flight-scrubber-fill"></div>
+          <div class="scrubber-plane-handle" id="flight-scrubber-handle">
+            <span class="handle-icon">✈</span>
+          </div>
+        </div>
+
+        <div class="scrubber-legend-times">
+          <span>09:00:00 UTC (DEPARTURE)</span>
+          <span>10:00:00</span>
+          <span>11:00:00</span>
+          <span>12:00:00</span>
+          <span>13:00:00</span>
+          <span>14:00:04 UTC (TOUCHDOWN)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         LEVEL 2: FORENSIC NARRATION & ANIMATED CASCADE DECK
+         ==================================================================== -->
+    <section class="zoom-level" id="level-2-narration-deck">
+      <div class="deck-topbar">
+        <button class="btn-back-zoom" id="btn-back-to-level1">
+          <span class="arrow">←</span> ZOOM OUT: FLIGHT PATH <span class="kbd-hint">[ESC]</span>
+        </button>
+
+        <div class="deck-incident-headline">
+          <span class="incident-index-badge" id="deck-index-badge">INCIDENT #001</span>
+          <h2 class="incident-title-text" id="deck-cluster-title">cluster-28d5f74c</h2>
+          <span class="incident-time-badge" id="deck-time-badge">09:00:00 — 09:01:28 UTC</span>
+          <span class="incident-crit-badge" id="deck-severity-badge">CRITICAL</span>
+        </div>
+
+        <div class="deck-top-actions">
+          <button class="action-btn" id="btn-prev-incident" title="Jump to previous incident in flight order">← PREV</button>
+          <button class="action-btn" id="btn-next-incident" title="Jump to next incident in flight order">NEXT →</button>
+          <button class="action-btn" id="btn-replay-cascade" title="Step through events sequentially">▶ PLAY CASCADE</button>
+          <button class="action-btn primary" id="btn-jump-to-raw-facts" title="Scroll down directly to Black Box Raw Facts &amp; Sensor Telemetry">🔬 RAW FACTS ↘</button>
+          <button class="action-btn" id="btn-open-raw-modal" title="View Full Report">📄 FULL REPORT</button>
+          <button class="action-btn" id="btn-zoom-to-telemetry" title="Open Fullscreen Telemetry Terminal">TERMINAL →</button>
+        </div>
+      </div>
+
+      <div class="deck-scrollable-content">
+        <!-- INCIDENT DOSSIER GRID -->
+        <div class="dossier-grid">
+          
+          <!-- LEFT COLUMN: EXECUTIVE SUMMARY & ROOT CAUSE TRIGGER -->
+          <div class="dossier-col left-col">
+            
+            <!-- OVERVIEW SPECIFICATION CARD -->
+            <div class="glass-card meta-specs-card">
+              <h3 class="card-kicker">1. INCIDENT SPECIFICATION</h3>
+              <div class="specs-matrix" id="deck-specs-matrix"></div>
+            </div>
+
+            <!-- EXECUTIVE SUMMARY -->
+            <div class="glass-card summary-card">
+              <h3 class="card-kicker">2. EXECUTIVE FORENSIC NARRATIVE</h3>
+              <p class="narrative-body" id="deck-exec-narrative"></p>
+            </div>
+
+            <!-- ROOT CAUSE TRIGGER BOX -->
+            <div class="glass-card root-cause-card">
+              <div class="kicker-row">
+                <h3 class="card-kicker">3. PRIMARY TRIGGER EVENT &amp; MECHANISM</h3>
+                <span class="trigger-tag" id="deck-trigger-tag">AUTONOMOUS STATE TRANSITION</span>
+              </div>
+              <div class="rca-description" id="deck-rca-description"></div>
+            </div>
+
+            <!-- SYSTEM IMPACT & RECOMMENDATIONS -->
+            <div class="glass-card impact-card">
+              <h3 class="card-kicker">4. SYSTEM IMPACT &amp; CORRECTIVE ACTIONS</h3>
+              <div class="impact-section">
+                <h4 class="sub-kicker">OPERATIONAL IMPACT</h4>
+                <div id="deck-impact-text" class="text-block"></div>
+                <h4 class="sub-kicker" style="margin-top:10px;">ACTIONABLE CORRECTIVE ACTIONS</h4>
+                <div id="deck-recs-text" class="text-block"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: INTERACTIVE VISUAL FAILURE CASCADE TREE -->
+          <div class="dossier-col right-col">
+            <div class="glass-card cascade-tree-card">
+              <div class="cascade-header-row">
+                <div>
+                  <h3 class="card-kicker">5. FAILURE CASCADE SEQUENCE</h3>
+                  <p class="cascade-instruction">Chronological propagation across nodes. Click any step to deep zoom to raw records ↘</p>
+                </div>
+                <span class="cascade-step-count" id="deck-cascade-count">13 STEPS</span>
+              </div>
+
+              <!-- VISUAL FLOWCHART STEPS -->
+              <div class="cascade-flowchart" id="deck-cascade-flowchart">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================================================================
+             SECTION 6: BLACK BOX TELEMETRY & RAW FACTS (UNIFIED DOSSIER)
+             ================================================================ -->
+        <div class="glass-card raw-facts-dossier-card" id="dossier-raw-facts-section" style="margin-top: 18px;">
+          <div class="raw-facts-header-row" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 10px; margin-bottom: 14px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="step-badge" style="background:var(--cyan); color:#070a11; font-weight:800; font-size:0.65rem; padding:2px 8px; border-radius:4px;">RAW FACTS</span>
+                <h3 class="card-kicker" style="font-size:0.95rem; font-weight:800; color:#fff; letter-spacing:0.8px;">6. BLACK BOX RAW SENSOR TELEMETRY &amp; CITATIONS</h3>
+              </div>
+              <p class="cascade-instruction" style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">Verifiable discrete telemetry records, decoded physical parameters, and bus parity flags.</p>
+            </div>
+            
+            <div class="raw-facts-stepper" style="display: flex; align-items: center; gap: 8px;">
+              <button class="term-btn" id="dossier-prev-frame">← Prev Frame</button>
+              <span class="term-pos" id="dossier-frame-pos" style="font-family:var(--font-mono); font-size:0.75rem; color:var(--cyan);">Frame 1 of 13</span>
+              <button class="term-btn" id="dossier-next-frame">Next Frame →</button>
+            </div>
+          </div>
+
+          <div class="dossier-facts-grid" style="display: grid; grid-template-columns: 320px 1fr; gap: 16px;">
+            <!-- LEFT: AUDIT RECORD & CITATION -->
+            <div class="facts-left-col">
+              <div class="record-meta-bar" style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                <span class="node-pill" id="dossier-node-badge">NODE_A</span>
+                <span class="family-pill" id="dossier-family-badge">Operator Interaction</span>
+                <span class="timestamp-pill" id="dossier-time-badge">09:00:31 UTC</span>
+              </div>
+              <h4 class="record-headline" id="dossier-summary-headline" style="font-size:0.9rem; font-weight:700; color:#fff; margin-bottom:12px; line-height:1.4;">Navigation Database Refresh Cycle</h4>
+              
+              <div class="citation-vault" style="background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px; padding:10px;">
+                <span class="citation-label" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-dim); font-weight:700;">VERIFIABLE FORENSIC CITATION:</span>
+                <div class="citation-box" id="dossier-citation-tag" style="font-family:var(--font-mono); font-size:0.68rem; color:var(--cyan); word-break:break-all; margin:6px 0 10px 0;">[Source: ... | Seq: ... | UUID: ...]</div>
+                <button class="btn-copy-citation" id="dossier-btn-copy-citation" style="width:100%; justify-content:center;">📋 COPY CITATION</button>
+              </div>
+            </div>
+
+            <!-- RIGHT: DECODED PARAMETERS TABLE -->
+            <div class="facts-right-col">
+              <div class="table-header-bar" style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span class="th-title" style="font-family:var(--font-mono); font-size:0.7rem; font-weight:700; color:var(--text-dim);">DECODED AVIONICS PARAMETERS</span>
+                <span class="th-count" id="dossier-param-count" style="font-family:var(--font-mono); font-size:0.7rem; color:var(--cyan);">12 Parameters</span>
+              </div>
+              <div class="telemetry-table-wrapper" style="max-height: 240px; overflow-y:auto; border:1px solid var(--border-glass); border-radius:8px;">
+                <table class="telemetry-table" style="width:100%; border-collapse:collapse; font-size:0.72rem;">
+                  <thead>
+                    <tr style="background:rgba(255,255,255,0.04); text-align:left; font-family:var(--font-mono); color:var(--text-dim);">
+                      <th style="padding:6px 10px;">PARAMETER</th>
+                      <th style="padding:6px 10px;">DECODED VALUE</th>
+                      <th style="padding:6px 10px;">FORMAT</th>
+                      <th style="padding:6px 10px;">HEALTH</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dossier-telemetry-tbody">
+                    <!-- Injected via JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         LEVEL 3: MICRO RAW TELEMETRY & VERIFIABLE CITATION TERMINAL
+         ==================================================================== -->
+    <section class="zoom-level" id="level-3-telemetry-terminal">
+      <div class="terminal-topbar">
+        <button class="btn-back-zoom" id="btn-back-to-level2">
+          <span class="arrow">←</span> ZOOM OUT: NARRATION <span class="kbd-hint">[ESC]</span>
+        </button>
+
+        <div class="terminal-breadcrumb">
+          <span class="term-dim" id="term-cluster-ref">cluster-28d5f74c</span>
+          <span class="term-sep">/</span>
+          <span class="term-active" id="term-event-ref">EVENT #1 (Seq: 15)</span>
+        </div>
+
+        <div class="terminal-nav-controls">
+          <button class="term-btn" id="term-prev-event">← Previous Event</button>
+          <span class="term-pos" id="term-event-pos">1 of 13</span>
+          <button class="term-btn" id="term-next-event">Next Event →</button>
+        </div>
+      </div>
+
+      <div class="terminal-body-grid">
+        
+        <!-- LEFT: AUDIT RECORD & CITATION VAULT -->
+        <div class="term-panel record-panel">
+          
+          <div class="record-meta-bar">
+            <span class="node-pill" id="term-node-badge">NODE_A</span>
+            <span class="family-pill" id="term-family-badge">Operator Interaction</span>
+            <span class="timestamp-pill" id="term-time-badge">09:00:31 UTC</span>
+            <span class="occurrences-pill" id="term-occ-badge">1 occurrence</span>
+          </div>
+
+          <h2 class="record-headline" id="term-summary-headline">Navigation Database Refresh Cycle</h2>
+
+          <!-- VERIFIABLE CITATION BANNER -->
+          <div class="citation-vault">
+            <div class="vault-header">
+              <span class="vault-title">VERIFIABLE FORENSIC AUDIT CITATION</span>
+              <button class="copy-btn" id="btn-copy-citation">📋 COPY CITATION</button>
+            </div>
+            <div class="vault-code-wrapper">
+              <code class="citation-tag" id="term-citation-tag">[Source: NODE_A_FM_CI_BPQ_Log_6_Custom_Log_Decoded_Report.html | Seq: 15 | UUID: 675e178f-7e11-4cb5-9198-c92aa465c74c]</code>
+            </div>
+            <p class="vault-note">Strictly verifiable against raw flight log artifacts. Hallucination-free.</p>
+          </div>
+
+          <!-- RAW JSON OBJECT ACCORDION -->
+          <div class="json-drawer">
+            <details>
+              <summary>View Complete Normalized JSON Record</summary>
+              <pre class="json-display" id="term-raw-json"></pre>
+            </details>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: FULL DECODED TELEMETRY PARAMETERS TABLE -->
+        <div class="term-panel telemetry-panel">
+          <div class="telemetry-panel-header">
+            <h3 class="panel-kicker">DECODED AVIONICS TELEMETRY PARAMETERS</h3>
+            <span class="param-count" id="term-param-count">8 parameters</span>
+          </div>
+
+          <div class="telemetry-table-container">
+            <table class="telemetry-table">
+              <thead>
+                <tr>
+                  <th>TELEMETRY FIELD</th>
+                  <th>RECORDED FLIGHT DATA</th>
+                </tr>
+              </thead>
+              <tbody id="term-telemetry-tbody">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FULL MARKDOWN REPORT MODAL -->
+  <div class="report-modal-overlay" id="report-modal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="modal-heading">Aviation Forensic Investigation Report</h3>
+        <button class="btn-close-modal" id="btn-modal-close">✕</button>
+      </div>
+      <div class="modal-scrollable" id="modal-markdown-container"></div>
+      <div class="modal-bottom">
+        <button class="copy-btn" id="btn-copy-full-markdown">📋 Copy Markdown</button>
+        <button class="nav-btn" id="btn-modal-dismiss">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOAD COMPILED DATASET -->
+  <script src="viz_data.js"></script>
+  <!-- LOAD BLACK BOX STORYBOARD LOGIC -->
+  <script src="app.js"></script>
+</body>
+</html>

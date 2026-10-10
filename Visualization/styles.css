@@ -1,0 +1,1764 @@
+/* ==============================================================================
+   TRACE — BLACK BOX FLIGHT TAPE & INFINITE ZOOM STORYBOARD (STYLESHEET)
+   Zero-Plot / Pure Interactive Storyboard Aesthetic
+   ============================================================================== */
+
+:root {
+  --bg-space: #070a11;
+  --bg-surface: #0d121f;
+  --bg-panel: rgba(18, 24, 38, 0.85);
+  --bg-card: rgba(22, 30, 48, 0.7);
+  --bg-card-hover: rgba(30, 42, 68, 0.95);
+  
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-focus: #38bdf8;
+  --border-glow-cyan: 0 0 25px rgba(56, 189, 248, 0.25);
+  
+  --cyan: #38bdf8;
+  --cyan-dim: rgba(56, 189, 248, 0.15);
+  --blue: #3b82f6;
+  --purple: #a855f7;
+  --purple-dim: rgba(168, 85, 247, 0.15);
+  --critical: #f43f5e;
+  --critical-dim: rgba(244, 63, 94, 0.18);
+  --warning: #f59e0b;
+  --warning-dim: rgba(245, 158, 11, 0.18);
+  --routine: #10b981;
+  --routine-dim: rgba(16, 185, 129, 0.18);
+
+  --text-bright: #ffffff;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.avionics-storyboard {
+  background-color: var(--bg-space);
+  background-image: 
+    radial-gradient(ellipse at 15% 10%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 90%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(13, 18, 31, 0.8), rgba(7, 10, 17, 0.98));
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. TOP COCKPIT BAR & SEMANTIC ZOOM STEPPER
+   -------------------------------------------------------------------------- */
+.cockpit-bar {
+  background: rgba(13, 18, 31, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glass);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.brand-zone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pulse-beacon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+  animation: beacon-pulse 2s infinite ease-in-out;
+}
+
+@keyframes beacon-pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 20px var(--cyan); }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-bright);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edition-pill {
+  font-size: 0.65rem;
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.brand-caption {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* SEMANTIC ZOOM STEPPER (BREADCRUMB) */
+.zoom-stepper {
+  display: flex;
+  align-items: center;
+  background: rgba(22, 30, 48, 0.7);
+  border: 1px solid var(--border-glass);
+  padding: 4px 8px;
+  border-radius: var(--radius-lg);
+  gap: 6px;
+}
+
+.step-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-sans);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.step-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.step-btn.active {
+  background: var(--cyan);
+  color: var(--bg-space);
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
+.step-btn .step-num {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-btn.active .step-num {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.step-btn .step-text {
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+}
+
+.step-btn .subtext {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+.step-connector {
+  width: 14px;
+  height: 2px;
+  background: var(--border-glass);
+}
+
+/* SEARCH & CHIPS */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.omni-search-wrapper {
+  display: flex;
+  align-items: center;
+  background: rgba(22, 30, 48, 0.8);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 5px 14px;
+  width: 280px;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.omni-search-wrapper:focus-within {
+  border-color: var(--cyan);
+  box-shadow: var(--border-glow-cyan);
+  width: 330px;
+}
+
+.omni-search-wrapper input {
+  background: transparent;
+  border: none;
+  color: var(--text-bright);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  width: 100%;
+  outline: none;
+}
+
+.btn-clear-search {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 4px;
+}
+
+.filter-chip {
+  background: rgba(22, 30, 48, 0.6);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  color: var(--text-bright);
+  background: rgba(30, 42, 68, 0.8);
+}
+
+.filter-chip.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--cyan);
+}
+
+.filter-chip.chip-crit.active { background: var(--critical); border-color: #fda4af; }
+.filter-chip.chip-warn.active { background: var(--warning); border-color: #fde68a; }
+.filter-chip.chip-rout.active { background: var(--routine); border-color: #a7f3d0; }
+
+/* --------------------------------------------------------------------------
+   2. MAIN INFINITE ZOOM CANVAS VIEWPORT
+   -------------------------------------------------------------------------- */
+.storyboard-viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-space);
+}
+
+.zoom-level {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 18px 24px;
+}
+
+.zoom-level.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* --------------------------------------------------------------------------
+   3. LEVEL 1: VISUAL FLIGHT PROFILE & INCIDENT TRAJECTORY
+   -------------------------------------------------------------------------- */
+.flight-hud-subbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(18, 24, 38, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  backdrop-filter: blur(14px);
+}
+
+.hud-left-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hud-gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hud-gauge-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.hud-gauge-val {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-bright);
+}
+
+.hud-gauge-val.cyan-glow {
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.hud-gauge-val.phase-pill {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--cyan);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+
+.hud-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.replay-button-deck {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flight-btn {
+  background: rgba(30, 42, 68, 0.8);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.flight-btn:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.flight-btn.primary-pulse {
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #fff;
+  border-color: var(--cyan);
+}
+
+.flight-btn.primary-pulse:hover {
+  background: linear-gradient(135deg, #0369a1, #1d4ed8);
+}
+
+.speed-toggle-group {
+  display: flex;
+  background: rgba(22, 30, 48, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.speed-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.speed-btn.active {
+  background: var(--cyan);
+  color: #070a11;
+}
+
+.phase-jump-deck {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jump-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.phase-jump-btn {
+  background: rgba(22, 30, 48, 0.6);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.phase-jump-btn:hover {
+  background: rgba(30, 42, 68, 0.9);
+  color: var(--text-bright);
+}
+
+.phase-jump-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+/* --------------------------------------------------------------------------
+   FLIGHT CANVAS VIEWPORT & AEROSPACE SKY
+   -------------------------------------------------------------------------- */
+.flight-canvas-viewport {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(180deg, #050914 0%, #081124 35%, #0d1935 70%, #060912 100%);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.7);
+  user-select: none;
+}
+
+/* CANVAS ZOOM & PAN TOOLBAR */
+.canvas-zoom-toolbar {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 25;
+  background: rgba(13, 18, 31, 0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 4px 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.zoom-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.zoom-tool-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-glass);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.zoom-tool-btn:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--cyan);
+}
+
+.zoom-tool-btn.reset {
+  width: auto;
+  padding: 0 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.zoom-factor-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--cyan);
+  padding: 0 6px;
+}
+
+.zoom-hint-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  border-left: 1px solid var(--border-glass);
+  padding-left: 8px;
+}
+
+.altitude-elevation-axis {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 170px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.alt-step {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.alt-step-marker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.alt-step-desc {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+/* AMBIENT SKY & CLOUDS */
+.sky-atmosphere-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.stars-glimmer {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20% 15%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 45% 10%, #fff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 70% 20%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 85% 12%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 35% 25%, #94a3b8 100%, transparent),
+    radial-gradient(1px 1px at 60% 8%, #94a3b8 100%, transparent);
+  background-size: 100% 100%;
+}
+
+.cloud-layer {
+  position: absolute;
+  width: 200%;
+  height: 90px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cloud-layer-1 {
+  top: 38%;
+  left: -20%;
+  animation: cloud-drift 120s linear infinite;
+}
+
+.cloud-layer-2 {
+  top: 60%;
+  left: -50%;
+  animation: cloud-drift 80s linear infinite reverse;
+}
+
+@keyframes cloud-drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+/* RUNWAY GRAPHICS */
+/* MINIMAL SLEEK RUNWAYS (VERY SMALL AS REQUESTED) */
+.runway-zone {
+  position: absolute;
+  bottom: 8px;
+  width: 75px;
+  height: 22px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.runway-departure {
+  left: 15px;
+}
+
+.runway-arrival {
+  right: 15px;
+}
+
+.runway-tarmac {
+  width: 100%;
+  height: 12px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.runway-threshold {
+  position: absolute;
+  left: 3px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.runway-id {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 0.5px;
+}
+
+.runway-stripes {
+  width: 6px;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #fff, #fff 1px, transparent 1px, transparent 2px);
+}
+
+.runway-centerline {
+  position: absolute;
+  left: 26px;
+  right: 4px;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, #fef08a, #fef08a 6px, transparent 6px, transparent 10px);
+}
+
+.runway-edge-lights {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #22c55e, #22c55e 2px, transparent 2px, transparent 12px);
+  box-shadow: 0 0 4px #22c55e;
+}
+
+.runway-caption {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+}
+
+.runway-caption-title {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+}
+
+.runway-caption-sub {
+  display: none;
+}
+
+/* SVG TRAJECTORY & FLIGHT PATH */
+.flight-trajectory-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+  overflow: visible;
+}
+
+.svg-alt-guide {
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 1;
+  stroke-dasharray: 4, 8;
+}
+
+.fl380-line {
+  stroke: rgba(56, 189, 248, 0.15);
+}
+
+.ground-line {
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+.trajectory-glow-underlay {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.22);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.trajectory-main-path {
+  fill: none;
+  stroke: url(#traj-grad);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+  vector-effect: non-scaling-stroke;
+}
+
+.trajectory-traveled-path {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-dasharray: 4, 6;
+  opacity: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+
+/* INCIDENT BEACONS & DOTS ON SVG (ZERO JIGGLE / ZERO FLICKER) */
+.incident-dot-group {
+  pointer-events: none; /* Managed by high-precision cursor proximity engine */
+}
+
+/* ZERO transform on hover - absolute geometric stability */
+.incident-dot-group.hovered .incident-beacon-core,
+.incident-dot-group.selected-active .incident-beacon-core {
+  fill: #ffffff !important;
+  stroke: var(--cyan) !important;
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 0 12px #38bdf8) !important;
+}
+
+.incident-dot-group.hovered .incident-beacon-halo,
+.incident-dot-group.selected-active .incident-beacon-halo {
+  stroke: #ffffff !important;
+  stroke-width: 3px !important;
+  opacity: 0.95;
+  animation: beacon-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.incident-beacon-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none !important;
+  opacity: 0.35;
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes beacon-ping {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+.incident-beacon-core {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  transition: fill 0.15s ease, stroke 0.15s ease, filter 0.15s ease;
+  pointer-events: none !important;
+  vector-effect: non-scaling-stroke;
+}
+
+.incident-dot-group.critical .incident-beacon-core {
+  fill: var(--critical);
+  filter: url(#glow-crit);
+}
+
+.incident-dot-group.warning .incident-beacon-core {
+  fill: var(--warning);
+  filter: url(#glow-warn);
+}
+
+.incident-dot-group.routine .incident-beacon-core {
+  fill: var(--routine);
+  filter: url(#glow-rout);
+}
+
+.incident-dot-group.dimmed {
+  opacity: 0.12;
+}
+
+.incident-dot-group.highlighted .incident-beacon-core {
+  fill: #fff !important;
+  stroke: var(--cyan) !important;
+  stroke-width: 3 !important;
+}
+
+.incident-dot-group.highlighted .incident-beacon-halo {
+  stroke: #fff;
+}
+
+/* Incident label tag: only visible when hovered or selected, so labels never collide */
+.incident-dot-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  fill: #ffffff;
+  text-anchor: middle;
+  pointer-events: none !important;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.95);
+  user-select: none;
+}
+
+.incident-dot-group.hovered .incident-dot-label,
+.incident-dot-group.selected-active .incident-dot-label,
+.incident-dot-group.highlighted .incident-dot-label {
+  opacity: 1;
+}
+
+/* THE AIRCRAFT MARKER GLYPH */
+.aircraft-marker {
+  cursor: grab;
+  transition: transform 0.15s ease-out;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+}
+
+.aircraft-marker:active {
+  cursor: grabbing;
+}
+
+.aircraft-body {
+  fill: #f8fafc;
+  stroke: #38bdf8;
+  stroke-width: 1.5;
+}
+
+.aircraft-cockpit {
+  fill: #0284c7;
+}
+
+.jet-afterburner {
+  fill: #38bdf8;
+  opacity: 0.8;
+  animation: afterburner-flicker 0.1s infinite alternate;
+}
+
+@keyframes afterburner-flicker {
+  0% { opacity: 0.6; r: 3.5; }
+  100% { opacity: 0.95; r: 5; }
+}
+
+.nav-light-green {
+  animation: nav-flash 1s infinite alternate;
+}
+.nav-light-red {
+  animation: nav-flash 1s infinite alternate;
+}
+.nav-strobe {
+  animation: strobe-flash 1.2s infinite ease-in-out;
+}
+
+@keyframes nav-flash {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; filter: drop-shadow(0 0 5px #22c55e); }
+}
+
+@keyframes strobe-flash {
+  0%, 90% { opacity: 0; }
+  95%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #fff); }
+}
+
+/* FLOATING RADAR HUD TOOLTIP (ZERO FLICKER) */
+.incident-hover-hud {
+  position: absolute;
+  display: none;
+  background: rgba(13, 18, 31, 0.96);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  width: 320px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.35);
+  z-index: 50;
+  pointer-events: none !important; /* Never intercept mouse cursor to eliminate flicker */
+  transform: translate(-50%, calc(-100% - 16px));
+  transition: opacity 0.15s ease;
+}
+
+.incident-hover-hud.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hud-tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 6px;
+}
+
+.hud-tooltip-index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--cyan);
+}
+
+.hud-tooltip-cluster {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hud-tooltip-sev {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 8px;
+}
+
+.hud-tooltip-sev.critical { background: var(--critical-dim); color: var(--critical); border: 1px solid var(--critical); }
+.hud-tooltip-sev.warning { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning); }
+.hud-tooltip-sev.routine { background: var(--routine-dim); color: var(--routine); border: 1px solid var(--routine); }
+
+.hud-tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hud-tip-row {
+  display: flex;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  gap: 6px;
+}
+
+.hud-tip-label {
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 58px;
+}
+
+.hud-tip-val {
+  color: var(--text-main);
+}
+
+.hud-tip-val.highlight {
+  color: #fff;
+  font-weight: 700;
+}
+
+.hud-tip-val.text-wrap {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hud-tooltip-footer {
+  border-top: 1px solid var(--border-glass);
+  padding-top: 6px;
+  margin-top: 2px;
+}
+
+.hud-tip-action {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* FLIGHT SCRUBBER TIMELINE DECK */
+.flight-scrubber-deck {
+  margin-top: 12px;
+  background: rgba(18, 24, 38, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  flex-shrink: 0;
+  backdrop-filter: blur(14px);
+}
+
+.scrubber-phases-band {
+  display: flex;
+  height: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.phase-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seg-takeoff { background: rgba(245, 158, 11, 0.25); color: #fde68a; border-right: 1px solid rgba(245, 158, 11, 0.3); }
+.seg-climb { background: rgba(56, 189, 248, 0.25); color: #bae6fd; border-right: 1px solid rgba(56, 189, 248, 0.3); }
+.seg-cruise { background: rgba(99, 102, 241, 0.25); color: #c7d2fe; border-right: 1px solid rgba(99, 102, 241, 0.3); }
+.seg-descent { background: rgba(168, 85, 247, 0.25); color: #e9d5ff; border-right: 1px solid rgba(168, 85, 247, 0.3); }
+.seg-rollout { background: rgba(16, 185, 129, 0.25); color: #a7f3d0; }
+
+.scrubber-interaction-bar {
+  height: 10px;
+  background: rgba(22, 30, 48, 0.95);
+  border: 1px solid var(--border-glass);
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.scrubber-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.scrubber-plane-handle {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px var(--cyan);
+  transition: transform 0.1s ease;
+  z-index: 10;
+}
+
+.scrubber-plane-handle:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.handle-icon {
+  font-size: 0.72rem;
+  color: #0d121f;
+  transform: rotate(45deg);
+}
+
+.scrubber-legend-times {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   4. LEVEL 2: FORENSIC NARRATION & ANIMATED CASCADE DECK
+   -------------------------------------------------------------------------- */
+.deck-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+  background: rgba(18, 24, 38, 0.7);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+.btn-back-zoom {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  color: var(--text-bright);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-back-zoom:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.kbd-hint {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+}
+
+.deck-incident-headline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.incident-index-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.incident-title-text {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.incident-time-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.incident-crit-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--critical-dim);
+  color: var(--critical);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.deck-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-btn {
+  background: rgba(22, 30, 48, 0.8);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--cyan);
+  color: #fff;
+}
+
+.action-btn.primary {
+  background: var(--purple);
+  color: #fff;
+  border-color: #d8b4fe;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+}
+
+.action-btn.primary:hover {
+  background: #c084fc;
+}
+
+/* SCROLLABLE DOSSIER GRID */
+.deck-scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyan) rgba(22, 30, 48, 0.4);
+  padding-right: 6px;
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.dossier-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.glass-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* SPECS MATRIX */
+.specs-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.spec-cell { display: flex; flex-direction: column; }
+.spec-k { font-size: 0.65rem; color: var(--text-dim); font-weight: 600; }
+.spec-v { font-size: 0.9rem; font-family: var(--font-mono); font-weight: 700; color: #fff; }
+
+.narrative-body {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+
+.root-cause-card {
+  border-left: 4px solid var(--cyan);
+}
+
+.kicker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.trigger-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.rca-description {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+}
+
+.sub-kicker {
+  font-size: 0.68rem;
+  color: var(--cyan);
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.text-block {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* CASCADE FLOWCHART */
+.cascade-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cascade-instruction {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cascade-step-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--purple-dim);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.cascade-flowchart {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flow-step-item {
+  background: rgba(22, 30, 48, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.flow-step-item:hover {
+  background: rgba(30, 42, 68, 0.9);
+  border-color: var(--purple);
+  transform: translateX(6px);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+}
+
+.flow-step-item.active {
+  border-color: var(--cyan);
+  background: rgba(56, 189, 248, 0.15);
+  box-shadow: var(--border-glow-cyan);
+}
+
+.flow-num-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  background: rgba(168, 85, 247, 0.2);
+  color: var(--purple);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.flow-content { flex: 1; }
+
+.flow-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.flow-node-tag {
+  background: #fff;
+  color: #000;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.flow-occ-tag {
+  background: var(--warning-dim);
+  color: var(--warning);
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.flow-summary {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.flow-citation {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  background: rgba(56, 189, 248, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   5. LEVEL 3: MICRO RAW TELEMETRY & VERIFIABLE CITATION TERMINAL
+   -------------------------------------------------------------------------- */
+.terminal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+  background: rgba(18, 24, 38, 0.7);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+.terminal-breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.term-dim { color: var(--text-dim); }
+.term-sep { color: var(--border-glass); }
+.term-active { color: var(--purple); font-weight: 700; }
+
+.terminal-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.term-btn {
+  background: rgba(22, 30, 48, 0.8);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.term-btn:hover {
+  background: var(--purple);
+  color: #fff;
+}
+
+.term-pos {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.terminal-body-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.term-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.record-panel {
+  overflow-y: auto;
+}
+
+.record-meta-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.node-pill, .family-pill, .timestamp-pill, .occurrences-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.node-pill { background: #fff; color: #000; }
+.family-pill { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+.timestamp-pill { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.occurrences-pill { background: var(--warning-dim); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+.record-headline {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.35;
+}
+
+.citation-vault {
+  background: rgba(13, 18, 31, 0.85);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
+}
+
+.vault-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.vault-title {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--purple);
+}
+
+.copy-btn {
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid var(--purple);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover { background: var(--purple); }
+
+.vault-code-wrapper {
+  background: #000;
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin-bottom: 6px;
+}
+
+.citation-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #38bdf8;
+  word-break: break-all;
+  line-height: 1.4;
+  display: block;
+}
+
+.vault-note {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+.json-drawer details {
+  background: rgba(13, 18, 31, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.json-drawer summary {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.json-display {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--cyan);
+  max-height: 180px;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+/* TELEMETRY TABLE PANEL */
+.telemetry-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.telemetry-panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.panel-kicker {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.param-count {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+}
+
+.telemetry-table-container {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  background: rgba(13, 18, 31, 0.7);
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyan) rgba(22, 30, 48, 0.4);
+}
+
+.telemetry-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.telemetry-table th {
+  background: rgba(22, 30, 48, 0.95);
+  padding: 8px 14px;
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.telemetry-table td {
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.telemetry-table td:first-child {
+  font-weight: 600;
+  color: var(--text-muted);
+  width: 40%;
+}
+
+.telemetry-table td:last-child {
+  font-family: var(--font-mono);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   6. FULL REPORT MODAL
+   -------------------------------------------------------------------------- */
+.report-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.report-modal-overlay.open { display: flex; }
+
+.modal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  width: 900px;
+  max-width: 95vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+.modal-top {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-top h3 { font-size: 1.15rem; font-weight: 700; color: #fff; }
+.btn-close-modal { background: none; border: none; font-size: 1.2rem; color: var(--text-dim); cursor: pointer; }
+
+.modal-scrollable {
+  padding: 24px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+
+.modal-scrollable h1 { font-size: 1.3rem; margin-bottom: 12px; color: var(--cyan); }
+.modal-scrollable h2 { font-size: 1.05rem; margin-top: 18px; margin-bottom: 8px; color: #fff; border-bottom: 1px solid var(--border-glass); padding-bottom: 4px; }
+.modal-scrollable table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.82rem; }
+.modal-scrollable th, .modal-scrollable td { border: 1px solid var(--border-glass); padding: 8px 12px; }
+.modal-scrollable th { background: rgba(22, 30, 48, 0.8); }
+
+.modal-bottom {
+  padding: 14px 24px;
+  border-top: 1px solid var(--border-glass);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
